@@ -58,8 +58,7 @@ div.col-md-4:nth-child(1) > div:nth-child(2) > div:nth-child(1) > address:nth-ch
 	color: #A9A9A9;
 }
 
-form {
-    margin-left: auto;
-    margin-right:auto;
-    width: 30%;
+form { 
+	margin: 0 auto; 
+	width:30%;
 }
