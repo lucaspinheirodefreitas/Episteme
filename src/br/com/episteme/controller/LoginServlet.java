@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.episteme.dao.DataSource;
 import br.com.episteme.dao.UsuarioDAO;
 
 
@@ -19,7 +20,8 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pagina;
-		UsuarioDAO userDAO = new UsuarioDAO();
+		DataSource datasource = new DataSource();
+		UsuarioDAO userDAO = new UsuarioDAO(datasource);
 		List<Object> res = userDAO.read(null);
 		request.getSession().setAttribute("Usuario", res.get(0));
 		pagina = "/minhaConta.jsp";

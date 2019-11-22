@@ -13,12 +13,13 @@ public class PesquisarServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     public PesquisarServlet() {
-        super();
+    	
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pagina, itemPesquisa;
 		itemPesquisa = request.getParameter("livroPesquisar");
+		System.out.println("item pesquisa: " + itemPesquisa);
 		if(itemPesquisa.isBlank()) {
 			// Pensar em enviar algum alerta pra página quando vier vazio e redirecionar novamente pra mesma pagina.
 			pagina = "/index.html";
