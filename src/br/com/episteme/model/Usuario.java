@@ -15,6 +15,7 @@ public class Usuario implements java.io.Serializable {
 	private String email;
 	private String senha;
 	private List<Emprestimo> emprestimos;
+	private Endereco endereco;
 	
 	public Usuario() {
 		// TODO Auto-generated constructor stub

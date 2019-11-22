@@ -16,15 +16,15 @@ public class PesquisarServlet extends HttpServlet {
     	
     }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pagina, itemPesquisa;
-		itemPesquisa = request.getParameter("livroPesquisar");
+		itemPesquisa = request.getParameter("pesquisar");
 		System.out.println("item pesquisa: " + itemPesquisa);
 		if(itemPesquisa.isBlank()) {
 			// Pensar em enviar algum alerta pra página quando vier vazio e redirecionar novamente pra mesma pagina.
 			pagina = "/index.html";
 		} else {
-			pagina = "/index.jsp";
+			pagina = "/minhaConta.jsp";
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);
