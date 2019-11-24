@@ -14,7 +14,7 @@ import br.com.episteme.dao.DataSource;
 import br.com.episteme.dao.UsuarioDAO;
 
 
-@WebServlet("/LoginServlet")
+@WebServlet("/loginservlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Teste</title>
+<title>Página de erro</title>
 </head>
 <body>
-
+<h3>Senhas divergentes</h3>
 </body>
 </html>

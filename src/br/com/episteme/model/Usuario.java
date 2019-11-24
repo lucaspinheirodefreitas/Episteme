@@ -10,21 +10,45 @@ import java.util.List;
 */
 @SuppressWarnings("serial")
 public class Usuario implements java.io.Serializable {
-	private int id;
+	public List<Emprestimo> getEmprestimos() {
+		return emprestimos;
+	}
+
+	private int idUsuario;
 	private String nome;
 	private String email;
 	private String senha;
 	private List<Emprestimo> emprestimos;
 	private Endereco endereco;
 	
-	public Usuario() {
-		// TODO Auto-generated constructor stub
+	/* 
+		Pensar melhor em como relacionar a lista de emprestimos e endereço ao usuário 
+	*/
+	public Usuario(Endereco endereco) {
+		this.endereco = endereco;
 	}
+	public Usuario() {
+		this.endereco = new Endereco();
+	}
+	
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
 	public String getEmail() {
 		return email;
-	}
-	public int getId() {
-		return id;
 	}
 	public String getNome() {
 		return nome;
@@ -35,19 +59,15 @@ public class Usuario implements java.io.Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public List<Emprestimo> getEmprestimos() {
-		return emprestimos;
-	}
+
 	public void setEmprestimos(List<Emprestimo> emprestimos) {
 		this.emprestimos = emprestimos;
 	}
+	
 }

@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import br.com.episteme.model.Usuario;
 
 public class UsuarioDAO implements GenericDAO {
@@ -18,7 +19,37 @@ public class UsuarioDAO implements GenericDAO {
 	}
 	
 	public void create(Object o) {
-		
+		try {
+			if(o instanceof Usuario) { 
+				Usuario cadastrarUsuario = (Usuario) o;
+				String SQL = "INSERT INTO TBUSUARIO(IdUsuario, NomeUsuario, Email, Senha, IdEndereco) "
+						+ "VALUES ((select nextval('autoIncrementUsuario'))," 
+						+ cadastrarUsuario.getNome()        + ',' 
+						+ cadastrarUsuario.getEmail()   	+ ',' 
+						+ cadastrarUsuario.getSenha() 		+ ',' 
+						+ "(SELECT MAX(IdEndereco) FROM TBENDERECO))";
+				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
+				ResultSet rs = stm.executeQuery();
+				System.out.println(rs);
+				/*
+					Pra atualizar o ID vou precisar executar uma operação de select na base eu acho.
+				
+				if(rs.next()) {
+					cadastrarUsuario.setIdUsuario(rs.getInt("IdUsuario"));
+				}
+				
+				*/
+				stm.close();
+				rs.close();
+				
+			} else {
+				throw new RuntimeException("Objeto inválido"); // entender como funciona o throw.
+			}
+			
+		} catch (SQLException ex) {
+			System.out.println("Falha ao efetuar inserção!\n" + "Codigo de erro: " + ex.getErrorCode() 
+			+ "\n" + "Mensagem de erro: " + ex.getMessage());
+		}
 	}
 	
 	public List<Object> read(Object o) {
@@ -34,7 +65,7 @@ public class UsuarioDAO implements GenericDAO {
 				
 				if(rs.next()) {
 					Usuario usuario = new Usuario();
-					usuario.setId(rs.getInt("IdUsuario"));
+					usuario.setIdUsuario(rs.getInt("IdUsuario"));
 					usuario.setNome(rs.getString("nomeUsuario"));
 					usuario.setEmail(rs.getString("Email"));
 					result.add(usuario);
