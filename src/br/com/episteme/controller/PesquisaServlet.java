@@ -1,7 +1,6 @@
 package br.com.episteme.controller;
 
 import java.io.IOException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +15,7 @@ public class PesquisaServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pagina, itemPesquisa;
-		itemPesquisa = request.getParameter("livroPesquisar");
+		itemPesquisa = request.getParameter("txtPesquisa");
 		System.out.println("item pesquisa: " + itemPesquisa);
 		if(itemPesquisa.isBlank()) {
 			// Pensar em enviar algum alerta pra página quando vier vazio e redirecionar novamente pra mesma pagina.

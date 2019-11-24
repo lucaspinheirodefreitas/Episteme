@@ -21,19 +21,19 @@ public class EnderecoDAO implements GenericDAO{
 				Endereco cadastrarEndereco = (Endereco) o;
 				
 				String SQL = "INSERT INTO TBENDERECO(IdEndereco, CEP, Logradouro, Numero, Bairro, Cidade, Estado) "
-						+ "VALUES((select nextval('autoIncrementEndereco'))," 
-						+ cadastrarEndereco.getCep()          		+ ',' 
-						+ cadastrarEndereco.getLogradouro()   		+ ',' 
-						+ cadastrarEndereco.getNumeroImovel() 		+ ',' 
-						+ cadastrarEndereco.getBairro()       		+ ',' 
-						+ cadastrarEndereco.getCidade()       		+ ',' 
-						+ cadastrarEndereco.getEstado()       		+ ')';
+						+ "VALUES((select nextval('autoIncrementEndereco')), '" 
+						+ cadastrarEndereco.getCep()           		+ "'," 
+						+ "'" + cadastrarEndereco.getLogradouro()   		+ "',"
+						+ "'" + cadastrarEndereco.getNumeroImovel() 		+ "'," 
+						+ "'" + cadastrarEndereco.getBairro()       		+ "'," 
+						+ "'" + cadastrarEndereco.getCidade()       		+ "'," 
+						+ "'" + cadastrarEndereco.getEstado()       		+ "');";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				ResultSet rs = stm.executeQuery();
-				System.out.println(rs);
-				if(rs.next()) {
-					cadastrarEndereco.setIdEndereco(rs.getInt("IdEndereco"));
-				}
+
+				/* CHAMAR A OPERAÇÃO DE READ AQUI E ATUALIZAR O ID DO OBJETO ENDEREÇO */
+				//	cadastrarEndereco.setIdEndereco(rs.getInt("IdEndereco"));
+				
 				stm.close();
 				rs.close();
 			} else {

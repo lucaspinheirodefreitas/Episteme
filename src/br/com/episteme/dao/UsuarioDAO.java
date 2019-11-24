@@ -24,14 +24,17 @@ public class UsuarioDAO implements GenericDAO {
 				Usuario cadastrarUsuario = (Usuario) o;
 				String SQL = "INSERT INTO TBUSUARIO(IdUsuario, NomeUsuario, Email, Senha, IdEndereco) "
 						+ "VALUES ((select nextval('autoIncrementUsuario'))," 
-						+ cadastrarUsuario.getNome()        + ',' 
-						+ cadastrarUsuario.getEmail()   	+ ',' 
-						+ cadastrarUsuario.getSenha() 		+ ',' 
-						+ "(SELECT MAX(IdEndereco) FROM TBENDERECO))";
+						+ "'" + cadastrarUsuario.getNome()       	+ "'," 
+						+ "'" + cadastrarUsuario.getEmail()   		+ "',"
+						+ "'" + cadastrarUsuario.getSenha() 		+ "'," 
+						+ "(SELECT MAX(IdEndereco) FROM TBENDERECO));";
+				System.out.println(SQL);
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				ResultSet rs = stm.executeQuery();
-				System.out.println(rs);
+				
+				
 				/*
+				 	Criar uma consistencia para verificar a quantidade de tuplas inseridas
 					Pra atualizar o ID vou precisar executar uma operação de select na base eu acho.
 				
 				if(rs.next()) {
@@ -96,6 +99,8 @@ public class UsuarioDAO implements GenericDAO {
 
 /*
 	Exemplo de operações para realizar insert de novo usuário na base.
+	
+	//md5(senha) -- criptografar no insert do banco
 	
 	** Passo 1:
 	INSERT INTO TBENDERECO(IdEndereco, CEP, Logradouro, Numero, Bairro, Cidade, Estado)

@@ -22,27 +22,29 @@ public class CadastraUsuarioServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pagina, confirmaSenha;
-		DataSource  datasource  = new DataSource();
+		DataSource datasource;
+		datasource 				= new DataSource();
 		UsuarioDAO  userDAO     = new UsuarioDAO(datasource);
 		EnderecoDAO enderecoDAO = new EnderecoDAO(datasource);
+		Endereco endereco 		= new Endereco();
 		
-		Endereco endereco = new Endereco();
 		endereco.setCep((request.getParameter("txtCep")));
 		endereco.setLogradouro((request.getParameter("txtLogradouro")));
 		endereco.setNumeroImovel((request.getParameter("txtNumero")));
 		endereco.setBairro((request.getParameter("txtBairro")));
 		endereco.setCidade((request.getParameter("txtCidade")));
 		endereco.setEstado((request.getParameter("txtEstado")));
-		System.out.println(endereco);
-		enderecoDAO.create(endereco);
 		
+		enderecoDAO.create(endereco);
+
 		Usuario cadastroUsuario = new Usuario(endereco);
 		cadastroUsuario.setNome(request.getParameter("txtNome"));
 		cadastroUsuario.setEmail(request.getParameter("txtEmail"));
 		cadastroUsuario.setSenha(request.getParameter("txtSenha"));
 		confirmaSenha = (request.getParameter("txtConfirmaSenha"));
-		userDAO.create(cadastroUsuario);
 		
+		userDAO.create(cadastroUsuario);
+
 		//request.setAttribute("o usuário cadastrado é: " + cadastroUsuario.getNome());
 		if(confirmaSenha.equals(cadastroUsuario.getSenha())) {
 			pagina = "/minhaConta.jsp";
@@ -53,8 +55,9 @@ public class CadastraUsuarioServlet extends HttpServlet {
 		//request.setAttribute("teste", "você está pesquisando o livro: " + itemPesquisa);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);
-		
-		
+
+
+
 	}
 
 }

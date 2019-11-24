@@ -20,13 +20,15 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pagina;
-		DataSource datasource = new DataSource();
+		DataSource datasource;
+		datasource = new DataSource();
 		UsuarioDAO userDAO = new UsuarioDAO(datasource);
 		List<Object> res = userDAO.read(null);
 		request.getSession().setAttribute("Usuario", res.get(0));
 		pagina = "/minhaConta.jsp";
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);
+		
 	}
 
 }
