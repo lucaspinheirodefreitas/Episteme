@@ -7,6 +7,6 @@
 <title>Página de erro</title>
 </head>
 <body>
-<h3>Senhas divergentes</h3>
+<h3>Usuario ou senha incorreto!</h3>
 </body>
 </html>

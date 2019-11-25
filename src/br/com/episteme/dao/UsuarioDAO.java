@@ -1,7 +1,5 @@
 package br.com.episteme.dao;
 
-/* Assisti até 1h05 min o video modelando e implementando o banco de dados. */
-
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,25 +21,21 @@ public class UsuarioDAO implements GenericDAO {
 			if(o instanceof Usuario) { 
 				Usuario cadastrarUsuario = (Usuario) o;
 				String SQL = "INSERT INTO TBUSUARIO(IdUsuario, NomeUsuario, Email, Senha, IdEndereco) "
-						+ "VALUES ((select nextval('autoIncrementUsuario'))," 
-						+ "'" + cadastrarUsuario.getNome()       	+ "'," 
-						+ "'" + cadastrarUsuario.getEmail()   		+ "',"
-						+ "'" + cadastrarUsuario.getSenha() 		+ "'," 
-						+ "(SELECT MAX(IdEndereco) FROM TBENDERECO));";
-				System.out.println(SQL);
+							+ "VALUES ((select nextval('autoIncrementUsuario')), ?, ?, ?, (SELECT MAX(IdEndereco) FROM TBENDERECO));";
+				// o select MAX é meio que um gato >>> precisa ser ajustado ainda.
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
+				stm.setString(1, cadastrarUsuario.getNome());
+				stm.setString(2, cadastrarUsuario.getEmail());
+				stm.setString(3, cadastrarUsuario.getSenha());
 				ResultSet rs = stm.executeQuery();
 				
-				
 				/*
+				 	função MD5 inclui a senha já criptografada no banco, precisamos criar um metodo pra criptografar a senha de entrada e mandar pro
+				 	select a senha que foi digitada também criptografada.
 				 	Criar uma consistencia para verificar a quantidade de tuplas inseridas
 					Pra atualizar o ID vou precisar executar uma operação de select na base eu acho.
-				
-				if(rs.next()) {
-					cadastrarUsuario.setIdUsuario(rs.getInt("IdUsuario"));
-				}
-				
 				*/
+				
 				stm.close();
 				rs.close();
 				
@@ -59,10 +53,11 @@ public class UsuarioDAO implements GenericDAO {
 		try {
 			if(o instanceof Usuario) { // entender como funciona o instanceof.
 				Usuario parcial = (Usuario) o;
-				String SQL = "SELECT * FROM TBUSUARIO WHERE email = lucas@lucas.com.br";
+				String SQL = "SELECT * FROM TBUSUARIO WHERE email = ? AND senha = ?";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				stm.setString(1, parcial.getEmail());
 				stm.setString(2, parcial.getSenha());
+				
 				ResultSet rs = stm.executeQuery();
 				ArrayList<Object> result = new ArrayList<Object>();
 				
@@ -73,6 +68,7 @@ public class UsuarioDAO implements GenericDAO {
 					usuario.setEmail(rs.getString("Email"));
 					result.add(usuario);
 				}
+				
 				stm.close();
 				rs.close();
 				return result;
@@ -110,7 +106,7 @@ public class UsuarioDAO implements GenericDAO {
 	** Passo 2:
 	
 	INSERT INTO TBUSUARIO(IdUsuario, NomeUsuario, Email, Senha, IdEndereco)
-		VALUES ((select nextval('autoIncrementUsuario')), 'LUCAS', 'LUCAS@LUCAS.COM.BR', '12345', (SELECT MAX(IdEndereco) FROM TBENDERECO));
+		VALUES ((select nextval('autoIncrementUsuario')), 'LUCAS', 'LUCAS@LUCAS.COM.BR', MD5('12345'), (SELECT MAX(IdEndereco) FROM TBENDERECO));
 	
 		
 	DELETE FROM TBENDERECO;

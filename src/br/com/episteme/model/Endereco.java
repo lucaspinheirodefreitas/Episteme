@@ -2,8 +2,8 @@ package br.com.episteme.model;
 
 @SuppressWarnings("serial")
 public class Endereco implements java.io.Serializable {
-	private String cep, logradouro, numeroImovel, bairro, cidade, estado;
-	int idEndereco;
+	private String cep, logradouro, bairro, cidade, estado;
+	int idEndereco, numeroImovel;
 	
 	public Endereco() {
 		
@@ -25,11 +25,11 @@ public class Endereco implements java.io.Serializable {
 		this.logradouro = logradouro;
 	}
 
-	public String getNumeroImovel() {
+	public int getNumeroImovel() {
 		return numeroImovel;
 	}
 
-	public void setNumeroImovel(String numeroImovel) {
+	public void setNumeroImovel(int numeroImovel) {
 		this.numeroImovel = numeroImovel;
 	}
 

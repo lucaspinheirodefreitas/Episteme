@@ -23,7 +23,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<i class="material-icons"> account_box </i>
-				<form role="form" action="loginservilet" method="post">
+				<form role="form" action="loginservlet" method="post">
 					<div class="form-group">
 
 						<label for="exampleInputEmail1"> Email </label> <input

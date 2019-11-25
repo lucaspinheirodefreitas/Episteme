@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.episteme.dao.DataSource;
 import br.com.episteme.dao.UsuarioDAO;
+import br.com.episteme.model.Usuario;
 
 
 @WebServlet("/loginservlet")
@@ -23,12 +24,24 @@ public class LoginServlet extends HttpServlet {
 		DataSource datasource;
 		datasource = new DataSource();
 		UsuarioDAO userDAO = new UsuarioDAO(datasource);
-		List<Object> res = userDAO.read(null);
-		request.getSession().setAttribute("Usuario", res.get(0));
-		pagina = "/minhaConta.jsp";
+		Usuario usuario = new Usuario();
+		
+		usuario.setEmail((request.getParameter("txtEmail")));
+		usuario.setSenha((request.getParameter("txtSenha")));
+		System.out.println(usuario.getEmail());
+		System.out.println(usuario.getSenha());
+		List<Object> usuarios = userDAO.read(usuario);
+		
+		if(usuarios.equals(null) || usuarios.isEmpty()) {
+			System.out.println(usuarios.size());
+			pagina = "/Erro.jsp";
+		}
+		else {
+			pagina = "/minhaConta.jsp";
+		}	
+		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);
 		
 	}
-
 }

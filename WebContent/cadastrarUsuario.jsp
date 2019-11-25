@@ -91,7 +91,7 @@
 							name="txtLogradouro" />
 					</div>
 					<div class="form-group">
-						<label for="numero"> Numero </label> <input type="text"
+						<label for="numero"> Numero </label> <input type="number"
 							class="form-control" id="numero" name="txtNumero" />
 					</div>
 					<div class="form-group">

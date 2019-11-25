@@ -20,24 +20,22 @@ public class EnderecoDAO implements GenericDAO{
 			if(o instanceof Endereco) { 
 				Endereco cadastrarEndereco = (Endereco) o;
 				
-				String SQL = "INSERT INTO TBENDERECO(IdEndereco, CEP, Logradouro, Numero, Bairro, Cidade, Estado) "
-						+ "VALUES((select nextval('autoIncrementEndereco')), '" 
-						+ cadastrarEndereco.getCep()           		+ "'," 
-						+ "'" + cadastrarEndereco.getLogradouro()   		+ "',"
-						+ "'" + cadastrarEndereco.getNumeroImovel() 		+ "'," 
-						+ "'" + cadastrarEndereco.getBairro()       		+ "'," 
-						+ "'" + cadastrarEndereco.getCidade()       		+ "'," 
-						+ "'" + cadastrarEndereco.getEstado()       		+ "');";
-				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
-				ResultSet rs = stm.executeQuery();
-
-				/* CHAMAR A OPERAÇÃO DE READ AQUI E ATUALIZAR O ID DO OBJETO ENDEREÇO */
-				//	cadastrarEndereco.setIdEndereco(rs.getInt("IdEndereco"));
+				String SQL =  "INSERT INTO TBENDERECO(IdEndereco, CEP, Logradouro, Numero, Bairro, Cidade, Estado) "
+							+ "VALUES((select nextval('autoIncrementEndereco')), ?, ?, ?, ?, ?, ?)";
 				
+				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
+				stm.setString(1, cadastrarEndereco.getCep());
+				stm.setString(2, cadastrarEndereco.getLogradouro());
+				stm.setInt(3, cadastrarEndereco.getNumeroImovel());
+				stm.setString(4, cadastrarEndereco.getBairro());
+				stm.setString(5, cadastrarEndereco.getCidade());
+				stm.setString(6, cadastrarEndereco.getEstado());
+				ResultSet rs = stm.executeQuery();
 				stm.close();
 				rs.close();
+				System.out.println("Endereço cadastradao com sucesso.");
 			} else {
-				throw new RuntimeException("Objeto inválido"); // entender como funciona o throw.
+				throw new RuntimeException("Objeto inválido");
 			}
 		} catch (SQLException ex) {
 			System.out.println("Falha ao efetuar inserção!\n" + "Codigo de erro: " + ex.getErrorCode() 

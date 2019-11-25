@@ -17,9 +17,11 @@ CREATE TABLE TBUSUARIO (
   	IdUsuario 		SERIAL	 		NOT NULL ,
   	NomeUsuario 	VARCHAR(100) 	NOT NULL,
 	Email 			VARCHAR(255)	NOT NULL,
-	Senha 			VARCHAR(30)		NOT NULL,
+	Senha 			TEXT			NOT NULL,
 	IdEndereco 		INTEGER			NOT NULL,
-  	CONSTRAINT PK_usuario PRIMARY KEY(IdUsuario),
+	UNIQUE 			(IdUsuario),
+	UNIQUE			(email),		
+  	CONSTRAINT PK_usuario PRIMARY KEY(email),
 	CONSTRAINT FK_endereco FOREIGN KEY (IdEndereco) REFERENCES TBEndereco(IdEndereco)
 );
 
