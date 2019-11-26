@@ -26,15 +26,16 @@ CREATE TABLE TBUSUARIO (
 );
 
 CREATE TABLE TBLIVRO (
-  	IdLivro 			SERIAL  	NOT NULL,
-	NomeLivro		VARCHAR(30)		NOT NULL, -- motivos: usuário pode colocar ponto ou pode ser alguém de fora do Brasil.
+  	IdLivro 		SERIAL		  	NOT NULL,
+	NomeLivro		VARCHAR(30)		NOT NULL, 
   	Autor	 		VARCHAR(100) 	NOT NULL,
-	Ano 			DATE	   		NOT NULL,
-	Versao	 		INTEGER		 	NOT NULL,
+	dataPublicacao	DATE	   		NOT NULL,
+	Versao	 		REAL		 	NOT NULL,
 	Editora	 		VARCHAR(30) 	NOT NULL,
 	LinkPDF	 		TEXT		 	NOT NULL,
 	DataCadastro 	TIMESTAMP		NOT NULL,
-	Sinopse			JSON			NOT NULL,
+	Sinopse			TEXT			NOT NULL,
+	Idioma 			VARCHAR(20)		NOT NULL,
   	CONSTRAINT PK_livro PRIMARY KEY(IdLivro)
 );
 
@@ -44,7 +45,7 @@ CREATE TABLE TBEMPRESTIMO (
 	DataFim		 	Date	 		NOT NULL,
   	IdUsuario 		INTEGER  		NOT NULL,
 	IdLivro 		INTEGER			NOT NULL,
-  	CONSTRAINT PK_emprestimo 	PRIMARY KEY(IdEmprestimo),
-	CONSTRAINT FK_usuario		FOREIGN KEY (idUsuario) 	REFERENCES TBUsuario(IdUsuario),
+  	CONSTRAINT PK_emprestimo 		PRIMARY KEY(IdEmprestimo),
+	CONSTRAINT FK_usuario			FOREIGN KEY (idUsuario) 	REFERENCES TBUsuario(IdUsuario),
 	CONSTRAINT FK_livro 	 		FOREIGN KEY (idLivro) 	REFERENCES TBLivro(IdLivro)
 );

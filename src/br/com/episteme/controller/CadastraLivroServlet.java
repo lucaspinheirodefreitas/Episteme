@@ -19,12 +19,12 @@ public class CadastraLivroServlet extends HttpServlet {
 		String pagina;
 		Livro livro = new Livro();
 		livro.setNome(request.getParameter("txtlivro"));
-		livro.setAno(request.getParameter("txtAno"));
+		//livro.setDataPublicacao((request.getParameter("txtAno"))); pensar melhor nessa implementação, se faz sentido ou não.
 		livro.setAutor(request.getParameter("txtAutor"));
 		livro.setEditora(request.getParameter("txtEditora"));
-		livro.setLingua(request.getParameter("txtLingua"));
 		livro.setLinkPDF(request.getParameter("txtLinkPDF"));
 		livro.setSinopse(request.getParameter("txtSinopse"));
+		livro.setIdioma(request.getParameter("txtSinopse"));
 		livro.setVersao(Double.parseDouble((request.getParameter("txtVersao"))));
 		
 		

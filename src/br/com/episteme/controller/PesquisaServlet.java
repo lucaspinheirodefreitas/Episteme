@@ -15,7 +15,7 @@ import br.com.episteme.dao.LivroDAO;
 import br.com.episteme.model.Livro;
 
 
-@WebServlet("/pesquisaservlet")
+@WebServlet("/pesquisar")
 public class PesquisaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -35,7 +35,7 @@ public class PesquisaServlet extends HttpServlet {
 				A tabela deve ter o nome do livro, o link pra sinopse e o link pro PDF.
 			 	request.setAttribute(,);
 			*/
-			pagina = "listaLivros.jsp";
+			pagina = "/listaLivros.jsp";
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);

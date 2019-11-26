@@ -1,5 +1,6 @@
 package br.com.episteme.dao;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,31 +21,25 @@ public class LivroDAO implements GenericDAO{
 	public void create(Object o) {
 		try {
 			if(o instanceof Livro) { 
+				/*
+					INSERT INTO TBLIVRO(idlivro, nomelivro, autor, ano, versao, editora, linkpdf, datacadastro, sinopse, idioma) 
+					VALUES((select nextval('autoIncrementLivro')), 'livro de teste', 'teste@teste.com.br', '1500-01-01', '0.0', 'editora de teste', 'http://www.argen.com.br/arquivos/servico/pdfServico_57952bf8ca7af_24-07-2016_17-58-32.pdf', '1999-01-08 04:05:06
+					', 'este livro refere-se a história de um teste', 'português');
+				*/
 				Livro cadastrarLivro = (Livro) o;
-				String SQL = "INSERT INTO TBLIVRO(IdUsuario, NomeUsuario, Email, Senha, IdEndereco) "
-						+ "VALUES ((select nextval('autoIncrementUsuario')), ?, ?, ?, (SELECT MAX(IdEndereco) FROM TBENDERECO));";
-				// o select MAX é meio que um gato >>> precisa ser ajustado ainda.
+				String SQL = "INSERT INTO TBLIVRO(idlivro, nomelivro, autor, ano, versao, editora, linkpdf, datacadastro, sinopse, idioma) "
+						+ "VALUES ((select nextval('autoIncrementUsuario')), ?, ?, ?, ?, ?, ?, ?, ?, ?;";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				stm.setString(1, cadastrarLivro.getNome());
-				stm.setString(2, cadastrarLivro.getAno());
-				stm.setString(3, cadastrarLivro.getEditora());
-				stm.setString(4, cadastrarLivro.getLingua());
-				stm.setString(5, cadastrarLivro.getAutor());
-				stm.setDouble(6, cadastrarLivro.getVersao());
-				stm.setString(7, cadastrarLivro.getLinkPDF());
+				stm.setString(2, cadastrarLivro.getAutor());
+				stm.setDate(3, (Date) cadastrarLivro.getDataPublicacao());
+				stm.setDouble(4, cadastrarLivro.getVersao());
+				stm.setString(5, cadastrarLivro.getEditora());
+				stm.setString(6, cadastrarLivro.getLinkPDF());
+				stm.setString(7, "'1500-01-01 01:01:01'");
 				stm.setString(8, cadastrarLivro.getSinopse());
-				/*
-					executar ALTER TABLE e modificar o tipo da colune sinopse
-				*/
+				stm.setString(9, cadastrarLivro.getIdioma());
 				ResultSet rs = stm.executeQuery();
-
-				/*
-				 	função MD5 inclui a senha já criptografada no banco, precisamos criar um metodo pra criptografar a senha de entrada e mandar pro
-				 	select a senha que foi digitada também criptografada.
-				 	Criar uma consistencia para verificar a quantidade de tuplas inseridas
-					Pra atualizar o ID vou precisar executar uma operação de select na base eu acho.
-				 */
-
 				stm.close();
 				rs.close();
 
@@ -62,22 +57,31 @@ public class LivroDAO implements GenericDAO{
 	@Override
 	public List<Object> read(Object o) {
 		try {
-			if(o instanceof Livro) { // entender como funciona o instanceof.
-				Livro parcial = (Livro) o;
-				String SQL = "SELECT * FROM TBUSUARIO WHERE email = ? AND senha = ?";
+			if(o instanceof Livro) { 
+				Livro livroPesquisa = (Livro) o;
+				
+				/*
+					select * from tblivro where nomelivro like ('%teste%');
+				*/
+				
+				String SQL = "SELECT * FROM TBULIVRO WHERE nomeLivro like('%?%')";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
-				//stm.setString(1, parcial.getEmail());
-				//stm.setString(2, parcial.getSenha());
-
+				stm.setString(1, livroPesquisa.getNome());
 				ResultSet rs = stm.executeQuery();
 				ArrayList<Object> result = new ArrayList<Object>();
 
 				if(rs.next()) {
-					//Usuario usuario = new Usuario();
-					//usuario.setIdUsuario(rs.getInt("IdUsuario"));
-					//usuario.setNome(rs.getString("nomeUsuario"));
-					//usuario.setEmail(rs.getString("Email"));
-					//result.add(usuario);
+					/* 
+						Pensar em como implementar aqui... Talvez criar um laço até o fim dos resultados e ir adicionando 
+						no arrayList de livros. 
+					*/
+					
+					Livro livro = new Livro();
+					livro.setId(rs.getInt("IdLivro"));
+					livro.setNome(rs.getString("nomeLivro"));
+					livro.setAutor(rs.getString("autor"));
+					livro.setDataPublicacao(rs.getDate("dataPublicacao"));
+					result.add(livro);
 				}
 
 				stm.close();
