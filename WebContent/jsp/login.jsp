@@ -34,7 +34,7 @@
 
 						<label for="exampleInputPassword1"> Senha </label> <input
 							type="password" class="form-control" id="exampleInputPassword1"
-							name="txtSenha" />
+							name="txtSenha"/>
 					</div>
 
 					<button type="submit" class="btn btn-primary">Entrar</button>

@@ -1,18 +1,31 @@
 package br.com.episteme.model;
 
-import java.util.ArrayList;
+import java.util.Calendar;
 
 @SuppressWarnings("serial")
 public class Livro implements java.io.Serializable {
+	public Calendar getDataCadastro() {
+		return dataCadastro;
+	}
+	public void setDataCadastro(Calendar dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+	public String getSinopse() {
+		return Sinopse;
+	}
+	public void setSinopse(String sinopse) {
+		Sinopse = sinopse;
+	}
 	private int id;
 	private String nome;
-	private ArrayList<String> autor = new ArrayList<String>();
-	private int versao;
+	private String autor;
+	private Double versao;
 	private String lingua;
 	private String ano;
-	private String categoria;
 	private String editora;
 	private String linkPDF;
+	private String Sinopse;
+	private Calendar dataCadastro = Calendar.getInstance();;
 	
 	public int getId() {
 		return id;
@@ -26,16 +39,16 @@ public class Livro implements java.io.Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public ArrayList<String> getAutor() {
+	public String getAutor() {
 		return autor;
 	}
-	public void setAutor(ArrayList<String> autor) {
+	public void setAutor(String autor) {
 		this.autor = autor;
 	}
-	public int getVersao() {
+	public Double getVersao() {
 		return versao;
 	}
-	public void setVersao(int versao) {
+	public void setVersao(Double versao) {
 		this.versao = versao;
 	}
 	public String getLingua() {
@@ -50,12 +63,7 @@ public class Livro implements java.io.Serializable {
 	public void setAno(String ano) {
 		this.ano = ano;
 	}
-	public String getCategoria() {
-		return categoria;
-	}
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
-	}
+
 	public String getEditora() {
 		return editora;
 	}

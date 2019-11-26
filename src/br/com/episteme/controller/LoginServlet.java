@@ -34,10 +34,10 @@ public class LoginServlet extends HttpServlet {
 		
 		if(usuarios.equals(null) || usuarios.isEmpty()) {
 			System.out.println(usuarios.size());
-			pagina = "/Erro.jsp";
+			pagina = "/erro.jsp";
 		}
 		else {
-			pagina = "/minhaConta.jsp";
+			pagina = "/index.html";
 		}	
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);

@@ -1,7 +1,6 @@
 package br.com.episteme.controller;
 
 import java.io.IOException;
-import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,24 +9,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.episteme.model.Livro;
+
 @WebServlet("/cadastralivro")
 public class CadastraLivroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pagina, nomeLivro, autor, editora, linkPDF, sinopse;
-		int ano;
-		Double versao;
-		Calendar publicacao = Calendar.getInstance();
-		nomeLivro = request.getParameter("livro"); //criar o name do input no jsp como livro
+		String pagina;
+		Livro livro = new Livro();
+		livro.setNome(request.getParameter("txtlivro"));
+		livro.setAno(request.getParameter("txtAno"));
+		livro.setAutor(request.getParameter("txtAutor"));
+		livro.setEditora(request.getParameter("txtEditora"));
+		livro.setLingua(request.getParameter("txtLingua"));
+		livro.setLinkPDF(request.getParameter("txtLinkPDF"));
+		livro.setSinopse(request.getParameter("txtSinopse"));
+		livro.setVersao(Double.parseDouble((request.getParameter("txtVersao"))));
 		
-		if(nomeLivro.isBlank()) {
-			// Pensar em enviar algum alerta pra página quando vier vazio e redirecionar novamente pra mesma pagina.
-			pagina = "/index.html";
-		} else {
-			request.setAttribute("teste", "você está pesquisando o livro: " + nomeLivro);
-			pagina = "/minhaConta.jsp";
-		}
+		
+		pagina = "/index.html";
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);
 	}

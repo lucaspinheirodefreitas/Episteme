@@ -46,7 +46,6 @@ public class EnderecoDAO implements GenericDAO{
 
 	@Override
 	public List<Object> read(Object o) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
