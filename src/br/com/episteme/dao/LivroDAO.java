@@ -27,12 +27,11 @@ public class LivroDAO implements GenericDAO{
 					', 'este livro refere-se a história de um teste', 'português');
 				*/
 				Livro cadastrarLivro = (Livro) o;
-				String SQL = "INSERT INTO TBLIVRO(idlivro, nomelivro, autor, ano, versao, editora, linkpdf, datacadastro, sinopse, idioma) "
-						+ "VALUES ((select nextval('autoIncrementUsuario')), ?, ?, ?, ?, ?, ?, ?, ?, ?;";
+				String SQL = "INSERT INTO TBLIVRO(idlivro, nomelivro, autor, versao, editora, linkpdf, datacadastro, sinopse, idioma) "
+						+ "VALUES ((select nextval('autoIncrementUsuario')), ?, ?, ?, ?, ?, ?, ?, ?;";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				stm.setString(1, cadastrarLivro.getNome());
 				stm.setString(2, cadastrarLivro.getAutor());
-				stm.setDate(3, (Date) cadastrarLivro.getDataPublicacao());
 				stm.setDouble(4, cadastrarLivro.getVersao());
 				stm.setString(5, cadastrarLivro.getEditora());
 				stm.setString(6, cadastrarLivro.getLinkPDF());
@@ -80,7 +79,6 @@ public class LivroDAO implements GenericDAO{
 					livro.setId(rs.getInt("IdLivro"));
 					livro.setNome(rs.getString("nomeLivro"));
 					livro.setAutor(rs.getString("autor"));
-					livro.setDataPublicacao(rs.getDate("dataPublicacao"));
 					result.add(livro);
 				}
 

@@ -10,7 +10,6 @@ public class Livro implements java.io.Serializable {
 	private String autor;
 	private Double versao;
 	private String idioma;
-	private Date dataPublicacao;
 	private String editora;
 	private String linkPDF;
 	private String Sinopse;
@@ -59,13 +58,6 @@ public class Livro implements java.io.Serializable {
 	}
 	public void setVersao(Double versao) {
 		this.versao = versao;
-	}
-
-	public Date getDataPublicacao() {
-		return dataPublicacao;
-	}
-	public void setDataPublicacao(Date ano) {
-		this.dataPublicacao = ano;
 	}
 
 	public String getEditora() {

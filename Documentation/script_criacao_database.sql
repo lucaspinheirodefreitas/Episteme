@@ -29,7 +29,6 @@ CREATE TABLE TBLIVRO (
   	IdLivro 		SERIAL		  	NOT NULL,
 	NomeLivro		VARCHAR(30)		NOT NULL, 
   	Autor	 		VARCHAR(100) 	NOT NULL,
-	dataPublicacao	DATE	   		NOT NULL,
 	Versao	 		REAL		 	NOT NULL,
 	Editora	 		VARCHAR(30) 	NOT NULL,
 	LinkPDF	 		TEXT		 	NOT NULL,
