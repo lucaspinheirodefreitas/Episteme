@@ -1,7 +1,6 @@
 package br.com.episteme.model;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.sql.Timestamp;
 
 @SuppressWarnings("serial")
 public class Livro implements java.io.Serializable {
@@ -13,7 +12,7 @@ public class Livro implements java.io.Serializable {
 	private String editora;
 	private String linkPDF;
 	private String Sinopse;
-	private Calendar dataCadastro = Calendar.getInstance();
+	private Timestamp dataCadastro;
 	
 	public String getIdioma() {
 		return idioma;
@@ -22,10 +21,10 @@ public class Livro implements java.io.Serializable {
 		this.idioma = idioma;
 	}
 	
-	public Calendar getDataCadastro() {
+	public Timestamp getDataCadastro() {
 		return dataCadastro;
 	}
-	public void setDataCadastro(Calendar dataCadastro) {
+	public void setDataCadastro(Timestamp dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 	public String getSinopse() {

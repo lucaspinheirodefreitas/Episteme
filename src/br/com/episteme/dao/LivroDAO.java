@@ -28,22 +28,23 @@ public class LivroDAO implements GenericDAO{
 				*/
 				Livro cadastrarLivro = (Livro) o;
 				String SQL = "INSERT INTO TBLIVRO(idlivro, nomelivro, autor, versao, editora, linkpdf, datacadastro, sinopse, idioma) "
-						+ "VALUES ((select nextval('autoIncrementUsuario')), ?, ?, ?, ?, ?, ?, ?, ?;";
+						+ "VALUES ((select nextval('autoIncrementUsuario')), ?, ?, ?, ?, ?, ?, ?, ?);";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				stm.setString(1, cadastrarLivro.getNome());
 				stm.setString(2, cadastrarLivro.getAutor());
-				stm.setDouble(4, cadastrarLivro.getVersao());
-				stm.setString(5, cadastrarLivro.getEditora());
-				stm.setString(6, cadastrarLivro.getLinkPDF());
-				stm.setString(7, "'1500-01-01 01:01:01'");
-				stm.setString(8, cadastrarLivro.getSinopse());
-				stm.setString(9, cadastrarLivro.getIdioma());
+				stm.setDouble(3, cadastrarLivro.getVersao());
+				stm.setString(4, cadastrarLivro.getEditora());
+				stm.setString(5, cadastrarLivro.getLinkPDF());
+				stm.setTimestamp(6, cadastrarLivro.getDataCadastro());
+				stm.setString(7, cadastrarLivro.getSinopse());
+				stm.setString(8, cadastrarLivro.getIdioma());
+				
 				ResultSet rs = stm.executeQuery();
 				stm.close();
 				rs.close();
 
 			} else {
-				throw new RuntimeException("Objeto inválido"); // entender como funciona o throw.
+				throw new RuntimeException("Objeto inválido");
 			}
 
 		} catch (SQLException ex) {
