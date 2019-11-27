@@ -47,7 +47,7 @@ public class EmprestimoDAO implements GenericDAO {
 	}
 
 	@Override
-	public List<Object> read(Object o) {
+	public List<Object> read(Object o, String SQ) {
 		try {
 			if(o instanceof Usuario) { // entender como funciona o instanceof.
 				Usuario parcial = (Usuario) o;

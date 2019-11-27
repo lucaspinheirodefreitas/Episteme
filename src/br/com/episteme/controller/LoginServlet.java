@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
 		usuario.setSenha((request.getParameter("txtSenha")));
 		System.out.println(usuario.getEmail());
 		System.out.println(usuario.getSenha());
-		List<Object> usuarios = userDAO.read(usuario);
+		List<Object> usuarios = userDAO.read(usuario, "qlq coisa");
 		
 		if(usuarios.equals(null) || usuarios.isEmpty()) {
 			System.out.println(usuarios.size());

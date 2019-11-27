@@ -1,7 +1,7 @@
 package br.com.episteme.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,27 +20,52 @@ public class PesquisaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pagina, itemPesquisa;
+		String pagina, itemPesquisa, SQL;
 		itemPesquisa = request.getParameter("txtPesquisa");
 		if(itemPesquisa.isBlank()) {
 			pagina = "/index.html";
 		} else {
-			DataSource datasource = new DataSource();
-			Livro livroPesquisa = new Livro();
-			LivroDAO livroDAO = new LivroDAO(datasource);
+			DataSource datasource       = new DataSource();
+			Livro      livroPesquisa 	= new Livro();
+			LivroDAO   livroPesquisaDAO = new LivroDAO(datasource);
 			livroPesquisa.setNome(itemPesquisa);
-			List<Object> listaLivros = livroDAO.read(livroPesquisa);
-			/*
-				A ideia aqui é construir uma página que tenha tabela e enviar pra essa tabela todos os itens da lista de livros
-				A tabela deve ter o nome do livro, o link pra sinopse e o link pro PDF.
-			 	request.setAttribute(,);
-			*/
-			pagina = "/listaLivros.jsp";
+			SQL = livroPesquisaDAO.pesquisaLivro();
+			ArrayList<Object> listaLivros    = (ArrayList<Object>) livroPesquisaDAO.read(livroPesquisa, SQL);
+			request.setAttribute("listaLivros", listaLivros);
+			pagina = "/PesquisaLivros.jsp"; // precisa ajustar essa pagina está dando erro.
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);
-		
-		
 	}
+	
+	/*
+	A ideia aqui é construir uma página que tenha tabela e enviar pra essa tabela todos os itens da lista de livros
+	A tabela deve ter o nome do livro, o link pra sinopse e o link pro PDF.
+ 	request.setAttribute(,);
+ 	
+ 	while(rs.next())
+    {
+        PostData postdata = new PostData();
+
+        postdata.setId(rs.getInt("id"));
+        postdata.setOtkogo(rs.getString("otkogo"));
+        postdata.setKomy(rs.getString("komy"));
+        postdata.setText(rs.getString("text"));
+        postdata.setDate(rs.getString("'date'"));
+        posts.add(postdata);
+
+    }
+ 					
+	request.setAttribute("posts", posts);
+	
+	<table>
+	  <c:forEach items="${posts}" var="post">
+	   <tr>
+	     <td>${post.id}</td>
+	     ....
+	   </tr>
+	  </c:forEach>
+	</table>
+*/
 
 }

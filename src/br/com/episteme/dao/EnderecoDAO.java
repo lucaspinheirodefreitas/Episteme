@@ -45,7 +45,7 @@ public class EnderecoDAO implements GenericDAO{
 	}
 
 	@Override
-	public List<Object> read(Object o) {
+	public List<Object> read(Object o, String SQL) {
 		return null;
 	}
 

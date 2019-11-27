@@ -1,6 +1,5 @@
 package br.com.episteme.dao;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,10 +37,9 @@ public class LivroDAO implements GenericDAO{
 				stm.setTimestamp(6, cadastrarLivro.getDataCadastro());
 				stm.setString(7, cadastrarLivro.getSinopse());
 				stm.setString(8, cadastrarLivro.getIdioma());
-				
-				ResultSet rs = stm.executeQuery();
+				stm.executeQuery();
 				stm.close();
-				rs.close();
+				// questionar por que está entrando no exception e montando codigo de erro = 0.
 
 			} else {
 				throw new RuntimeException("Objeto inválido");
@@ -55,7 +53,8 @@ public class LivroDAO implements GenericDAO{
 	}
 
 	@Override
-	public List<Object> read(Object o) {
+	public List<Object> read(Object o, String SQL) {
+		System.out.println(SQL);
 		try {
 			if(o instanceof Livro) { 
 				Livro livroPesquisa = (Livro) o;
@@ -63,23 +62,22 @@ public class LivroDAO implements GenericDAO{
 				/*
 					select * from tblivro where nomelivro like ('%teste%');
 				*/
-				
-				String SQL = "SELECT * FROM TBULIVRO WHERE nomeLivro like('%?%')";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
-				stm.setString(1, livroPesquisa.getNome());
+				//stm.setString(1, livroPesquisa.getNome());
 				ResultSet rs = stm.executeQuery();
 				ArrayList<Object> result = new ArrayList<Object>();
 
-				if(rs.next()) {
-					/* 
-						Pensar em como implementar aqui... Talvez criar um laço até o fim dos resultados e ir adicionando 
-						no arrayList de livros. 
-					*/
-					
+				while(rs.next()) {
 					Livro livro = new Livro();
 					livro.setId(rs.getInt("IdLivro"));
 					livro.setNome(rs.getString("nomeLivro"));
 					livro.setAutor(rs.getString("autor"));
+					livro.setVersao(rs.getDouble("versao"));
+					livro.setEditora(rs.getString("editora"));
+					livro.setLinkPDF(rs.getString("linkpdf"));
+					livro.setDataCadastro(rs.getTimestamp("datacadastro"));
+					livro.setSinopse(rs.getString("sinopse"));
+					livro.setIdioma(rs.getString("idioma"));
 					result.add(livro);
 				}
 
@@ -108,6 +106,19 @@ public class LivroDAO implements GenericDAO{
 	public void delete(Object o) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public String pesquisaLivro() {
+		/*
+		 	Precisa ajustar isso, estava dando erro ao substituir o campo teste por ?
+		*/
+		String SQL = "SELECT * FROM TBLIVRO WHERE nomeLivro like('%teste%');";
+		return SQL;
+	}
+	
+	public String validaInsercao() {
+		String SQL = "SELECT * FROM TBLIVRO WHERE nomeLivro = ? ORDER BY DESC dataCadastro FETCH FIRST 1 ROWS ONLY;";
+		return SQL;
 	}
 
 }

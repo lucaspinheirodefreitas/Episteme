@@ -2,6 +2,7 @@ package br.com.episteme.controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,7 +20,7 @@ public class CadastraLivroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pagina;
+		String pagina, SQL;
 		DataSource datasource = new DataSource();
 		LivroDAO livroDAO = new LivroDAO(datasource);
 		Livro livro = new Livro();
@@ -33,8 +34,20 @@ public class CadastraLivroServlet extends HttpServlet {
 		Timestamp dataDeHoje = new Timestamp(System.currentTimeMillis()); 
 		livro.setDataCadastro(dataDeHoje);
 		livroDAO.create(livro);
-		// fazer aqui um if que vai validar se a inserção foi realizada com sucesso. Se sim, atualizar o id do livro.
-		pagina = "/minha-conta.html";
+		
+		// validando inserção e atualizando id do objeto livro.
+		SQL = livroDAO.pesquisaLivro();
+		List <Object> livros = livroDAO.read(livro, SQL);
+		Livro ultimoLivroCadastrado = (Livro) livros.get(0);
+		if(livros.isEmpty() || ultimoLivroCadastrado.getDataCadastro() != dataDeHoje) {
+			// significa que o registro não foi inserido na base.
+			pagina = "Erro.jsp"; 
+		}
+		else {
+			livro.setId(ultimoLivroCadastrado.getId());
+			pagina = "/minha-conta.html";
+		}
+		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);
 	}
