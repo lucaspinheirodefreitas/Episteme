@@ -36,29 +36,25 @@ public class CadastraUsuarioServlet extends HttpServlet {
 		endereco.setCidade((request.getParameter("txtCidade")));
 		endereco.setEstado((request.getParameter("txtEstado")));
 		enderecoDAO.create(endereco);
+		
 		SQL = enderecoDAO.buscaUltimaInsercao();
 		List <Object> enderecos = enderecoDAO.read(endereco, SQL);
 		Endereco ultimoEnderecoCadastrado = (Endereco) enderecos.get(0);
 		
 		if(enderecos.equals(null) || enderecos.isEmpty()) {
-			// significa que o registro não foi inserido na base.
 			pagina = "Erro.jsp"; 
 		}
-		else {
-			endereco.setIdEndereco(ultimoEnderecoCadastrado.getIdEndereco());
-			pagina = "/minha-conta.html";
-		}
 		
-		Usuario cadastroUsuario = new Usuario(endereco);
+		Usuario cadastroUsuario = new Usuario(ultimoEnderecoCadastrado);
 		cadastroUsuario.setNome(request.getParameter("txtNome"));
 		cadastroUsuario.setEmail(request.getParameter("txtEmail"));
 		cadastroUsuario.setSenha(request.getParameter("txtSenha"));
 		confirmaSenha = (request.getParameter("txtConfirmaSenha"));
 		
-		userDAO.create(cadastroUsuario);
 		
 		if(confirmaSenha.equals(cadastroUsuario.getSenha())) {
-			pagina = "/minhaConta.jsp";
+			userDAO.create(cadastroUsuario);
+			pagina = "/minha-conta.html";
 		}
 		else {
 			pagina = "/Erro.jsp";

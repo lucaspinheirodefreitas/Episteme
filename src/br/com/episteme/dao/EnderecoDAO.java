@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.episteme.model.Endereco;
-import br.com.episteme.model.Livro;
 
 public class EnderecoDAO implements GenericDAO{
 	private DataSource dataSource;
@@ -24,7 +23,6 @@ public class EnderecoDAO implements GenericDAO{
 				
 				String SQL =  "INSERT INTO TBENDERECO(IdEndereco, CEP, Logradouro, Numero, Bairro, Cidade, Estado) "
 							+ "VALUES((select nextval('autoIncrementEndereco')), ?, ?, ?, ?, ?, ?)";
-				
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				stm.setString(1, cadastrarEndereco.getCep());
 				stm.setString(2, cadastrarEndereco.getLogradouro());
@@ -32,16 +30,25 @@ public class EnderecoDAO implements GenericDAO{
 				stm.setString(4, cadastrarEndereco.getBairro());
 				stm.setString(5, cadastrarEndereco.getCidade());
 				stm.setString(6, cadastrarEndereco.getEstado());
-				ResultSet rs = stm.executeQuery();
+				int qtdRegistrosInseridos = stm.executeUpdate();
+				if (qtdRegistrosInseridos == 0) {
+					System.out.println("Endereço já cadastrado na base.");
+				}
+				else {
+					System.out.println("Endereço cadastrado com sucesso.");
+				}
 				stm.close();
-				rs.close();
-				System.out.println("Endereço cadastradao com sucesso.");
 			} else {
 				throw new RuntimeException("Objeto inválido");
 			}
 		} catch (SQLException ex) {
-			System.out.println("Falha ao efetuar inserção!\n" + "Codigo de erro: " + ex.getErrorCode() 
-			+ "\n" + "Mensagem de erro: " + ex.getMessage());
+			if(ex.getErrorCode() == 0) {
+				System.out.println("Endereço já cadastrado na base de clientes.");
+			}
+			else {
+				System.out.println("Falha ao efetuar inserção!\n" + "Codigo de erro: " + ex.getErrorCode() 
+				+ "\n" + "Mensagem de erro: " + ex.getMessage());
+			}
 		}
 		
 	}
@@ -55,25 +62,21 @@ public class EnderecoDAO implements GenericDAO{
 				stm.setString(1, buscaEndereco.getCep());
 				stm.setInt(2, buscaEndereco.getNumeroImovel());
 				ResultSet rs = stm.executeQuery();
-				stm.close();
-				rs.close();
 				ArrayList<Object> result = new ArrayList<Object>();
 
 				while(rs.next()) {
-					Livro livro = new Livro();
-					livro.setId(rs.getInt("IdLivro"));
-					livro.setNome(rs.getString("nomeLivro"));
-					livro.setAutor(rs.getString("autor"));
-					livro.setVersao(rs.getDouble("versao"));
-					livro.setEditora(rs.getString("editora"));
-					livro.setLinkPDF(rs.getString("linkpdf"));
-					livro.setDataCadastro(rs.getTimestamp("datacadastro"));
-					livro.setSinopse(rs.getString("sinopse"));
-					livro.setIdioma(rs.getString("idioma"));
-					result.add(livro);
+					Endereco endereco = new Endereco();
+					endereco.setIdEndereco(rs.getInt("IdEndereco"));
+					endereco.setCep(rs.getString("cep"));
+					endereco.setLogradouro(rs.getString("logradouro"));
+					endereco.setNumeroImovel(rs.getInt("numero"));
+					endereco.setBairro(rs.getString("bairro"));
+					endereco.setCidade(rs.getString("cidade"));
+					endereco.setEstado(rs.getString("estado"));
+					result.add(endereco);
 				}
-
-				System.out.println("Endereço cadastradao com sucesso.");
+				stm.close();
+				rs.close();
 				return result;
 			} else {
 				throw new RuntimeException("Objeto inválido");
@@ -98,6 +101,13 @@ public class EnderecoDAO implements GenericDAO{
 	}
 	
 	public String buscaUltimaInsercao() {
+		// ajustar essa query para considerar timestamt e pegar a ultima inclusão
+		String SQL = "SELECT * FROM TBENDERECO WHERE  CEP = ? AND NUMERO = ? FETCH FIRST 1 ROWS ONLY;";
+		return SQL;
+	}
+	
+	public String buscaEndereco() {
+		// ajustar essa query
 		String SQL = "SELECT * FROM TBENDERECO WHERE  CEP = ? AND NUMERO = ? FETCH FIRST 1 ROWS ONLY;";
 		return SQL;
 	}

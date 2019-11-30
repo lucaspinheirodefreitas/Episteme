@@ -23,8 +23,7 @@ public class EmprestimoDAO implements GenericDAO {
 				Endereco cadastrarEndereco = (Endereco) o;
 				
 				String SQL =  "INSERT INTO TBENDERECO(IdEndereco, CEP, Logradouro, Numero, Bairro, Cidade, Estado) "
-							+ "VALUES((select nextval('autoIncrementEndereco')), ?, ?, ?, ?, ?, ?)";
-				
+							+ "VALUES((select nextval('autoIncrementEndereco')), ?, ?, ?, ?, ?, ?);";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				stm.setString(1, cadastrarEndereco.getCep());
 				stm.setString(2, cadastrarEndereco.getLogradouro());
@@ -43,13 +42,12 @@ public class EmprestimoDAO implements GenericDAO {
 			System.out.println("Falha ao efetuar inserção!\n" + "Codigo de erro: " + ex.getErrorCode() 
 			+ "\n" + "Mensagem de erro: " + ex.getMessage());
 		}
-		
 	}
 
 	@Override
 	public List<Object> read(Object o, String SQ) {
 		try {
-			if(o instanceof Usuario) { // entender como funciona o instanceof.
+			if(o instanceof Usuario) { 
 				Usuario parcial = (Usuario) o;
 				String SQL = "SELECT * FROM TBUSUARIO WHERE email = ? AND senha = ?";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
@@ -66,7 +64,6 @@ public class EmprestimoDAO implements GenericDAO {
 					usuario.setEmail(rs.getString("Email"));
 					result.add(usuario);
 				}
-				
 				stm.close();
 				rs.close();
 				return result;
@@ -84,13 +81,11 @@ public class EmprestimoDAO implements GenericDAO {
 
 	@Override
 	public void update(Object o) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void delete(Object o) {
-		// TODO Auto-generated method stub
 		
 	}
 }

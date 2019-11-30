@@ -21,13 +21,14 @@ public class UsuarioDAO implements GenericDAO {
 			if(o instanceof Usuario) { 
 				Usuario cadastrarUsuario = (Usuario) o;
 				String SQL = "INSERT INTO TBUSUARIO(IdUsuario, NomeUsuario, Email, Senha, IdEndereco) "
-							+ "VALUES ((select nextval('autoIncrementUsuario')), ?, ?, ?, (SELECT MAX(IdEndereco) FROM TBENDERECO));";
-				// o select MAX é meio que um gato >>> precisa ser ajustado ainda.
+							+ "VALUES ((select nextval('autoIncrementUsuario')), ?, ?, ?, ?);";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				stm.setString(1, cadastrarUsuario.getNome());
 				stm.setString(2, cadastrarUsuario.getEmail());
 				stm.setString(3, cadastrarUsuario.getSenha());
-				ResultSet rs = stm.executeQuery();
+				int idEndereco = cadastrarUsuario.getEndereco().getIdEndereco();
+				stm.setInt(4, idEndereco);
+				stm.executeUpdate();
 				
 				/*
 				 	função MD5 inclui a senha já criptografada no banco, precisamos criar um metodo pra criptografar a senha de entrada e mandar pro
@@ -37,12 +38,9 @@ public class UsuarioDAO implements GenericDAO {
 				*/
 				
 				stm.close();
-				rs.close();
-				
 			} else {
-				throw new RuntimeException("Objeto inválido"); // entender como funciona o throw.
+				throw new RuntimeException("Objeto inválido");
 			}
-			
 		} catch (SQLException ex) {
 			System.out.println("Falha ao efetuar inserção!\n" + "Codigo de erro: " + ex.getErrorCode() 
 			+ "\n" + "Mensagem de erro: " + ex.getMessage());
@@ -51,7 +49,7 @@ public class UsuarioDAO implements GenericDAO {
 	
 	public List<Object> read(Object o, String SQ) {
 		try {
-			if(o instanceof Usuario) { // entender como funciona o instanceof.
+			if(o instanceof Usuario) { 
 				Usuario parcial = (Usuario) o;
 				String SQL = "SELECT * FROM TBUSUARIO WHERE email = ? AND senha = ?";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
@@ -68,13 +66,12 @@ public class UsuarioDAO implements GenericDAO {
 					usuario.setEmail(rs.getString("Email"));
 					result.add(usuario);
 				}
-				
 				stm.close();
 				rs.close();
 				return result;
 				
 			} else {
-				throw new RuntimeException("Objeto inválido"); // entender como funciona o throw.
+				throw new RuntimeException("Objeto inválido");
 			}
 			
 		} catch (SQLException ex) {

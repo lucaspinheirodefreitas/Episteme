@@ -10,6 +10,7 @@ CREATE TABLE TBENDERECO (
 	Bairro	 		VARCHAR(30) 	NOT NULL,
 	Cidade	 		VARCHAR(30) 	NOT NULL,
 	Estado	 		VARCHAR(20) 	NOT NULL,
+	UNIQUE			(CEP, Numero),
   	CONSTRAINT PK_endereco PRIMARY KEY(IdEndereco)
 );
 

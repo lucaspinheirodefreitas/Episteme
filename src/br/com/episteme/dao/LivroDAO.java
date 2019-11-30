@@ -20,11 +20,6 @@ public class LivroDAO implements GenericDAO{
 	public void create(Object o) {
 		try {
 			if(o instanceof Livro) { 
-				/*
-					INSERT INTO TBLIVRO(idlivro, nomelivro, autor, ano, versao, editora, linkpdf, datacadastro, sinopse, idioma) 
-					VALUES((select nextval('autoIncrementLivro')), 'livro de teste', 'teste@teste.com.br', '1500-01-01', '0.0', 'editora de teste', 'http://www.argen.com.br/arquivos/servico/pdfServico_57952bf8ca7af_24-07-2016_17-58-32.pdf', '1999-01-08 04:05:06
-					', 'este livro refere-se a história de um teste', 'português');
-				*/
 				Livro cadastrarLivro = (Livro) o;
 				String SQL = "INSERT INTO TBLIVRO(idlivro, nomelivro, autor, versao, editora, linkpdf, datacadastro, sinopse, idioma) "
 						+ "VALUES ((select nextval('autoIncrementUsuario')), ?, ?, ?, ?, ?, ?, ?, ?);";
@@ -39,8 +34,6 @@ public class LivroDAO implements GenericDAO{
 				stm.setString(8, cadastrarLivro.getIdioma());
 				stm.executeQuery();
 				stm.close();
-				// questionar por que está entrando no exception e montando codigo de erro = 0.
-
 			} else {
 				throw new RuntimeException("Objeto inválido");
 			}
@@ -58,12 +51,7 @@ public class LivroDAO implements GenericDAO{
 		try {
 			if(o instanceof Livro) { 
 				Livro livroPesquisa = (Livro) o;
-				
-				/*
-					select * from tblivro where nomelivro like ('%teste%');
-				*/
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
-				//stm.setString(1, livroPesquisa.getNome());
 				ResultSet rs = stm.executeQuery();
 				ArrayList<Object> result = new ArrayList<Object>();
 
@@ -80,15 +68,12 @@ public class LivroDAO implements GenericDAO{
 					livro.setIdioma(rs.getString("idioma"));
 					result.add(livro);
 				}
-
 				stm.close();
 				rs.close();
 				return result;
-
 			} else {
-				throw new RuntimeException("Objeto inválido"); // entender como funciona o throw.
+				throw new RuntimeException("Objeto inválido");
 			}
-
 		} catch (SQLException ex) {
 			System.out.println("Falha ao efetuar consulta!\n" + "Codigo de erro: " + ex.getErrorCode() 
 			+ "\n" + "Mensagem de erro: " + ex.getMessage());
@@ -98,20 +83,15 @@ public class LivroDAO implements GenericDAO{
 
 	@Override
 	public void update(Object o) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void delete(Object o) {
-		// TODO Auto-generated method stub
 
 	}
 	
 	public String pesquisaLivro() {
-		/*
-		 	Precisa ajustar isso, estava dando erro ao substituir o campo teste por ?
-		*/
 		String SQL = "SELECT * FROM TBLIVRO WHERE nomeLivro like('%" + "?" + "%');";
 		return SQL;
 	}
