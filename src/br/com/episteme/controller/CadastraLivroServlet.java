@@ -35,8 +35,7 @@ public class CadastraLivroServlet extends HttpServlet {
 		livro.setDataCadastro(dataDeHoje);
 		livroDAO.create(livro);
 		
-		// validando inserção e atualizando id do objeto livro.
-		SQL = livroDAO.pesquisaLivro();
+		SQL = livroDAO.buscaUltimaInsercao();
 		List <Object> livros = livroDAO.read(livro, SQL);
 		Livro ultimoLivroCadastrado = (Livro) livros.get(0);
 		if(livros.isEmpty() || ultimoLivroCadastrado.getDataCadastro() != dataDeHoje) {

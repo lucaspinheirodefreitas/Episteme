@@ -3,9 +3,11 @@ package br.com.episteme.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.episteme.model.Endereco;
+import br.com.episteme.model.Livro;
 
 public class EnderecoDAO implements GenericDAO{
 	private DataSource dataSource;
@@ -46,19 +48,58 @@ public class EnderecoDAO implements GenericDAO{
 
 	@Override
 	public List<Object> read(Object o, String SQL) {
+		try {
+			if(o instanceof Endereco) { 
+				Endereco buscaEndereco = (Endereco) o;
+				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
+				stm.setString(1, buscaEndereco.getCep());
+				stm.setInt(2, buscaEndereco.getNumeroImovel());
+				ResultSet rs = stm.executeQuery();
+				stm.close();
+				rs.close();
+				ArrayList<Object> result = new ArrayList<Object>();
+
+				while(rs.next()) {
+					Livro livro = new Livro();
+					livro.setId(rs.getInt("IdLivro"));
+					livro.setNome(rs.getString("nomeLivro"));
+					livro.setAutor(rs.getString("autor"));
+					livro.setVersao(rs.getDouble("versao"));
+					livro.setEditora(rs.getString("editora"));
+					livro.setLinkPDF(rs.getString("linkpdf"));
+					livro.setDataCadastro(rs.getTimestamp("datacadastro"));
+					livro.setSinopse(rs.getString("sinopse"));
+					livro.setIdioma(rs.getString("idioma"));
+					result.add(livro);
+				}
+
+				System.out.println("Endereço cadastradao com sucesso.");
+				return result;
+			} else {
+				throw new RuntimeException("Objeto inválido");
+			}
+		} catch (SQLException ex) {
+			System.out.println("Falha ao efetuar inserção!\n" + "Codigo de erro: " + ex.getErrorCode() 
+			+ "\n" + "Mensagem de erro: " + ex.getMessage());
+		}
 		return null;
 	}
 
 	@Override
 	public void update(Object o) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void delete(Object o) {
-		// TODO Auto-generated method stub
 		
+		
+	}
+	
+	public String buscaUltimaInsercao() {
+		String SQL = "SELECT * FROM TBENDERECO WHERE  CEP = ? AND NUMERO = ? FETCH FIRST 1 ROWS ONLY;";
+		return SQL;
 	}
 
 }

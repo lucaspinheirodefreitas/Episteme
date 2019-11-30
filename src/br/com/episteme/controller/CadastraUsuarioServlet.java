@@ -1,6 +1,7 @@
 package br.com.episteme.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,7 +22,7 @@ public class CadastraUsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pagina, confirmaSenha;
+		String pagina, confirmaSenha, SQL;
 		DataSource datasource;
 		datasource 				= new DataSource();
 		UsuarioDAO  userDAO     = new UsuarioDAO(datasource);
@@ -35,7 +36,18 @@ public class CadastraUsuarioServlet extends HttpServlet {
 		endereco.setCidade((request.getParameter("txtCidade")));
 		endereco.setEstado((request.getParameter("txtEstado")));
 		enderecoDAO.create(endereco);
-		//enderecoDAO.read(endereco); construir aqui pra pegar o id de endereço e enviar via stm ao inves de usar a query com MAX 
+		SQL = enderecoDAO.buscaUltimaInsercao();
+		List <Object> enderecos = enderecoDAO.read(endereco, SQL);
+		Endereco ultimoEnderecoCadastrado = (Endereco) enderecos.get(0);
+		
+		if(enderecos.equals(null) || enderecos.isEmpty()) {
+			// significa que o registro não foi inserido na base.
+			pagina = "Erro.jsp"; 
+		}
+		else {
+			endereco.setIdEndereco(ultimoEnderecoCadastrado.getIdEndereco());
+			pagina = "/minha-conta.html";
+		}
 		
 		Usuario cadastroUsuario = new Usuario(endereco);
 		cadastroUsuario.setNome(request.getParameter("txtNome"));
@@ -50,11 +62,8 @@ public class CadastraUsuarioServlet extends HttpServlet {
 		}
 		else {
 			pagina = "/Erro.jsp";
-		}
-		
+		}	
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);
-
 	}
-
 }

@@ -37,35 +37,4 @@ public class PesquisaServlet extends HttpServlet {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);
 	}
-	
-	/*
-	A ideia aqui é construir uma página que tenha tabela e enviar pra essa tabela todos os itens da lista de livros
-	A tabela deve ter o nome do livro, o link pra sinopse e o link pro PDF.
- 	request.setAttribute(,);
- 	
- 	while(rs.next())
-    {
-        PostData postdata = new PostData();
-
-        postdata.setId(rs.getInt("id"));
-        postdata.setOtkogo(rs.getString("otkogo"));
-        postdata.setKomy(rs.getString("komy"));
-        postdata.setText(rs.getString("text"));
-        postdata.setDate(rs.getString("'date'"));
-        posts.add(postdata);
-
-    }
- 					
-	request.setAttribute("posts", posts);
-	
-	<table>
-	  <c:forEach items="${posts}" var="post">
-	   <tr>
-	     <td>${post.id}</td>
-	     ....
-	   </tr>
-	  </c:forEach>
-	</table>
-*/
-
 }

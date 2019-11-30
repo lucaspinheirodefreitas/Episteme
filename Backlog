@@ -1,0 +1,27 @@
+Cadastro de usuário 			- ok
+Login                   				- ok
+Atualização de dados do usuário 	- FALTA DESENVOLVER 
+		-> lembrar que ele querer alterar o endereço por exemplo... Então as classes a tratar nesse ponto são, endereço e usuário.
+Deletar usuário				- FALTA DESENVOLVER 
+		-> Lembrar que existe integridade referencial entre as bases endereço e usuário. Não podemos deletar um e deixar o outro. Da mesma forma que precisamos analisar como fica a questão de Emprestimos quando realizar a deleção de uma conta. A gente pode discutir se faz sentido incluir um campo por exemplo na tabela de emprestimo do tipo: usuário ativo 'S' ou 'N' pra manter o histórico de livros emprestados, se for N significa que o usuário não tem mais conta na biblioteca por exemplo.
+Desenvolver a consulta de endereço - Falta desenvolver
+
+Buscar emprestimos já realizado 	- FALTA DESENVOLVER
+Incluir novo emprestimo na base	- FALTA DESENVOLVER
+**** Não sei se faz sentido atualizar um emprestimo ou deletar (acho que não precisamos implementar)
+
+Buscar livros em uma pesquisa	- ok
+Cadastrar livro				- ok
+Deletar livro					- FALTA DESENVOLVER
+Ajustar dados do livro			- FALTA DESENVOLVER
+
+Precisamos de uma página com algum tipo de relatório:
+	Ideia de informações que podem estar no relatório: 
+		1. Livros mais emprestados.
+		2. Usuários mais assíduos.
+		3. Períodos com maior volume de emprestimos (ex: inicio do mês ou fim do mês)
+		4. Meses do ano com maior volume de empréstimos.
+		5. Estado mais comum dentre os leitores.
+		5. Incluam aqui mais ideias pra gente discutir...
+
+

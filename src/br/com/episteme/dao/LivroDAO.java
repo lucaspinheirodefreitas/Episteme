@@ -112,11 +112,11 @@ public class LivroDAO implements GenericDAO{
 		/*
 		 	Precisa ajustar isso, estava dando erro ao substituir o campo teste por ?
 		*/
-		String SQL = "SELECT * FROM TBLIVRO WHERE nomeLivro like('%teste%');";
+		String SQL = "SELECT * FROM TBLIVRO WHERE nomeLivro like('%" + "?" + "%');";
 		return SQL;
 	}
 	
-	public String validaInsercao() {
+	public String buscaUltimaInsercao() {
 		String SQL = "SELECT * FROM TBLIVRO WHERE nomeLivro = ? ORDER BY DESC dataCadastro FETCH FIRST 1 ROWS ONLY;";
 		return SQL;
 	}
