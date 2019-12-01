@@ -31,25 +31,25 @@ public class UsuarioDAO implements GenericDAO {
 				stm.executeUpdate();
 				
 				/*
-				 	função MD5 inclui a senha já criptografada no banco, precisamos criar um metodo pra criptografar a senha de entrada e mandar pro
-				 	select a senha que foi digitada também criptografada.
+				 	funÃ§Ã£o MD5 inclui a senha jÃ¡ criptografada no banco, precisamos criar um metodo pra criptografar a senha de entrada e mandar pro
+				 	select a senha que foi digitada tambÃ©m criptografada.
 				 	Criar uma consistencia para verificar a quantidade de tuplas inseridas
-					Pra atualizar o ID vou precisar executar uma operação de select na base eu acho.
+					Pra atualizar o ID vou precisar executar uma operaÃ§Ã£o de select na base eu acho.
 				*/
 				
 				stm.close();
 			} else {
-				throw new RuntimeException("Objeto inválido");
+				throw new RuntimeException("Objeto invÃ¡lido");
 			}
 		} catch (SQLException ex) {
 			if(ex.getErrorCode() == 0) {
-				System.out.println("E-mail já cadastrado.");
+				System.out.println("E-mail jÃ¡ cadastrado.");
 				
 			} else {
-				System.out.println("Falha ao efetuar inserção!\n" + "Codigo de erro: " + ex.getErrorCode() 
+				System.out.println("Falha ao efetuar inserÃ§Ã£o!\n" + "Codigo de erro: " + ex.getErrorCode() 
 				+ "\n" + "Mensagem de erro: " + ex.getMessage());
 			}
-			// pensar melhor em como garantir que deu certo a inserção.
+			// pensar melhor em como garantir que deu certo a inserÃ§Ã£o.
 		}
 	}
 	
@@ -77,7 +77,7 @@ public class UsuarioDAO implements GenericDAO {
 				return result;
 				
 			} else {
-				throw new RuntimeException("Objeto inválido");
+				throw new RuntimeException("Objeto invÃ¡lido");
 			}
 			
 		} catch (SQLException ex) {
@@ -94,10 +94,11 @@ public class UsuarioDAO implements GenericDAO {
 	public void delete(Object o) {
 		
 	}
+	
 }
 
 /*
-	Exemplo de operações para realizar insert de novo usuário na base.
+	Exemplo de operaÃ§Ãµes para realizar insert de novo usuÃ¡rio na base.
 	
 	//md5(senha) -- criptografar no insert do banco
 	
@@ -131,11 +132,11 @@ public class UsuarioDAO implements GenericDAO {
 	-- DELETAR SEQUENCIA:
 	DROP SEQUENCE IF EXISTS autoincrementEndereco;
 	
-	-- SEMPRE QUE DÁ ERRO NO TIPO DE DADO A SER INSERIDO (Ex: NULL em campo NOT NULL), A SEQUENCIA INCREMENTA INDEVIDAMENTE POIS A OPERAÇÃO NÃO É COMMITADA.
+	-- SEMPRE QUE DÃ� ERRO NO TIPO DE DADO A SER INSERIDO (Ex: NULL em campo NOT NULL), A SEQUENCIA INCREMENTA INDEVIDAMENTE POIS A OPERAÃ‡ÃƒO NÃƒO Ã‰ COMMITADA.
 	-- Pensar em uma forma de sempre que der erro nesse ponto, restartar a sequencia do valor anterior.
 	-- Exemplo: pegar o codigo de erro e executar o SQL abaixo.
 	ALTER SEQUENCE autoincrementUsuario START WITH (select nextval('autoIncrementUsuario')-1);
 	
-	-- É necessário manter a integridade:
-	-- Obs.: Sempre que deletar um usuário, deletar também os dados do mesmo para as demais tabelas.
+	-- Ã‰ necessÃ¡rio manter a integridade:
+	-- Obs.: Sempre que deletar um usuÃ¡rio, deletar tambÃ©m os dados do mesmo para as demais tabelas.
 */
