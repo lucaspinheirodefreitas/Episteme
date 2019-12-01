@@ -42,8 +42,14 @@ public class UsuarioDAO implements GenericDAO {
 				throw new RuntimeException("Objeto inválido");
 			}
 		} catch (SQLException ex) {
-			System.out.println("Falha ao efetuar inserção!\n" + "Codigo de erro: " + ex.getErrorCode() 
-			+ "\n" + "Mensagem de erro: " + ex.getMessage());
+			if(ex.getErrorCode() == 0) {
+				System.out.println("E-mail já cadastrado.");
+				
+			} else {
+				System.out.println("Falha ao efetuar inserção!\n" + "Codigo de erro: " + ex.getErrorCode() 
+				+ "\n" + "Mensagem de erro: " + ex.getMessage());
+			}
+			// pensar melhor em como garantir que deu certo a inserção.
 		}
 	}
 	

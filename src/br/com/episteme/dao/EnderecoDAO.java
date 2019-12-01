@@ -100,12 +100,6 @@ public class EnderecoDAO implements GenericDAO{
 		
 	}
 	
-	public String buscaUltimaInsercao() {
-		// ajustar essa query para considerar timestamt e pegar a ultima inclusão
-		String SQL = "SELECT * FROM TBENDERECO WHERE  CEP = ? AND NUMERO = ? FETCH FIRST 1 ROWS ONLY;";
-		return SQL;
-	}
-	
 	public String buscaEndereco() {
 		// ajustar essa query
 		String SQL = "SELECT * FROM TBENDERECO WHERE  CEP = ? AND NUMERO = ? FETCH FIRST 1 ROWS ONLY;";

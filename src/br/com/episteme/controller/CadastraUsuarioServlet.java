@@ -37,12 +37,12 @@ public class CadastraUsuarioServlet extends HttpServlet {
 		endereco.setEstado((request.getParameter("txtEstado")));
 		enderecoDAO.create(endereco);
 		
-		SQL = enderecoDAO.buscaUltimaInsercao();
+		SQL = enderecoDAO.buscaEndereco();
 		List <Object> enderecos = enderecoDAO.read(endereco, SQL);
 		Endereco ultimoEnderecoCadastrado = (Endereco) enderecos.get(0);
 		
 		if(enderecos.equals(null) || enderecos.isEmpty()) {
-			pagina = "Erro.jsp"; 
+			pagina = "erro.jsp"; 
 		}
 		
 		Usuario cadastroUsuario = new Usuario(ultimoEnderecoCadastrado);
@@ -52,12 +52,12 @@ public class CadastraUsuarioServlet extends HttpServlet {
 		confirmaSenha = (request.getParameter("txtConfirmaSenha"));
 		
 		
-		if(confirmaSenha.equals(cadastroUsuario.getSenha())) {
+		if(!cadastroUsuario.equals(null) || confirmaSenha.equals(cadastroUsuario.getSenha())) {
 			userDAO.create(cadastroUsuario);
-			pagina = "/minha-conta.html";
+			pagina = "/index.html";
 		}
 		else {
-			pagina = "/Erro.jsp";
+			pagina = "/erro.jsp";
 		}	
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);

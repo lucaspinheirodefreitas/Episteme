@@ -47,11 +47,11 @@ public class LivroDAO implements GenericDAO{
 
 	@Override
 	public List<Object> read(Object o, String SQL) {
-		System.out.println(SQL);
 		try {
 			if(o instanceof Livro) { 
 				Livro livroPesquisa = (Livro) o;
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
+				stm.setString(1, '%' + livroPesquisa.getNome() + '%');
 				ResultSet rs = stm.executeQuery();
 				ArrayList<Object> result = new ArrayList<Object>();
 
@@ -92,7 +92,7 @@ public class LivroDAO implements GenericDAO{
 	}
 	
 	public String pesquisaLivro() {
-		String SQL = "SELECT * FROM TBLIVRO WHERE nomeLivro like('%" + "?" + "%');";
+		String SQL = "SELECT * FROM TBLIVRO WHERE nomeLivro like (?) FETCH FIRST 5 ROWS ONLY;";
 		return SQL;
 	}
 	
