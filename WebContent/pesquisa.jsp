@@ -7,7 +7,7 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
-<title></title>
+<title>.: Pesquisar livro :.</title>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 
@@ -56,8 +56,7 @@
 						<div class="row">
 							<div class="col-md-10">&nbsp;</div>
 							<div class="col-md-2" align="right">
-								<a class="dropdown-item" href="./relatorios?tipo=1"></a>
-								<button type="submit" class="btn btn-primary">Detalhes</button>
+								<a href="./relatorios?tipo=1">{+} Detalhes</a>
 							</div>
 						</div>
 					</li>
@@ -65,7 +64,7 @@
 						<div class="row" align="right">
 							<div class="col-md-10">&nbsp;</div>
 							<div class="col-md-2">
-								<button type="submit" class="btn btn-primary">Detalhes</button>
+								<a href="./relatorios?tipo=1">{+} Detalhes</a>
 							</div>
 						</div>
 					</li>
@@ -73,7 +72,7 @@
 						<div class="row" align="right">
 							<div class="col-md-10">&nbsp;</div>
 							<div class="col-md-2">
-								<button type="submit" class="btn btn-primary">Detalhes</button>
+								<a href="./relatorios?tipo=1">{+} Detalhes</a>
 							</div>
 						</div>
 					</li>
@@ -81,7 +80,7 @@
 						<div class="row" align="right">
 							<div class="col-md-10">&nbsp;</div>
 							<div class="col-md-2">
-								<button type="submit" class="btn btn-primary">Detalhes</button>
+								<a href="./relatorios?tipo=1">{+} Detalhes</a>
 							</div>
 						</div>
 					</li>

@@ -1,3 +1,5 @@
+/*#################################COMUNS#################################*/
+
 body {
 	background: #000000;
 	color: #F5DEB3;
@@ -13,47 +15,39 @@ body > div > div > div > div:nth-child(2) > div:nth-child(3) > div:nth-child(2) 
 	color: #F5DEB3;
 }
 
-#modal-262616 {
-	color: #87CEFA;
-}
-
-#modal-613219 {
-	color: #87CEFA;
-}
-
-#modal-297530 {
-	color: #87CEFA;
-}
-
-#modal-549066{
-	color: #87CEFA;
-}
-
-body > div > div > div > ul > li:nth-child(3) > a {
-	color: #87CEFA;
-}
-
+/*Navbar:*/
 body > div > div > div > ul > li:nth-child(1) > a {
 	color: #87CEFA;
 }
-
 body > div > div > div > ul > li:nth-child(2) > a {
 	color: #87CEFA;
 }
-
-#navbarDropdownMenuLink {
+body > div > div > div > ul > li:nth-child(3) > a {
+	color: #87CEFA;
+}
+body > div > div > div > ul > li:nth-child(4) > a {
+	color: #87CEFA;
+}
+body > div > div > div > ul > li:nth-child(5) > a {
 	color: #87CEFA;
 }
 
+/*#################################PAGINA INICIAL#################################*/
+
+/*Titulo:*/
+.col-md-8 > h3:nth-child(1) > strong:nth-child(1) {
+	color: #63615E;
+}
+
+/*Rodapé:*/
 .blockquote-footer {
 	color: #DAA520;
 }
 
-div.col-md-4:nth-child(1) > div:nth-child(2) > div:nth-child(1) > address:nth-child(1) > strong:nth-child(1) {
-	
-	color: #FFFFFF;
+div.col-md-2:nth-child(2) > address:nth-child(1) > strong:nth-child(1) {
+	color: #DAA520;
 }
 
-div.col-md-4:nth-child(1) > div:nth-child(2) > div:nth-child(1) > address:nth-child(1) {
-	color: #A9A9A9;
+div.col-md-2:nth-child(2) > address:nth-child(1) {
+	color: #63615E;
 }
