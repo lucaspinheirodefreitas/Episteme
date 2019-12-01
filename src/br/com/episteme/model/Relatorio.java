@@ -3,122 +3,50 @@ package br.com.episteme.model;
 import java.util.ArrayList;
 
 public class Relatorio {
-	private ArrayList<String> topLivros, topEnderecos, topBairros, topCidades, topEstados, topPaises, topLeitores;
-	private ArrayList<Integer> qtdLivrosEmp, qtdUsuariosEndereco, qtdUsuariosBairro, qtdUsuariosCidade, qtdUsuariosEstado, qtdUsuariosPais, qtdLivros;
+
+	private ArrayList<DadosRelatorio> dado; 
+	private String nomeRelatorio, colunaDado, colunaQuantidade;
 	
-	public Relatorio () {
+	public Relatorio (String nomeRelatorio) {
+		this.nomeRelatorio = nomeRelatorio;
+	}
+	
+	public Relatorio() {
 		
 	}
 	
-	public ArrayList<String> getTopLivros() {
-		return topLivros;
+	public String getColunaDado() {
+		return colunaDado;
 	}
 
-	public void setTopLivros(ArrayList<String> topLivros) {
-		this.topLivros = topLivros;
+	public void setColunaDado(String colunaDado) {
+		this.colunaDado = colunaDado;
 	}
 
-	public ArrayList<String> getTopEnderecos() {
-		return topEnderecos;
+	public String getColunaQuantidade() {
+		return colunaQuantidade;
 	}
 
-	public void setTopEnderecos(ArrayList<String> topEnderecos) {
-		this.topEnderecos = topEnderecos;
+	public void setColunaQuantidade(String colunaQuantidade) {
+		this.colunaQuantidade = colunaQuantidade;
+	}
+	
+	public String getNomeRelatorio() {
+		return nomeRelatorio;
 	}
 
-	public ArrayList<String> getTopBairros() {
-		return topBairros;
+	public void setNomeRelatorio(String nomeRelatorio) {
+		this.nomeRelatorio = nomeRelatorio;
+	}
+	
+	public ArrayList<DadosRelatorio> getDado() {
+		return dado;
 	}
 
-	public void setTopBairros(ArrayList<String> topBairros) {
-		this.topBairros = topBairros;
+	public void setDado(ArrayList<DadosRelatorio> dado) {
+		this.dado = dado;
 	}
 
-	public ArrayList<String> getTopCidades() {
-		return topCidades;
-	}
-
-	public void setTopCidades(ArrayList<String> topCidades) {
-		this.topCidades = topCidades;
-	}
-
-	public ArrayList<String> getTopEstados() {
-		return topEstados;
-	}
-
-	public void setTopEstados(ArrayList<String> topEstados) {
-		this.topEstados = topEstados;
-	}
-
-	public ArrayList<String> getTopPaises() {
-		return topPaises;
-	}
-
-	public void setTopPaises(ArrayList<String> topPaises) {
-		this.topPaises = topPaises;
-	}
-
-	public ArrayList<String> getTopLeitores() {
-		return topLeitores;
-	}
-
-	public void setTopLeitores(ArrayList<String> topLeitores) {
-		this.topLeitores = topLeitores;
-	}
-
-	public ArrayList<Integer> getQtdLivrosEmp() {
-		return qtdLivrosEmp;
-	}
-
-	public void setQtdLivrosEmp(ArrayList<Integer> qtdLivrosEmp) {
-		this.qtdLivrosEmp = qtdLivrosEmp;
-	}
-
-	public ArrayList<Integer> getQtdUsuariosEndereco() {
-		return qtdUsuariosEndereco;
-	}
-
-	public void setQtdUsuariosEndereco(ArrayList<Integer> qtdUsuariosEndereco) {
-		this.qtdUsuariosEndereco = qtdUsuariosEndereco;
-	}
-
-	public ArrayList<Integer> getQtdUsuariosBairro() {
-		return qtdUsuariosBairro;
-	}
-
-	public void setQtdUsuariosBairro(ArrayList<Integer> qtdUsuariosBairro) {
-		this.qtdUsuariosBairro = qtdUsuariosBairro;
-	}
-
-	public ArrayList<Integer> getQtdUsuariosCidade() {
-		return qtdUsuariosCidade;
-	}
-
-	public void setQtdUsuariosCidade(ArrayList<Integer> qtdUsuariosCidade) {
-		this.qtdUsuariosCidade = qtdUsuariosCidade;
-	}
-
-	public ArrayList<Integer> getQtdUsuariosEstado() {
-		return qtdUsuariosEstado;
-	}
-
-	public void setQtdUsuariosEstado(ArrayList<Integer> qtdUsuariosEstado) {
-		this.qtdUsuariosEstado = qtdUsuariosEstado;
-	}
-
-	public ArrayList<Integer> getQtdUsuariosPais() {
-		return qtdUsuariosPais;
-	}
-
-	public void setQtdUsuariosPais(ArrayList<Integer> qtdUsuariosPais) {
-		this.qtdUsuariosPais = qtdUsuariosPais;
-	}
-
-	public ArrayList<Integer> getQtdLivros() {
-		return qtdLivros;
-	}
-
-	public void setQtdLivros(ArrayList<Integer> qtdLivros) {
-		this.qtdLivros = qtdLivros;
-	}
+	
+	
 }

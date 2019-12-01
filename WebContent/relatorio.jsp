@@ -23,16 +23,10 @@
 
 	<div class="container-fluid">
 		<div class="row" id="titulo">
+			<div class="col-md-12" align="center">
+				<h1 class="text-center">${dados.nomeRelatorio}</h1>
+			</div>
 
-			<div class="col-md-8">
-				<h1 class="text-center">TOP FIVE - Livros mais emprestados!</h1>
-			</div>
-			<div class="col-md-2">
-				<!--  <a href="./meuCarrinho"><img src="./icons/cart.png" id="iconCarrinho"></a>-->
-			</div>
-			<div class="col-md-2">
-				<!--<a href="./newUser"><img src="./icons/avatar.png" id="iconCarrinho"></a>-->
-			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-2">&nbsp;</div>
@@ -48,28 +42,17 @@
 
 
 		<div class="row">
-			<div class="col-md-2">&nbsp;</div>
-			<div class="col-md-4">
-				<c:forEach var="item" items="${dados.topLivros}">
-					<div class="col-md-4">&nbsp;</div>
-					<div class="col-md-4">
-						<h4>${item}</h4>
-					</div>
-					<div class="col-md-4">&nbsp;</div>
-				</c:forEach>
-			</div>
-			<div class="col-md-2">&nbsp;</div>
-			<div class="col-md-2">&nbsp;</div>
-			<div class="col-md-4">
-				<c:forEach var="item" items="${dados.qtdLivrosEmp}">
-					<div class="col-md-4">&nbsp;</div>
-					<div class="col-md-4">
-						<h4>${item}</h4>
-					</div>
-					<div class="col-md-4">&nbsp;</div>
-				</c:forEach>
-			</div>
-			<div class="col-md-2">&nbsp;</div>
+			<c:forEach var="item" items="${dados.dado}">
+				<div class="col-md-2">&nbsp;</div>
+				<div class="col-md-2">
+					<h4>${item.dado}</h4>
+				</div>
+				<div class="col-md-4">&nbsp;</div>
+				<div class="col-md-2">
+					<h4>${item.quantidade}</h4>
+				</div>
+				<div class="col-md-2">&nbsp;</div>
+			</c:forEach>
 		</div>
 	</div>
 

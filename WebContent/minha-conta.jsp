@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Minha conta</title>
+<title>.: Minha conta :.</title>
 
 <meta name="description"
 	content="Source code generated using layoutit.com">
@@ -32,14 +32,13 @@
 						id="navbarDropdownMenuLink" data-toggle="dropdown">Relatórios</a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="./relatorios?tipo=1">Livros mais emprestados</a> 
-							<a class="dropdown-item" href="./relatorios?tipo=2">Top 5 - leitores</a>
+							<a class="dropdown-item" href="./relatorios?tipo=1">Top livros</a> 
+							<a class="dropdown-item" href="./relatorios?tipo=2">Top leitores</a>
+							<a class="dropdown-item" href="./relatorios?tipo=3">Tempo medio de emprestimos - Top livros</a>
 							<div class="dropdown-divider">Região</div>
-							<a class="dropdown-item" href="./relatorios?tipo=3">Endereco com maior número de usuários</a>
 							<a class="dropdown-item" href="./relatorios?tipo=4">Bairro com maior número de usuários</a>
 							<a class="dropdown-item" href="./relatorios?tipo=5">Cidade com maior número de usuários</a>
 							<a class="dropdown-item" href="./relatorios?tipo=6">Estado com maior número de usuários</a>
-							<a class="dropdown-item" href="./relatorios?tipo=7">Pais com maior número de usuários</a>
 						</div>
 					</li>
 				</ul>
