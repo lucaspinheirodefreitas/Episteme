@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.episteme.model.Emprestimo;
 import br.com.episteme.model.Endereco;
+import br.com.episteme.model.Livro;
 import br.com.episteme.model.Usuario;
 
 public class EmprestimoDAO implements GenericDAO {
@@ -45,27 +47,25 @@ public class EmprestimoDAO implements GenericDAO {
 	}
 
 	@Override
-	public List<Object> read(Object o, String SQ) {
+	public List<Object> read(Object o, String SQL) {
 		try {
-			if(o instanceof Usuario) { 
-				Usuario parcial = (Usuario) o;
-				String SQL = "SELECT * FROM TBUSUARIO WHERE email = ? AND senha = ?";
+			if(o instanceof Emprestimo) { 
+				Emprestimo emprestimo = (Emprestimo) o;
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
-				stm.setString(1, parcial.getEmail());
-				stm.setString(2, parcial.getSenha());
-				
 				ResultSet rs = stm.executeQuery();
 				ArrayList<Object> result = new ArrayList<Object>();
 				
 				if(rs.next()) {
+					// ainda não pensei em como implementar isso, só estou pensando no relatório por enquanto.
 					Usuario usuario = new Usuario();
-					usuario.setIdUsuario(rs.getInt("IdUsuario"));
-					usuario.setNome(rs.getString("nomeUsuario"));
-					usuario.setEmail(rs.getString("Email"));
-					result.add(usuario);
+					Livro livro = new Livro();
+					livro.setNome(rs.getString("nomeLivro"));
+					Emprestimo emp = new Emprestimo(usuario, livro);
+					result.add(emp);
 				}
 				stm.close();
 				rs.close();
+				System.out.println("item 1 do relatório obtido com sucesso.");
 				return result;
 				
 			} else {
@@ -87,5 +87,10 @@ public class EmprestimoDAO implements GenericDAO {
 	@Override
 	public void delete(Object o) {
 		
+	}
+	
+	public String topLivrosEmprestados() {
+		String SQL = "SELECT L.NOMELIVRO, COUNT(E.IDLIVRO) as QTD_EMPRESTIMOS FROM TBEMPRESTIMO E INNER JOIN TBLIVRO L ON E.IDLIVRO = L.IDLIVRO GROUP BY L.NOMELIVRO, E.IDLIVRO;";
+		return SQL;
 	}
 }

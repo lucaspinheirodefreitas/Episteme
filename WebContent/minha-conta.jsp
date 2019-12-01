@@ -21,9 +21,9 @@
 		<div class="row">
 			<div class="col-md-12">
 				<ul class="nav">
-					<li class="nav-item"><a class="nav-link active" href="#">Home</a>
+					<li class="nav-item"><a class="nav-link" href="./index.html">Home</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#">Pesquisar</a>
+					<li class="nav-item"><a class="nav-link active" href="./login.html">Sair</a>
 					</li>
 					<li class="nav-item"><a class="nav-link disabled" href="#">Minha conta</a>
 					</li>
@@ -32,15 +32,16 @@
 						id="navbarDropdownMenuLink" data-toggle="dropdown">Relatórios</a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="#">Livros mais emprestados</a> 
-							<a class="dropdown-item" href="#">Top 5 - leitores</a>
+							<a class="dropdown-item" href="./relatorios?tipo=1">Livros mais emprestados</a> 
+							<a class="dropdown-item" href="./relatorios?tipo=2">Top 5 - leitores</a>
 							<div class="dropdown-divider">Região</div>
-							<a class="dropdown-item" href="#">Endereco com maior número de usuários</a>
-							<a class="dropdown-item" href="#">Bairro com maior número de usuários</a>
-							<a class="dropdown-item" href="#">Cidade com maior número de usuários</a>
-							<a class="dropdown-item" href="#">Estado com maior número de usuários</a>
-							<a class="dropdown-item" href="#">Pais com maior número de usuários</a>
-						</div></li>
+							<a class="dropdown-item" href="./relatorios?tipo=3">Endereco com maior número de usuários</a>
+							<a class="dropdown-item" href="./relatorios?tipo=4">Bairro com maior número de usuários</a>
+							<a class="dropdown-item" href="./relatorios?tipo=5">Cidade com maior número de usuários</a>
+							<a class="dropdown-item" href="./relatorios?tipo=6">Estado com maior número de usuários</a>
+							<a class="dropdown-item" href="./relatorios?tipo=7">Pais com maior número de usuários</a>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</div>
