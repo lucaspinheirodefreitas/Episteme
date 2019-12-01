@@ -21,11 +21,11 @@
 		<div class="row">
 			<div class="col-md-12">
 				<ul class="nav">
-					<li class="nav-item"><a class="nav-link" href="./index.html">Home</a>
-					</li>
-					<li class="nav-item"><a class="nav-link active" href="./login.html">Sair</a>
+					<li class="nav-item"><a class="nav-link" href="./index.html">Página inicial</a>
 					</li>
 					<li class="nav-item"><a class="nav-link disabled" href="#">Minha conta</a>
+					</li>
+					<li class="nav-item"><a class="nav-link actived" href="#">Alterar dados</a>
 					</li>
 					<li class="nav-item dropdown ml-md-auto"><a
 						class="nav-link dropdown-toggle" href="http://example.com"
@@ -69,7 +69,7 @@
 							<td>01/04/2012</td>
 							<td>Approved</td>
 						</tr>
-						<tr class="table-success">
+						<!-- <tr class="table-success">
 							<td>2</td>
 							<td>TB - Monthly</td>
 							<td>02/04/2012</td>
@@ -86,7 +86,7 @@
 							<td>TB - Monthly</td>
 							<td>04/04/2012</td>
 							<td>Call in to confirm</td>
-						</tr>
+						</tr>-->
 					</tbody>
 				</table>
 			</div>

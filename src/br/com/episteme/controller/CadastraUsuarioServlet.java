@@ -51,12 +51,12 @@ public class CadastraUsuarioServlet extends HttpServlet {
 		cadastroUsuario.setSenha(request.getParameter("txtSenha"));
 		confirmaSenha = (request.getParameter("txtConfirmaSenha"));
 		
-		
-		if(!cadastroUsuario.equals(null) || confirmaSenha.equals(cadastroUsuario.getSenha())) {
+		if(!cadastroUsuario.equals(null) && confirmaSenha.equals(cadastroUsuario.getSenha())) {
 			userDAO.create(cadastroUsuario);
 			pagina = "/index.html";
 		}
 		else {
+			// enviar a informação mencionando qual foi o erro...
 			pagina = "/erro.jsp";
 		}	
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);

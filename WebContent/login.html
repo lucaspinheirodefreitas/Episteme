@@ -3,20 +3,31 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
-<title></title>
+<title>.: Login :.</title>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
 
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
+				<img alt="Logo biblioteca" src="imagens/episteme_1.jpg" width=120
+					height=120 align="right">
+				<ul class="nav">
+					<li class="nav-item"><a class="nav-link disabled"
+						href="./index.html">Página inicial</a></li>
+					<li class="nav-item"><a class="nav-link disabled"
+						href="./minha-conta.jsp">Minha conta</a></li>
+					<li class="nav-item"><a class="nav-link disabled"
+						href="./cadastro-livro.html">Cadastrar livro</a></li>
+				</ul>
+			</div>
+			<div class="col-md-2">&nbsp;</div>
+			<div class="col-md-8">
 				<i class="material-icons"> account_box </i>
 				<form role="form" action="home" method="post">
 					<div class="form-group">
@@ -35,9 +46,12 @@
 					<button type="submit" class="btn btn-primary">Entrar</button>
 				</form>
 
-				<span>Não possui cadastro? <a href="http://localhost:8080/Episteme/cadastro-usuario.html">Cadastre-se agora</a></span>
+				<span>Não possui cadastro? <a
+					href="http://localhost:8080/Episteme/cadastro-usuario.html">Cadastre-se
+						agora</a></span>
 
 			</div>
+			<div class="col-md-1">&nbsp;</div>
 		</div>
 	</div>
 	<script src="js/jquery.min.js"></script>
