@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <jsp:useBean id="dados" type="br.com.episteme.model.Relatorio"
 	scope="request" />
+<jsp:useBean id="usuario" type="br.com.episteme.model.Usuario"
+scope="session" />
 <html lang="pt-br">
 <head>
 <meta charset="utf-8">
@@ -15,7 +17,6 @@
 <meta name="author" content="LayoutIt!">
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
-
 <link href="css/style.css" rel="stylesheet">
 
 </head>
@@ -27,8 +28,8 @@
 				<ul class="nav">
 					<li class="nav-item"><a class="nav-link" href="./index.html">Página
 							inicial</a></li>
-					<li class="nav-item"><a class="nav-link actived" href="./minha-conta.jsp">Minha
-							conta</a></li>
+					<li class="nav-item"><a class="nav-link actived"
+						href="./minha-conta.jsp">Minha conta</a></li>
 					<li class="nav-item dropdown ml-md-auto"><a
 						class="nav-link dropdown-toggle" href="http://example.com"
 						id="navbarDropdownMenuLink" data-toggle="dropdown">Relatórios</a>
@@ -44,8 +45,7 @@
 								href="./relatorios?tipo=5">Cidade com maior número de
 								usuários</a> <a class="dropdown-item" href="./relatorios?tipo=6">Estado
 								com maior número de usuários</a>
-						</div>
-					</li>
+						</div></li>
 				</ul>
 			</div>
 		</div>
@@ -56,30 +56,41 @@
 
 		</div>
 		<div class="row">
-			<div class="col-md-2">&nbsp;</div>
-			<div class="col-md-2">
-				<strong>Nome</strong>
+			<div class="col-md-12">
+				<h3>Bem vindo, "${usuario.nome}"</h3>
 			</div>
-			<div class="col-md-4">&nbsp;</div>
-			<div class="col-md-2">
-				<strong>Qtde</strong>
-			</div>
-			<div class="col-md-2">&nbsp;</div>
 		</div>
-
-
 		<div class="row">
-			<c:forEach var="item" items="${dados.dado}">
-				<div class="col-md-2">&nbsp;</div>
-				<div class="col-md-2">
-					<h4>${item.dado}</h4>
-				</div>
-				<div class="col-md-4">&nbsp;</div>
-				<div class="col-md-2">
-					<h4>${item.quantidade}</h4>
-				</div>
-				<div class="col-md-2">&nbsp;</div>
-			</c:forEach>
+			<div class="col-md-2">&nbsp;</div>
+			<div class="col-md-8">
+				<table class="table">
+					<thead>
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th>Item:</th>
+							<th align="right">Quantidade:</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<c:forEach var="item" items="${dados.dado}">
+								<tr class="table-active">
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>${item.dado}</td>
+									<td>${item.quantidade}</td>
+								</tr>
+							</c:forEach>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-2">&nbsp;</div>
 		</div>
 	</div>
 

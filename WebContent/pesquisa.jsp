@@ -1,5 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<jsp:useBean id="dados" type="br.com.episteme.model.Relatorio"
+	scope="request" />
 <jsp:useBean id="listaLivros"
 	class="br.com.episteme.controller.PesquisaServlet" scope="session"></jsp:useBean>
 
@@ -56,7 +59,7 @@
 						<div class="row">
 							<div class="col-md-10">&nbsp;</div>
 							<div class="col-md-2" align="right">
-								<a href="./relatorios?tipo=1">{+} Detalhes</a>
+								<a href="./solicitaremprestimo?tipo=1">{+} Detalhes</a>
 							</div>
 						</div>
 					</li>
@@ -64,7 +67,7 @@
 						<div class="row" align="right">
 							<div class="col-md-10">&nbsp;</div>
 							<div class="col-md-2">
-								<a href="./relatorios?tipo=1">{+} Detalhes</a>
+								<a href="./solicitaremprestimo?tipo=1">{+} Detalhes</a>
 							</div>
 						</div>
 					</li>
@@ -72,7 +75,7 @@
 						<div class="row" align="right">
 							<div class="col-md-10">&nbsp;</div>
 							<div class="col-md-2">
-								<a href="./relatorios?tipo=1">{+} Detalhes</a>
+								<a href="./solicitaremprestimo?tipo=1">{+} Detalhes</a>
 							</div>
 						</div>
 					</li>
@@ -80,7 +83,7 @@
 						<div class="row" align="right">
 							<div class="col-md-10">&nbsp;</div>
 							<div class="col-md-2">
-								<a href="./relatorios?tipo=1">{+} Detalhes</a>
+								<a href="./solicitaremprestimo?tipo=1">{+} Detalhes</a>
 							</div>
 						</div>
 					</li>

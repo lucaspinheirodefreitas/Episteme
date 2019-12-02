@@ -1,5 +1,7 @@
+<jsp:useBean id="usuario" type="br.com.episteme.model.Usuario"
+	scope="session" />
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">

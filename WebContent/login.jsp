@@ -1,6 +1,7 @@
-
+<jsp:useBean id="usuario" type="br.com.episteme.model.Usuario"
+	scope="session" />
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="pt-br" dir="ltr">
 <head>
 <meta charset="utf-8">
 <title>.: Login :.</title>
@@ -18,12 +19,12 @@
 				<img alt="Logo biblioteca" src="imagens/episteme_1.jpg" width=120
 					height=120 align="right">
 				<ul class="nav">
-					<li class="nav-item"><a class="nav-link disabled"
-						href="#">PÃ¡gina inicial</a></li>
-					<li class="nav-item"><a class="nav-link disabled"
-						href="#">Minha conta</a></li>
-					<li class="nav-item"><a class="nav-link disabled"
-						href="#">Cadastrar livro</a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="#">Página
+							inicial</a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="#">Minha
+							conta</a></li>
+					<li class="nav-item"><a class="nav-link disabled" href="#">Cadastrar
+							livro</a></li>
 				</ul>
 			</div>
 			<div class="col-md-2">&nbsp;</div>
@@ -46,7 +47,7 @@
 					<button type="submit" class="btn btn-primary">Entrar</button>
 				</form>
 
-				<span>NÃ£o possui cadastro? <a
+				<span>Não possui cadastro? <a
 					href="http://localhost:8080/Episteme/cadastro-usuario.html">Cadastre-se
 						agora</a></span>
 
