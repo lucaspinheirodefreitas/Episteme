@@ -24,9 +24,9 @@
 					<li class="nav-item"><a class="nav-link disabled"
 						href="#">Página inicial</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						href="./minha-conta.jsp">Minha conta</a></li>
+						href="./minhaconta">Minha conta</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						href="./cadastro-livro.html">Cadastrar livro</a></li>
+						href="./cadastrarlivro">Cadastrar livro</a></li>
 				</ul>
 				<div class="row">
 					<div class="col-md-5">&nbsp;</div>

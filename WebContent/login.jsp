@@ -48,7 +48,7 @@
 				</form>
 
 				<span>Não possui cadastro? <a
-					href="http://localhost:8080/Episteme/cadastro-usuario.html">Cadastre-se
+					href="./cadastrarusuario">Cadastre-se
 						agora</a></span>
 
 			</div>

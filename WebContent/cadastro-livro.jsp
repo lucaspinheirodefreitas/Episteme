@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br" dir="ltr">
 <head>
@@ -20,7 +19,7 @@
 					height=120 align="right">
 				<ul class="nav">
 					<li class="nav-item"><a class="nav-link active"
-						href="./pesquisar">P√°gina inicial</a></li>
+						href="./pesquisar">P·gina inicial</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						href="./minhaconta">Minha conta</a></li>
 					<li class="nav-item"><a class="nav-link disabled"
@@ -49,7 +48,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="inputNomeLivro"> Vers√£o </label> <input
+						<label for="inputNomeLivro"> Vers„o </label> <input
 							class="form-control" id="inputVersao" type="number"
 							name="txtVersao">
 					</div>

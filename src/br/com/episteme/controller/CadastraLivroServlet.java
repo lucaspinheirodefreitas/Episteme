@@ -14,11 +14,27 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.episteme.dao.DataSource;
 import br.com.episteme.dao.LivroDAO;
 import br.com.episteme.model.Livro;
+import br.com.episteme.model.Usuario;
 
-@WebServlet("/cadastralivro")
+@WebServlet("/cadastrarlivro")
 public class CadastraLivroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Usuario usuario = new Usuario();
+		String pagina;
+		usuario = (Usuario) (request.getSession().getAttribute("usuario"));
+		if(!usuario.equals(null)) {
+			pagina = "/cadastro-livro.jsp";
+			request.getSession().setAttribute("usuario", usuario);
+		}
+		else {
+			pagina = "/erro.jsp";
+		}
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
+		dispatcher.forward(request, response);
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pagina, SQL;
 		DataSource datasource = new DataSource();

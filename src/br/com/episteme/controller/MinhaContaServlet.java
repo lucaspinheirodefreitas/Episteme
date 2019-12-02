@@ -19,13 +19,12 @@ public class MinhaContaServlet extends HttpServlet {
 		Usuario usuario = new Usuario();
 		String pagina;
 		usuario = (Usuario) (request.getSession().getAttribute("usuario"));
-		if(usuario.equals(null)) {
-			pagina = "/erro.jsp";
-			//ajustar o attribute aqui para manter a session.
+		if(!usuario.equals(null)) {
+			pagina = "/minha-conta.jsp";
+			request.getSession().setAttribute("usuario", usuario);
 		}
 		else {
-			pagina = "/minha-conta.jsp";;
-			request.getSession().setAttribute("usuario", usuario);
+			pagina = "/erro.jsp";
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);

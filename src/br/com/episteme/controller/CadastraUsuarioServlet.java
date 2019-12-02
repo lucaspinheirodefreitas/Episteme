@@ -17,10 +17,24 @@ import br.com.episteme.model.Endereco;
 import br.com.episteme.model.Usuario;
 
 
-@WebServlet("/cadastrausuarioservlet")
+@WebServlet("/cadastrarusuario")
 public class CadastraUsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String pagina;
+		Usuario usuario = new Usuario();
+		usuario = (Usuario) request.getSession().getAttribute("usuario");
+		if(!usuario.equals(null)) {
+			request.setAttribute("usuario", usuario);
+			pagina = "/cadastro-usuario.jsp";
+		}
+		else {
+			pagina = "erro.jsp";
+		}
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
+		dispatcher.forward(request, response);
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pagina, confirmaSenha, SQL;
 		DataSource datasource;
@@ -53,7 +67,7 @@ public class CadastraUsuarioServlet extends HttpServlet {
 		
 		if(!cadastroUsuario.equals(null) && confirmaSenha.equals(cadastroUsuario.getSenha())) {
 			userDAO.create(cadastroUsuario);
-			pagina = "/index.html";
+			pagina = "/index.jsp";
 			request.getSession().setAttribute("Usuario", cadastroUsuario);
 		}
 		else {
