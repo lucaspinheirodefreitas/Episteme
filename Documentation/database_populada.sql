@@ -58,13 +58,13 @@ VALUES (default, 'raul', 'raul.tmachado@gmail.com', '1234',1),
 		(default, 'lucas', 'lucas.tmachado@gmail.com', '123',3),
 		(default, 'lucas dutra', 'dutra.tmachado@gmail.com', '123111',4),
 		(default, 'luiz inácio', 'lula.tmachado@gmail.com', '12333',5),
-		(default, 'joao amoedo', 'amoeda.hfernandes@gmail.com', '122342',6)
+		(default, 'joao amoedo', 'amoeda.hfernandes@gmail.com', '122342',5);
 		
 INSERT INTO TBLIVRO(idlivro, nomelivro, autor, ano, versao, editora, linkpdf, datacadastro, sinopse)
 values (default, 'manifesto comunista', 'carlos marcos e frederico anjos', '07/08/1845', 1, 'boitempo', 'www.livrosgratis.com', '07/08/1998', '"um espectro ronda a europa"'),
 		(default, 'don quixote', 'miguel de cervantes', '07/08/1333', 2, 'leya', 'www.livrosgratis.com', '01/02/1999', '"este cara eh mto loco"'),
 		(default, 'bíblia sagrada', 'Jeová', '01/01/0001', 1, 'igreja católica', 'www.livrosquevcdeverialer.com', '07/08/1980', '"este livro conta a história do mundo"'),
-		(default, 'A guerra dos tronos', 'Jorge R.R Martin', '07/08/1990', 4, 'leya', 'www.gameofthrones', '07/08/1990', '"um livro de ação, lobos e muita diversão"')
+		(default, 'A guerra dos tronos', 'Jorge R.R Martin', '07/08/1990', 4, 'leya', 'www.gameofthrones', '07/08/1990', '"um livro de ação, lobos e muita diversão"');
 
 insert into tbemprestimo(idemprestimo, datainicio, datafim,idusuario,idlivro)
 values(default,'01/01/2019','08/01/2019',1,1),
