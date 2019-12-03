@@ -1,5 +1,4 @@
-<jsp:useBean id="usuario" type="br.com.episteme.model.Usuario"
-	scope="session" />
+<jsp:useBean id="usuario" class="br.com.episteme.model.Usuario"	scope="session" />
 <!DOCTYPE html>
 <html lang="pt-br" dir="ltr">
 <head>

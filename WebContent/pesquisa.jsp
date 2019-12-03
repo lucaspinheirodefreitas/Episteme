@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:useBean id="dados" type="br.com.episteme.model.Relatorio"
+<jsp:useBean id="dados" class="br.com.episteme.model.Relatorio"
 	scope="request" />
 <jsp:useBean id="listaLivros"
 	class="br.com.episteme.controller.PesquisaServlet" scope="session"></jsp:useBean>
