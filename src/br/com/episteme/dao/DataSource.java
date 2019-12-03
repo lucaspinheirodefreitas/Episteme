@@ -14,7 +14,7 @@ public class DataSource {
 			hostname   = "localhost";
 			database   = "episteme";
 			username   = "postgres";
-			password   = "postgres";
+			password   = "ufabc";
 			port       = "5432";
 			url        = "jdbc:postgresql://" + hostname + ":" + port + "/" + database;
 			connection = DriverManager.getConnection(url, username, password);
