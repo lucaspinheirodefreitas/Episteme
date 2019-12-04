@@ -29,14 +29,6 @@ public class UsuarioDAO implements GenericDAO {
 				int idEndereco = cadastrarUsuario.getEndereco().getIdEndereco();
 				stm.setInt(4, idEndereco);
 				stm.executeUpdate();
-				
-				/*
-				 	funÃ§Ã£o MD5 inclui a senha jÃ¡ criptografada no banco, precisamos criar um metodo pra criptografar a senha de entrada e mandar pro
-				 	select a senha que foi digitada tambÃ©m criptografada.
-				 	Criar uma consistencia para verificar a quantidade de tuplas inseridas
-					Pra atualizar o ID vou precisar executar uma operaÃ§Ã£o de select na base eu acho.
-				*/
-				
 				stm.close();
 			} else {
 				throw new RuntimeException("Objeto invÃ¡lido");
@@ -49,7 +41,6 @@ public class UsuarioDAO implements GenericDAO {
 				System.out.println("Falha ao efetuar inserÃ§Ã£o!\n" + "Codigo de erro: " + ex.getErrorCode() 
 				+ "\n" + "Mensagem de erro: " + ex.getMessage());
 			}
-			// pensar melhor em como garantir que deu certo a inserÃ§Ã£o.
 		}
 	}
 	
@@ -95,16 +86,16 @@ public class UsuarioDAO implements GenericDAO {
 		try {
 			if(o instanceof Usuario) {
 				Usuario deletarUsuario = (Usuario) o;
-				System.out.println(deletarUsuario.getIdUsuario());
-				String SQL = "delete from tbusuario where idusuario = ?;";
+				String SQL = "DELETE FROM tbusuario WHERE idusuario = ?;";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				stm.setInt(1, deletarUsuario.getIdUsuario());
-				System.out.println("Usuario: " + deletarUsuario.getNome() + "removido!");
 				stm.executeUpdate();
+				System.out.println("Usuario: " + deletarUsuario.getNome() + " removido!");
 				stm.close();
 			}
 		} catch(SQLException ex) {
-			
+			System.out.println("Falha ao efetuar consulta!\n" + "Codigo de erro: " + ex.getErrorCode() 
+			+ "\n" + "Mensagem de erro: " + ex.getMessage());
 		}
 		
 	}

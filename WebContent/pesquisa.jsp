@@ -26,11 +26,11 @@
 					height=120 align="right">
 				<ul class="nav">
 					<li class="nav-item"><a class="nav-link active"
-						href="./index.html">Página inicial</a></li>
+						href="./pesquisar">Página inicial</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						href="./minha-conta.jsp">Minha conta</a></li>
+						href="./minhaconta">Minha conta</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						href="./cadastro-livro.html">Cadastrar livro</a></li>
+						href="./cadastrarlivro">Cadastrar livro</a></li>
 				</ul>
 			</div>
 			<div class="col-md-2">&nbsp;</div>

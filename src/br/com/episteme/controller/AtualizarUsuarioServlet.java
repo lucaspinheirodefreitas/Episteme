@@ -27,8 +27,6 @@ public class AtualizarUsuarioServlet extends HttpServlet {
 		DataSource datasource = new DataSource();
 		UsuarioDAO usuarioDAO = new UsuarioDAO(datasource);
 		usuarioDAO.delete(usuario);
-		
-		
 		if(!usuario.equals(null)) {
 			if(funcionalidade == 1) {
 				pagina = "/login.jsp";

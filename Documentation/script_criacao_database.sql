@@ -46,6 +46,6 @@ CREATE TABLE TBEMPRESTIMO (
   	IdUsuario 		INTEGER  		NOT NULL,
 	IdLivro 		INTEGER			NOT NULL,
   	CONSTRAINT PK_emprestimo 		PRIMARY KEY(IdEmprestimo),
-	CONSTRAINT FK_usuario			FOREIGN KEY (idUsuario) 	REFERENCES TBUsuario(IdUsuario),
+	UNIQUE (IdEmprestimo, IdUsuario),
 	CONSTRAINT FK_livro 	 		FOREIGN KEY (idLivro) 	REFERENCES TBLivro(IdLivro)
 );

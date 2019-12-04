@@ -1,11 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean id="usuario" class="br.com.episteme.model.Usuario"
 	scope="session" />
-<jsp:useBean id="emprestimo" class="br.com.episteme.model.Emprestimo"
-	scope="request" />
+<jsp:useBean id="emprestimo" class="java.util.ArrayList" scope="session" />
 
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +18,6 @@
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-
 </head>
 <body>
 
@@ -39,8 +37,9 @@
 							aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="./relatorios?tipo=1">Nome</a> <a
 								class="dropdown-item" href="./relatorios?tipo=2">Email</a> <a
-								class="dropdown-item" href="./relatorios?tipo=3">Senha</a>
-								<a class="dropdown-item" href="./atualizarusuario?tipo=1">Deletar conta</a>
+								class="dropdown-item" href="./relatorios?tipo=3">Senha</a> <a
+								class="dropdown-item" href="./atualizarusuario?tipo=1">Deletar
+								conta</a>
 							<div class="dropdown-divider">Região</div>
 							<a class="dropdown-item" href="./relatorios?tipo=4">CEP</a> <a
 								class="dropdown-item" href="./relatorios?tipo=5">Numero</a> <a
@@ -88,14 +87,15 @@
 						</thead>
 						<tbody>
 							<tr>
-								<!--<c:forEach var="item" items="${Emprestimo}">
+								<!--<c:forEach var="item" items="${emprestimo}">
 									<tr class="table-active">
 										<td></td>
 										<td></td>
 										<td></td>
-										<td>${item.dado}</td>
-										<td>${item.dado}</td>
-										<td>${item.quantidade}</td>
+										<td></td>
+										<td>${item.nomeLivro}</td>
+										<td>${item.retirada}</td>
+										<td>${item.devolucao}</td>
 									</tr>
 								</c:forEach>-->
 							</tr>
@@ -112,3 +112,7 @@
 	<script src="js/scripts.js"></script>
 </body>
 </html>
+
+
+
+
