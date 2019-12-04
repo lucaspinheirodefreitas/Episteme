@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean id="usuario" class="br.com.episteme.model.Usuario"
 	scope="session" />
+<jsp:useBean id="emprestimo" class="br.com.episteme.model.Emprestimo"
+	scope="request" />
 
 <!DOCTYPE html>
 <html lang="pt">

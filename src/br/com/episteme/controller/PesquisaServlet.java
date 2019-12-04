@@ -46,7 +46,7 @@ public class PesquisaServlet extends HttpServlet {
 		usuario = (Usuario) request.getSession().getAttribute("usuario");
 		itemPesquisa = request.getParameter("txtPesquisa");
 		
-		if(!itemPesquisa.isBlank()) {
+		if(!itemPesquisa.equals(null)) {
 			if(!usuario.equals(null)) {
 				DataSource datasource       = new DataSource();
 				Livro      livroPesquisa 	= new Livro();
