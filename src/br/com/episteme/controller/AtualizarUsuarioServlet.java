@@ -1,7 +1,6 @@
 package br.com.episteme.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,52 +12,38 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.episteme.dao.DataSource;
 import br.com.episteme.dao.EnderecoDAO;
-import br.com.episteme.dao.RelatorioDAO;
 import br.com.episteme.dao.UsuarioDAO;
 import br.com.episteme.model.Endereco;
-import br.com.episteme.model.Relatorio;
 import br.com.episteme.model.Usuario;
 
-/**
- * Servlet implementation class AtualizarUsuarioServlet
- */
-@WebServlet("/AtualizarUsuarioServlet")
+@WebServlet("/atualizarusuario")
 public class AtualizarUsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AtualizarUsuarioServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		try{
-			
-			Usuario usuario = (Usuario) request.getSession().getAttribute("Usuario");
-			
-			if(usuario != null) {
-				request.getSession().setAttribute("Usuario", usuario);
+		String pagina=null;
+		Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
+		int funcionalidade = Integer.parseInt(request.getParameter("tipo"));
+		DataSource datasource = new DataSource();
+		UsuarioDAO usuarioDAO = new UsuarioDAO(datasource);
+		usuarioDAO.delete(usuario);
+		
+		
+		if(!usuario.equals(null)) {
+			if(funcionalidade == 1) {
+				pagina = "/login.jsp";
+				request.getSession().setAttribute("Usuario", null);
 			}
-			
-		} catch (Exception ex) {
-			System.out.println("Erro ao buscar Cadastro");
+			// incluir os if's aqui para tratar os demais tipos de alteração.
+		} else {
+			pagina = "/erro.jsp";
 		}
-				
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/atualizar-cadastro.jsp");
+		
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
         dispatcher.forward(request, response);
 		
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pagina, confirmaSenha, SQL;
 		DataSource datasource;

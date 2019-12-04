@@ -77,7 +77,7 @@ public class UsuarioDAO implements GenericDAO {
 				return result;
 				
 			} else {
-				throw new RuntimeException("Objeto invÃ¡lido");
+				throw new RuntimeException("Objeto invalido");
 			}
 			
 		} catch (SQLException ex) {
@@ -92,6 +92,20 @@ public class UsuarioDAO implements GenericDAO {
 	}
 	
 	public void delete(Object o) {
+		try {
+			if(o instanceof Usuario) {
+				Usuario deletarUsuario = (Usuario) o;
+				System.out.println(deletarUsuario.getIdUsuario());
+				String SQL = "delete from tbusuario where idusuario = ?;";
+				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
+				stm.setInt(1, deletarUsuario.getIdUsuario());
+				System.out.println("Usuario: " + deletarUsuario.getNome() + "removido!");
+				stm.executeUpdate();
+				stm.close();
+			}
+		} catch(SQLException ex) {
+			
+		}
 		
 	}
 	

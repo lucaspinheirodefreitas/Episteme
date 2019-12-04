@@ -16,10 +16,11 @@ public class MinhaContaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Usuario usuario = new Usuario();
+		Usuario usuario;
 		String pagina;
 		usuario = (Usuario) (request.getSession().getAttribute("usuario"));
-		if(!usuario.equals(null)) {
+		
+		if(usuario != null) {
 			pagina = "/minha-conta.jsp";
 			request.getSession().setAttribute("usuario", usuario);
 		}

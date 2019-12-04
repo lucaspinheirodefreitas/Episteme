@@ -51,6 +51,7 @@ public class EmprestimoDAO implements GenericDAO {
 		try {
 			if(o instanceof Emprestimo) { 
 				Emprestimo emprestimo = (Emprestimo) o;
+				// VOU PRECISAR ALTERAR TODO ESSE MÉTODO.
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				ResultSet rs = stm.executeQuery();
 				ArrayList<Object> result = new ArrayList<Object>();
@@ -90,7 +91,7 @@ public class EmprestimoDAO implements GenericDAO {
 	}
 	
 	public String topLivrosEmprestados() {
-		String SQL = "SELECT L.NOMELIVRO, COUNT(E.IDLIVRO) as QTD_EMPRESTIMOS FROM TBEMPRESTIMO E INNER JOIN TBLIVRO L ON E.IDLIVRO = L.IDLIVRO GROUP BY L.NOMELIVRO, E.IDLIVRO;";
+		String SQL = "SELECT L.*, COUNT(E.IDLIVRO) as QTD_EMPRESTIMOS FROM TBEMPRESTIMO E INNER JOIN TBLIVRO L ON E.IDLIVRO = L.IDLIVRO GROUP BY L.NOMELIVRO, E.IDLIVRO;";
 		return SQL;
 	}
 }

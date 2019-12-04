@@ -37,7 +37,6 @@ public class RelatorioDAO implements GenericDAO {
 				
 				stm.close();
 				rs.close();
-				System.out.println("item 1 do relatório obtido com sucesso.");
 				return result;
 				
 			} else {

@@ -1,10 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:useBean id="dados" type="br.com.episteme.model.Relatorio"
-	scope="request" />
-<jsp:useBean id="listaLivros"
-	class="br.com.episteme.controller.PesquisaServlet" scope="session"></jsp:useBean>
+<jsp:useBean id="usuario" class="br.com.episteme.model.Usuario"
+	scope="session" />
+<jsp:useBean id="listaLivros" class="java.util.ArrayList"
+	scope="session"></jsp:useBean>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -54,40 +54,36 @@
 			<div class="col-md-2">&nbsp;</div>
 			<div class="col-md-8">
 				<h3>Você está buscando por:</h3>
-				<ul>
-					<li class="list-item">${listaLivros.get(0)}
-						<div class="row">
-							<div class="col-md-10">&nbsp;</div>
-							<div class="col-md-2" align="right">
-								<a href="./solicitaremprestimo?tipo=1">{+} Detalhes</a>
-							</div>
-						</div>
-					</li>
-					<li class="list-item">${listaLivros.get(1)}
-						<div class="row" align="right">
-							<div class="col-md-10">&nbsp;</div>
-							<div class="col-md-2">
-								<a href="./solicitaremprestimo?tipo=1">{+} Detalhes</a>
-							</div>
-						</div>
-					</li>
-					<li class="list-item">${listaLivros.get(2)}
-						<div class="row" align="right">
-							<div class="col-md-10">&nbsp;</div>
-							<div class="col-md-2">
-								<a href="./solicitaremprestimo?tipo=1">{+} Detalhes</a>
-							</div>
-						</div>
-					</li>
-					<li class="list-item">${listaLivros.get(3)}
-						<div class="row" align="right">
-							<div class="col-md-10">&nbsp;</div>
-							<div class="col-md-2">
-								<a href="./solicitaremprestimo?tipo=1">{+} Detalhes</a>
-							</div>
-						</div>
-					</li>
-				</ul>
+						<table class="table">
+							<thead>
+								<tr>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th>Nome:</th>
+									<th>Autor:</th>
+									<th>Versao:</th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<c:forEach var="livro" items="${listaLivros}" varStatus="loop">
+									<tr class="table-active">
+										<td></td>
+										<td></td>
+										<td></td>
+										<td>${livro.nome}</td>
+										<td>${livro.autor}</td>
+										<td>${livro.versao}</td>
+										<td></td>
+										<td><a href="./solicitaremprestimo?pos=${loop.index}&id=${livro.id}">{+} Pegar</a></td>
+									</tr>
+								</c:forEach>
+								</tr>
+							</tbody>
+						</table>
 			</div>
 			<div class="col-md-2">&nbsp;</div>
 		</div>

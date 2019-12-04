@@ -1,8 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:useBean id="usuario" type="br.com.episteme.model.Usuario"
+<jsp:useBean id="usuario" class="br.com.episteme.model.Usuario"
 	scope="session" />
-<jsp:useBean id="emprestimo" type="br.com.episteme.model.Emprestimo"
-	scope="request" />
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -26,7 +25,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<ul class="nav">
-					<li class="nav-item"><a class="nav-link" href="./index.html">Página
+					<li class="nav-item"><a class="nav-link" href="./pesquisar">Página
 							inicial</a></li>
 					<li class="nav-item"><a class="nav-link disabled" href="#">Minha
 							conta</a></li>
@@ -39,8 +38,7 @@
 							<a class="dropdown-item" href="./relatorios?tipo=1">Nome</a> <a
 								class="dropdown-item" href="./relatorios?tipo=2">Email</a> <a
 								class="dropdown-item" href="./relatorios?tipo=3">Senha</a>
-							<!-- 	PENSAR MELHOR EM COMO SERIA A ALTERAÇÃO DE ENDERECO :::: O CARA PODERIA ALTERAR SÓ O CEP E NUMERO 
-								E A GENTE ATUALIZA AUTOMATICAMENTE O RESTO? SE SIM, REMOVER AS OPÇOES -->
+								<a class="dropdown-item" href="./atualizarusuario?tipo=1">Deletar conta</a>
 							<div class="dropdown-divider">Região</div>
 							<a class="dropdown-item" href="./relatorios?tipo=4">CEP</a> <a
 								class="dropdown-item" href="./relatorios?tipo=5">Numero</a> <a
@@ -88,7 +86,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<c:forEach var="item" items="${Emprestimo}">
+								<!--<c:forEach var="item" items="${Emprestimo}">
 									<tr class="table-active">
 										<td></td>
 										<td></td>
@@ -97,7 +95,7 @@
 										<td>${item.dado}</td>
 										<td>${item.quantidade}</td>
 									</tr>
-								</c:forEach>
+								</c:forEach>-->
 							</tr>
 						</tbody>
 					</table>

@@ -1,5 +1,3 @@
-<jsp:useBean id="usuario" type="br.com.episteme.model.Usuario"
-	scope="session" />
 <!DOCTYPE html>
 <html lang="pt-br" dir="ltr">
 <head>
@@ -47,10 +45,9 @@
 					<button type="submit" class="btn btn-primary">Entrar</button>
 				</form>
 
-				<span>Não possui cadastro? <a
-					href="./cadastrarusuario">Cadastre-se
-						agora</a></span>
-
+				<span>Não possui cadastro? 
+					<a href="./cadastrarusuario">Cadastre-se agora</a>
+				</span>
 			</div>
 			<div class="col-md-1">&nbsp;</div>
 		</div>

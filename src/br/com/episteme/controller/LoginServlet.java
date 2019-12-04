@@ -28,19 +28,15 @@ public class LoginServlet extends HttpServlet {
 		
 		usuario.setEmail((request.getParameter("txtEmail")));
 		usuario.setSenha((request.getParameter("txtSenha")));
-		System.out.println(usuario.getEmail());
-		System.out.println(usuario.getSenha());
 		List<Object> usuarios = userDAO.read(usuario, ""); // ajustar isso.
 		
-		if(usuarios.equals(null) || usuarios.isEmpty()) {
-			System.out.println(usuarios.size());
-			pagina = "/erro.jsp";
-			//ajustar o attribute aqui para manter a session.
-		}
-		else {
+		if(!request.getSession().equals(null) && !usuarios.equals(null) && !usuarios.isEmpty()) {
 			pagina = "/index.jsp";
 			usuario = (Usuario) usuarios.get(0);
 			request.getSession().setAttribute("usuario", usuario);
+		}
+		else {
+			pagina = "/erro.jsp";
 		}
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
