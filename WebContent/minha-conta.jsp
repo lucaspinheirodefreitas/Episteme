@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:useBean id="usuario" class="br.com.episteme.model.Usuario" scope="session" />
-<jsp:useBean id="emprestimo" class="java.util.ArrayList"	scope="session" />
+<jsp:useBean id="emprestimo" class="java.util.ArrayList" scope="session" />
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -86,14 +86,15 @@
 						</thead>
 						<tbody>
 							<tr>
-								<c:forEach var="item" items="${Emprestimo}">
+								<c:forEach var="item" items="${emprestimo}">
 									<tr class="table-active">
 										<td></td>
 										<td></td>
 										<td></td>
-										<td>${item.dado}</td>
-										<td>${item.dado}</td>
-										<td>${item.quantidade}</td>
+										<td></td>
+										<td>${item.nomeLivro}</td>
+										<td>${item.retirada}</td>
+										<td>${item.devolucao}</td>
 									</tr>
 								</c:forEach>
 							</tr>
