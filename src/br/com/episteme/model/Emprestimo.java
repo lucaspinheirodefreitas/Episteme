@@ -11,11 +11,17 @@ public class Emprestimo implements java.io.Serializable {
 	private Livro livro;
 	private Date retirada = new Date();
 	private Date devolucao = new Date();
+	private String nomeLivro;
 	
 	
 	public Emprestimo(Usuario usuario, Livro livro) {
 		this.usuario = usuario;
 		this.livro = livro;
+	}
+	
+	public Emprestimo(Usuario usuario, String nomeLivro) {
+		this.usuario = usuario;
+		this.nomeLivro = nomeLivro;
 	}
 	
 	public Usuario getUsuario() {
@@ -48,6 +54,10 @@ public class Emprestimo implements java.io.Serializable {
 	}
 	public void setDevolucao(Date devolucao) {
 		this.devolucao = devolucao;
+	}
+	
+	public String getNomeLivro() {
+		return this.nomeLivro;		
 	}
 
 }

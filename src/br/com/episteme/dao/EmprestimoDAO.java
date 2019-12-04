@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.com.episteme.model.Emprestimo;
@@ -68,7 +69,35 @@ public class EmprestimoDAO implements GenericDAO {
 				System.out.println("item 1 do relatório obtido com sucesso.");
 				return result;
 				
-			} else {
+			} else if (o instanceof Usuario){
+				Usuario usuario = (Usuario) o;
+				SQL = "select * from tbemprestimo emp inner join tblivro liv on (liv.idlivro = emp.idlivro and idusuario = ?)";
+				
+				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
+				stm.setInt(1, usuario.getIdUsuario());
+				ResultSet rs = stm.executeQuery();
+				ArrayList<Object> result = new ArrayList<Object>();
+								
+				while(rs.next()) {
+					Date devolucao = rs.getDate("datafim");
+					Date retirada = rs.getDate("datainicio");
+					
+					Livro livro = new Livro();
+					
+					livro.setNome(rs.getString("nomeLivro"));
+					Emprestimo emp = new Emprestimo(usuario, livro.getNome());
+					emp.setDevolucao(devolucao);
+					emp.setRetirada(retirada);
+					result.add(emp);
+
+				}
+				
+				stm.close();
+				rs.close();
+				return result;
+			}	
+			else {
+				
 				throw new RuntimeException("Objeto inválido"); // entender como funciona o throw.
 			}
 			

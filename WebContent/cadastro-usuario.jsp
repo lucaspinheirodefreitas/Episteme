@@ -53,7 +53,7 @@ pageEncoding="UTF-8"%>
 			<div class="col-md-2">&nbsp;</div>
 			<div class="col-md-8">
 				<i class="material-icons"> account_box </i>
-				<form role="form" action="cadastrausuarioservlet" method="post">
+				<form role="form" action="cadastrarusuario" method="post">
 
 					<div class="form-group">
 
