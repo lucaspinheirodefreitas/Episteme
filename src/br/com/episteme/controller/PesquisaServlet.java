@@ -41,12 +41,12 @@ public class PesquisaServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pagina, itemPesquisa, SQL;
+		String pagina="/index.jsp", itemPesquisa, SQL;
 		Usuario usuario = new Usuario();
 		usuario = (Usuario) request.getSession().getAttribute("usuario");
 		itemPesquisa = request.getParameter("txtPesquisa");
 		
-		if(!itemPesquisa.equals(null)) {
+		if(!itemPesquisa.isEmpty()) {
 			if(!usuario.equals(null)) {
 				DataSource datasource       = new DataSource();
 				Livro      livroPesquisa 	= new Livro();
@@ -54,12 +54,6 @@ public class PesquisaServlet extends HttpServlet {
 				livroPesquisa.setNome(itemPesquisa);
 				SQL = livroPesquisaDAO.pesquisaLivro();
 				ArrayList<Object> listaLivros    = (ArrayList<Object>) livroPesquisaDAO.read(livroPesquisa, SQL);
-
-				/*for(Object livros : listaLivros) {
-					Livro livro = (Livro) livros;
-					nomeLivros.add(livro.getNome());
-				}*/
-				
 				request.getSession().setAttribute("usuario", usuario);
 				request.getSession().setAttribute("listaLivros", listaLivros);
 				pagina = "/pesquisa.jsp";
@@ -68,13 +62,7 @@ public class PesquisaServlet extends HttpServlet {
 				pagina = "/erro.jsp";
 			}
 		}
-		else {
-			pagina = "/index.jsp";
-		}
-		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);
 	}
-	
-
 }

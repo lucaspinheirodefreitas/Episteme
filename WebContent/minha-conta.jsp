@@ -70,40 +70,40 @@
 			<div class="col-md-12">
 				<h3>Olá, ${usuario.nome}!</h3>
 			</div>
-			<div class="row">
-				<div class="col-md-2">&nbsp;</div>
-				<div class="col-md-8">
-					<table class="table">
-						<thead>
-							<tr>
-								<th></th>
-								<th></th>
-								<th></th>
-								<th></th>
-								<th>Livro:</th>
-								<th>Data inicio:</th>
-								<th>Data fim</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<!--<c:forEach var="item" items="${emprestimo}">
-									<tr class="table-active">
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td>${item.nomeLivro}</td>
-										<td>${item.retirada}</td>
-										<td>${item.devolucao}</td>
-									</tr>
-								</c:forEach>-->
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="col-md-2">&nbsp;</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">&nbsp;</div>
+			<div class="col-md-8">
+				<table class="table">
+					<thead>
+						<tr>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th></th>
+							<th>Livro:</th>
+							<th>Data inicio:</th>
+							<th>Data fim</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<c:forEach var="item" items="${emprestimo}">
+								<tr class="table-active">
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>${item.livro.nome}</td>
+									<td>${item.retirada}</td>
+									<td>${item.devolucao}</td>
+								</tr>
+							</c:forEach>
+						</tr>
+					</tbody>
+				</table>
 			</div>
+			<div class="col-md-2">&nbsp;</div>
 		</div>
 	</div>
 
@@ -112,7 +112,3 @@
 	<script src="js/scripts.js"></script>
 </body>
 </html>
-
-
-
-

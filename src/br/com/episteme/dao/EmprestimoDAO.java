@@ -4,10 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.com.episteme.model.Emprestimo;
-import br.com.episteme.model.Endereco;
 import br.com.episteme.model.Livro;
 import br.com.episteme.model.Usuario;
 
@@ -21,22 +21,17 @@ public class EmprestimoDAO implements GenericDAO {
 	@Override
 	public void create(Object o) {
 		try {
-			if(o instanceof Endereco) { 
-				Endereco cadastrarEndereco = (Endereco) o;
+			if(o instanceof Emprestimo) { 
+				Emprestimo emprestimo = (Emprestimo) o;
 				
-				String SQL =  "INSERT INTO TBENDERECO(IdEndereco, CEP, Logradouro, Numero, Bairro, Cidade, Estado) "
-							+ "VALUES((select nextval('autoIncrementEndereco')), ?, ?, ?, ?, ?, ?);";
+				String SQL =  "INSERT INTO TBEMPRESTIMO(IdEmprestimo, dataInicio, dataFim, IdUsuario, IdLivro) "
+							+ "VALUES((select nextval('autoIncrementEndereco')), current_date, (current_date+10), ?, ?);";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
-				stm.setString(1, cadastrarEndereco.getCep());
-				stm.setString(2, cadastrarEndereco.getLogradouro());
-				stm.setInt(3, cadastrarEndereco.getNumeroImovel());
-				stm.setString(4, cadastrarEndereco.getBairro());
-				stm.setString(5, cadastrarEndereco.getCidade());
-				stm.setString(6, cadastrarEndereco.getEstado());
-				ResultSet rs = stm.executeQuery();
+				stm.setInt(1, emprestimo.getUsuario().getIdUsuario());
+				stm.setInt(2, emprestimo.getLivro().getId());
+				stm.executeUpdate();
 				stm.close();
-				rs.close();
-				System.out.println("Endereço cadastradao com sucesso.");
+				System.out.println("Emprestimo realizado com sucesso.");
 			} else {
 				throw new RuntimeException("Objeto inválido");
 			}
@@ -51,7 +46,6 @@ public class EmprestimoDAO implements GenericDAO {
 		try {
 			if(o instanceof Emprestimo) { 
 				Emprestimo emprestimo = (Emprestimo) o;
-				// VOU PRECISAR ALTERAR TODO ESSE MÉTODO.
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				ResultSet rs = stm.executeQuery();
 				ArrayList<Object> result = new ArrayList<Object>();
@@ -69,7 +63,35 @@ public class EmprestimoDAO implements GenericDAO {
 				System.out.println("item 1 do relatório obtido com sucesso.");
 				return result;
 				
-			} else {
+			} else if (o instanceof Usuario){
+				Usuario usuario = (Usuario) o;
+				SQL = "select * from tbemprestimo emp inner join tblivro liv on (liv.idlivro = emp.idlivro and idusuario = ?)";
+				
+				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
+				stm.setInt(1, usuario.getIdUsuario());
+				ResultSet rs = stm.executeQuery();
+				ArrayList<Object> result = new ArrayList<Object>();
+								
+				while(rs.next()) {
+					Date devolucao = rs.getDate("datafim");
+					Date retirada = rs.getDate("datainicio");
+					
+					Livro livro = new Livro();
+					
+					livro.setNome(rs.getString("nomeLivro"));
+					Emprestimo emp = new Emprestimo(usuario, livro);
+					emp.setDevolucao(devolucao);
+					emp.setRetirada(retirada);
+					result.add(emp);
+
+				}
+				
+				stm.close();
+				rs.close();
+				return result;
+			}	
+			else {
+				
 				throw new RuntimeException("Objeto inválido"); // entender como funciona o throw.
 			}
 			
