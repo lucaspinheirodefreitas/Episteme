@@ -28,12 +28,14 @@ public class LoginServlet extends HttpServlet {
 		
 		usuario.setEmail((request.getParameter("txtEmail")));
 		usuario.setSenha((request.getParameter("txtSenha")));
+		
 		List<Object> usuarios = userDAO.read(usuario, ""); // ajustar isso.
 		
 		if(!request.getSession().equals(null) && !usuarios.equals(null) && !usuarios.isEmpty()) {
 			pagina = "/index.jsp";
 			usuario = (Usuario) usuarios.get(0);
 			request.getSession().setAttribute("usuario", usuario);
+			pagina = "/minha-conta.jsp";
 		}
 		else {
 			pagina = "/erro.jsp";

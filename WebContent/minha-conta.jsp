@@ -35,17 +35,12 @@
 							dados</a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="./relatorios?tipo=1">Nome</a> <a
-								class="dropdown-item" href="./relatorios?tipo=2">Email</a> <a
-								class="dropdown-item" href="./relatorios?tipo=3">Senha</a> <a
+							<a class="dropdown-item" href="./atualizarusuario?tipo=2">Nome</a> <a
+								class="dropdown-item" href="./atualizarusuario?tipo=3">Email</a> <a
 								class="dropdown-item" href="./atualizarusuario?tipo=1">Deletar
 								conta</a>
 							<div class="dropdown-divider">Região</div>
-							<a class="dropdown-item" href="./relatorios?tipo=4">CEP</a> <a
-								class="dropdown-item" href="./relatorios?tipo=5">Numero</a> <a
-								class="dropdown-item" href="./relatorios?tipo=6">Rua</a> <a
-								class="dropdown-item" href="./relatorios?tipo=7">Cidade</a> <a
-								class="dropdown-item" href="./relatorios?tipo=8">Estado</a>
+							<a class="dropdown-item" href="./atualizarusuario?tipo=4">Endereço</a>
 						</div></li>
 					<li class="nav-item dropdown ml-md-auto"><a
 						class="nav-link dropdown-toggle" href="http://example.com"

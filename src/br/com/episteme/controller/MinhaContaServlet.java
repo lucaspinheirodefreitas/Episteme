@@ -30,6 +30,7 @@ public class MinhaContaServlet extends HttpServlet {
 			ArrayList<Object> emp = new ArrayList<Object>();
 			emp =  (ArrayList<Object>) emprestimoDAO.read(usuario, "");
 			
+			
 			pagina = "/minha-conta.jsp";
 			request.getSession().setAttribute("usuario", usuario);
 			request.getSession().setAttribute("emprestimo", emp);

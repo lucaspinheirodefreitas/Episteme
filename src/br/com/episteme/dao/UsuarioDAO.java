@@ -78,7 +78,37 @@ public class UsuarioDAO implements GenericDAO {
 		return null;
 	}
 	
-	public void update(Object o) {
+	public void update(Object o, String campo, String valor) {
+		System.out.println("CAMPO PARA ATUALIZAR: " + campo );
+		System.out.println("valor DA ATUALIZAÇÃO: " + valor );
+		try {
+			if(o instanceof Usuario) {
+				String SQL = "";
+				Usuario attUsuario = (Usuario) o;
+				System.out.println("usuario atualizado: " + attUsuario.getIdUsuario() );
+				//boolean bool = campo == "nomeusuario";
+				//System.out.println("true?" + bool);
+				if(campo == "nomeusuario") {
+					SQL = "update tbusuario set nomeusuario =  ?  WHERE idusuario = ?;";
+				} else if(campo == "email") {
+					SQL = "update tbusuario set email =  ?  WHERE idusuario = ?;";
+				} else{
+					SQL = "update tbusuario set senha =  ?  WHERE idusuario = ?;";
+				}
+					
+				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
+				stm.setString(1, valor);				
+				stm.setInt(2, attUsuario.getIdUsuario());
+				System.out.println("stm: " + stm );
+				stm.executeUpdate();
+				System.out.println("Usuario: " + attUsuario.getNome() + " atualizado!");
+				stm.close();
+			}
+			
+		} catch(SQLException ex) {
+			System.out.println("Falha ao efetuar consulta!\n" + "Codigo de erro: " + ex.getErrorCode() 
+			+ "\n" + "Mensagem de erro: " + ex.getMessage());
+		}
 		
 	}
 	
@@ -97,6 +127,12 @@ public class UsuarioDAO implements GenericDAO {
 			System.out.println("Falha ao efetuar consulta!\n" + "Codigo de erro: " + ex.getErrorCode() 
 			+ "\n" + "Mensagem de erro: " + ex.getMessage());
 		}
+		
+	}
+
+	@Override
+	public void update(Object o) {
+		// TODO Auto-generated method stub
 		
 	}
 	
