@@ -54,36 +54,40 @@
 			<div class="col-md-2">&nbsp;</div>
 			<div class="col-md-8">
 				<h3>Você está buscando por:</h3>
-						<table class="table">
-							<thead>
-								<tr>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th>Nome:</th>
-									<th>Autor:</th>
-									<th>Versao:</th>
-									<th></th>
-									<th></th>
+				<table class="table">
+					<thead>
+						<tr>
+						
+							<th>Nome:</th>
+							<th>Autor:</th>
+							<th>Versao:</th>
+							<th></th>
+							<th></th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<c:forEach var="livro" items="${listaLivros}" varStatus="loop">
+								<tr class="table-active">
+
+									<td>${livro.nome}</td>
+									<td>${livro.autor}</td>
+									<td>${livro.versao}</td>
+
+									<td><a
+										href="./solicitaremprestimo?pos=${loop.index}&tipo=1">{+}
+											Pegar</a>
+									</td>
+									<td><a
+										href="./solicitaremprestimo?pos=${loop.index}&tipo=2">{+}
+											Detalhes</a>
+									</td>
 								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<c:forEach var="livro" items="${listaLivros}" varStatus="loop">
-									<tr class="table-active">
-										<td></td>
-										<td></td>
-										<td></td>
-										<td>${livro.nome}</td>
-										<td>${livro.autor}</td>
-										<td>${livro.versao}</td>
-										<td></td>
-										<td><a href="./solicitaremprestimo?pos=${loop.index}&id=${livro.id}">{+} Pegar</a></td>
-									</tr>
-								</c:forEach>
-								</tr>
-							</tbody>
-						</table>
+							</c:forEach>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 			<div class="col-md-2">&nbsp;</div>
 		</div>

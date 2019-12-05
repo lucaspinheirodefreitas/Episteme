@@ -50,17 +50,18 @@ public class EmprestimoDAO implements GenericDAO {
 				ResultSet rs = stm.executeQuery();
 				ArrayList<Object> result = new ArrayList<Object>();
 				
-				if(rs.next()) {
-					// ainda não pensei em como implementar isso, só estou pensando no relatório por enquanto.
+				while(rs.next()) {
 					Usuario usuario = new Usuario();
 					Livro livro = new Livro();
-					livro.setNome(rs.getString("nomeLivro"));
-					Emprestimo emp = new Emprestimo(usuario, livro);
-					result.add(emp);
+					livro.setId(rs.getInt("idLivro"));
+					usuario.setIdUsuario(rs.getInt("idUsuario"));
+					emprestimo.setDevolucao(rs.getDate("dataFim"));
+					emprestimo.setRetirada(rs.getDate("dataInicio"));
+					emprestimo.setId(rs.getInt("idEmprestimo"));
+					result.add(emprestimo);
 				}
 				stm.close();
 				rs.close();
-				System.out.println("item 1 do relatório obtido com sucesso.");
 				return result;
 				
 			} else if (o instanceof Usuario){
