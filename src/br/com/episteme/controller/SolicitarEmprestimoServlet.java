@@ -29,6 +29,7 @@ public class SolicitarEmprestimoServlet extends HttpServlet {
 		LocalDate localDate = LocalDate.now();
 	    String dataAtual = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(localDate);
 		int posicaoLivro = Integer.parseInt(request.getParameter("pos"));
+		int tipoSolicitacao = Integer.parseInt(request.getParameter("tipo"));
 		Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
 		ArrayList<Livro> livros = (ArrayList<Livro>) request.getSession().getAttribute("listaLivros");
 		if(!livros.equals(null) && !usuario.equals(null)) {
@@ -36,12 +37,37 @@ public class SolicitarEmprestimoServlet extends HttpServlet {
 			Emprestimo emprestimo = new Emprestimo(usuario, livro);
 			DataSource datasource = new DataSource();
 			EmprestimoDAO emprestimoDAO = new EmprestimoDAO(datasource);
-			SQL = "SELECT * FROM TBEMPRESTIMO WHERE idUsuario = "+ emprestimo.getUsuario().getIdUsuario() +
-					" AND idLivro = " + emprestimo.getLivro().getId() + " AND DATE(dataFim) >= " + "'" + dataAtual + "'";
-			ArrayList<Object> emp = (ArrayList<Object>) emprestimoDAO.read(emprestimo, SQL);
-			if(emp.isEmpty()) {
-				emprestimoDAO.create(emprestimo);
+			ArrayList<Object> emp = new ArrayList<Object>();
+			if(tipoSolicitacao == 1) {
+				SQL = "SELECT * FROM TBEMPRESTIMO WHERE idUsuario = "+ emprestimo.getUsuario().getIdUsuario() +
+						" AND idLivro = " + emprestimo.getLivro().getId() + " AND DATE(dataFim) >= " + "'" + dataAtual + "'";
+				emp = (ArrayList<Object>) emprestimoDAO.read(emprestimo, SQL);
+				if(emp.isEmpty()) {
+					emprestimoDAO.create(emprestimo);
+				}
 			}
+			else if(tipoSolicitacao == 2) {
+				SQL = "SELECT * FROM TBEMPRESTIMO"
+						+ " WHERE idUsuario = "+ emprestimo.getUsuario().getIdUsuario()
+						+ " AND idLivro = " + emprestimo.getLivro().getId() 
+						+ " AND DATE(dataFim) <= " + "'" + dataAtual + "'" 
+						+ " AND dataInicio = (SELECT MAX(dataInicio) FROM TBEMPRESTIMO"
+						+ " WHERE idUsuario = " + emprestimo.getUsuario().getIdUsuario() 
+						+ " AND idLivro = " + emprestimo.getLivro().getId() 
+						+ " AND DATE(dataFim) <= " + "'" + dataAtual + "'";
+				emp = (ArrayList<Object>) emprestimoDAO.read(emprestimo, SQL);
+				if(emp.isEmpty()) {
+					dataAtual=dataAtual+10;
+					SQL = "UPDATE TBEMPRESTIMO SET dataFim = " + "'" + dataAtual + "'" 
+					+ " WHERE  = idUsuario = " + emprestimo.getUsuario().getIdUsuario() 
+					+ " AND idLivro = " + emprestimo.getLivro().getId() 
+					+ " AND DATE(dataFim) <= " + "'" + dataAtual + "'";
+					emprestimoDAO.update(emprestimo);
+				}
+				
+			}
+			
+			
 			emp = (ArrayList<Object>) emprestimoDAO.read(usuario, "");
 			pagina = "/minha-conta.jsp";
 			request.getSession().setAttribute("usuario", usuario);

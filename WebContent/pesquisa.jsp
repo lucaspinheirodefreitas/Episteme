@@ -81,7 +81,7 @@
 									</td>
 									<td><a
 										href="./solicitaremprestimo?pos=${loop.index}&tipo=2">{+}
-											Detalhes</a>
+											Renovar</a>
 									</td>
 								</tr>
 							</c:forEach>
