@@ -21,7 +21,7 @@ public class CadastraLivroServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Usuario usuario = new Usuario();
-		String pagina;
+		String pagina="/erro.jsp";
 		usuario = (Usuario) (request.getSession().getAttribute("usuario"));
 		if(!usuario.equals(null)) {
 			pagina = "/cadastro-livro.jsp";

@@ -20,23 +20,31 @@ public class MinhaContaServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Usuario usuario;
-		String pagina;
+		String pagina="/erro.jsp";
 		DataSource datasource = new DataSource();
-		
+		String sair = request.getParameter("tipo");
 		usuario = (Usuario) (request.getSession().getAttribute("usuario"));
 		
-		if(!usuario.equals(null)) {
-			EmprestimoDAO emprestimoDAO = new EmprestimoDAO(datasource);
-			ArrayList<Object> emp = new ArrayList<Object>();
-			emp =  (ArrayList<Object>) emprestimoDAO.read(usuario, "");
-			
-			pagina = "/minha-conta.jsp";
-			request.getSession().setAttribute("usuario", usuario);
-			request.getSession().setAttribute("emprestimo", emp);
+		if(sair.equals("x")) {
+			pagina = "/login.jsp";
+			request.getSession().setAttribute("usuario", null);
+			request.getSession().setAttribute("emprestimo", null);
 		}
 		else {
-			pagina = "/erro.jsp";
+			if(!usuario.equals(null)) {
+				EmprestimoDAO emprestimoDAO = new EmprestimoDAO(datasource);
+				ArrayList<Object> emp = new ArrayList<Object>();
+				emp =  (ArrayList<Object>) emprestimoDAO.read(usuario, "");
+				
+				pagina = "/minha-conta.jsp";
+				request.getSession().setAttribute("usuario", usuario);
+				request.getSession().setAttribute("emprestimo", emp);
+			}
+			else {
+				pagina = "/erro.jsp";
+			}
 		}
+		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);
 	}

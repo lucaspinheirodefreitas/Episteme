@@ -24,7 +24,7 @@ public class AtualizarEnderecoServlet extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Usuario atualizaUsuario;
-		String pagina, SQL;
+		String pagina="/erro.jsp", SQL;
 		DataSource datasource;
 		datasource 				= new DataSource();
 		UsuarioDAO  userDAO     = new UsuarioDAO(datasource);
@@ -33,7 +33,6 @@ public class AtualizarEnderecoServlet extends HttpServlet{
 		
 		atualizaUsuario = (Usuario) (request.getSession().getAttribute("usuario"));
 				
-		
 		endereco.setCep((request.getParameter("txtCep")));
 		endereco.setLogradouro((request.getParameter("txtLogradouro")));
 		endereco.setNumeroImovel((Integer.parseInt(request.getParameter("txtNumero"))));
@@ -47,23 +46,14 @@ public class AtualizarEnderecoServlet extends HttpServlet{
 		Endereco ultimoEnderecoCadastrado = (Endereco) enderecos.get(0);
 		
 		if(enderecos.equals(null) || enderecos.isEmpty()) {
-			pagina = "erro.jsp"; 
+			pagina = "/erro.jsp"; 
 		}
-		
-		
-		//cadastroUsuario.setNome(request.getParameter("txtNome"));
-		//cadastroUsuario.setEmail(request.getParameter("txtEmail"));
-		//cadastroUsuario.setSenha(request.getParameter("txtSenha"));
-		//confirmaSenha = (request.getParameter("txtConfirmaSenha"));
-		System.out.println("UsuarioSessao: " + atualizaUsuario.getNome() );
-		System.out.println("IDSessao: " + atualizaUsuario.getIdUsuario() );
 		
 		if(!atualizaUsuario.equals(null)) {
 			userDAO.update(atualizaUsuario, ultimoEnderecoCadastrado);
 			pagina = "/login.jsp";
 		}
 		else {
-			// enviar a informação mencionando qual foi o erro...
 			pagina = "/erro.jsp";
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);

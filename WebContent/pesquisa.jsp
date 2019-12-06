@@ -28,7 +28,7 @@
 					<li class="nav-item"><a class="nav-link active"
 						href="./pesquisar">Página inicial</a></li>
 					<li class="nav-item"><a class="nav-link active"
-						href="./minhaconta">Minha conta</a></li>
+						href="./minhaconta?tipo=1">Minha conta</a></li>
 					<li class="nav-item"><a class="nav-link active"
 						href="./cadastrarlivro">Cadastrar livro</a></li>
 				</ul>

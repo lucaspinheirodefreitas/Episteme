@@ -28,20 +28,20 @@ public class SolicitarEmprestimoServlet extends HttpServlet {
 		String pagina, SQL;
 		LocalDate localDate = LocalDate.now();
 		DataSource datasource = new DataSource();
-	    String dataAtual = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(localDate);
+		String dataAtual = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(localDate);
 		int posicaoLivro = Integer.parseInt(request.getParameter("pos"));
 		int tipoSolicitacao = Integer.parseInt(request.getParameter("tipo"));
 		Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
 		@SuppressWarnings("unchecked")
 		ArrayList<Livro> livros = (ArrayList<Livro>) request.getSession().getAttribute("listaLivros");
-		
+
 		if(!livros.equals(null) && !usuario.equals(null)) {
 			Livro livro = livros.get(posicaoLivro);
 			Emprestimo emprestimo = new Emprestimo (usuario, livro);
 
 			EmprestimoDAO emprestimoDAO = new EmprestimoDAO(datasource);
 			ArrayList<Object> emp = new ArrayList<Object>();
-			
+
 			if(tipoSolicitacao == 1) {
 				SQL = "SELECT * FROM TBEMPRESTIMO WHERE idUsuario = "+ emprestimo.getUsuario().getIdUsuario() +
 						" AND idLivro = " + emprestimo.getLivro().getId() + " AND DATE(dataFim) >= " + "'" + dataAtual + "'";

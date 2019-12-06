@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pagina;
+		String pagina="/erro.jsp";
 		DataSource datasource;
 		datasource = new DataSource();
 		UsuarioDAO userDAO = new UsuarioDAO(datasource);
@@ -29,15 +29,13 @@ public class LoginServlet extends HttpServlet {
 		usuario.setEmail((request.getParameter("txtEmail")));
 		usuario.setSenha((request.getParameter("txtSenha")));
 		
-		List<Object> usuarios = userDAO.read(usuario, ""); // ajustar isso.
+		List<Object> usuarios = userDAO.read(usuario, "");
 		
 		if(!request.getSession().equals(null) && !usuarios.equals(null) && !usuarios.isEmpty()) {
 			pagina = "/index.jsp";
 			usuario = (Usuario) usuarios.get(0);
 			request.getSession().setAttribute("usuario", usuario);
-
 			pagina = "/index.jsp";
-
 		}
 		else {
 			pagina = "/erro.jsp";

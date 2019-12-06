@@ -37,8 +37,13 @@ public class EnderecoDAO implements GenericDAO{
 				throw new RuntimeException("Objeto inválido");
 			}
 		} catch (SQLException ex) {
-			System.out.println("Falha ao efetuar inserção!\n" + "Codigo de erro: " + ex.getErrorCode() 
-			+ "\n" + "Mensagem de erro: " + ex.getMessage());
+			if(ex.getErrorCode() == 0) {
+				System.out.println("Endereço já cadastrado no sistema.");
+			}
+			else {
+				System.out.println("Falha ao efetuar inserção!\n" + "Codigo de erro: " + ex.getErrorCode() 
+				+ "\n" + "Mensagem de erro: " + ex.getMessage());
+			}
 		}
 		
 	}
@@ -69,7 +74,7 @@ public class EnderecoDAO implements GenericDAO{
 				rs.close();
 				return result;
 			} else {
-				throw new RuntimeException("Objeto inválido");
+				throw new RuntimeException("Objeto invalido");
 			}
 		} catch (SQLException ex) {
 			System.out.println("Falha ao efetuar inserção!\n" + "Codigo de erro: " + ex.getErrorCode() 
@@ -80,18 +85,13 @@ public class EnderecoDAO implements GenericDAO{
 
 	@Override
 	public void update(Object o) {
-		
-		
 	}
 
 	@Override
 	public void delete(Object o) {
-		
-		
 	}
 	
 	public String buscaEndereco() {
-		// ajustar essa query
 		String SQL = "SELECT * FROM TBENDERECO WHERE  CEP = ? AND NUMERO = ? FETCH FIRST 1 ROWS ONLY;";
 		return SQL;
 	}

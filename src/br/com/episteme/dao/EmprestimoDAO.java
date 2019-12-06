@@ -26,13 +26,10 @@ public class EmprestimoDAO implements GenericDAO {
 		try {
 			if(o instanceof Emprestimo) { 
 				Emprestimo emprestimo = (Emprestimo) o;
-				System.out.println("aqui");
 				String SQL =  "INSERT INTO TBEMPRESTIMO(dataInicio, dataFim, IdUsuario, IdLivro) "
 							+ "VALUES(current_date, (current_date+10), ?, ?);";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
-				System.out.println("aqui1");
 				stm.setInt(1, emprestimo.getUsuario().getIdUsuario());
-				System.out.println();
 				stm.setInt(2, emprestimo.getLivro().getId());
 				stm.executeUpdate();
 				stm.close();

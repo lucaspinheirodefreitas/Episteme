@@ -29,6 +29,7 @@
 							inicial</a></li>
 					<li class="nav-item"><a class="nav-link disabled" href="#">Minha
 							conta</a></li>
+					<li class="nav-item"><a class="nav-link " href="./minhaconta?tipo=x">sair</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdownMenuLink" data-toggle="dropdown">Alterar

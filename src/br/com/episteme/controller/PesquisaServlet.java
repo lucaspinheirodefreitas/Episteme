@@ -21,27 +21,27 @@ public class PesquisaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pagina;
+		String pagina="/erro.jsp";
 		Usuario usuario;
 		usuario = (Usuario) request.getSession().getAttribute("usuario");
-		
+
 		if(!usuario.equals(null)) {
 			request.getSession().setAttribute("usuario", usuario);
 			pagina = "/index.jsp";
 		}
 		else {
-			pagina = "erro.jsp";
+			pagina = "/erro.jsp";
 		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pagina="/index.jsp", itemPesquisa, SQL;
 		Usuario usuario = new Usuario();
 		usuario = (Usuario) request.getSession().getAttribute("usuario");
 		itemPesquisa = request.getParameter("txtPesquisa");
-		
+
 		if(!itemPesquisa.isEmpty()) {
 			if(!usuario.equals(null)) {
 				DataSource datasource       = new DataSource();

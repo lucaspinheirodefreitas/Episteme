@@ -21,7 +21,7 @@ import br.com.episteme.model.Usuario;
 public class CadastraUsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pagina;
+		String pagina="/erro.jsp";
 		
 		pagina = "/cadastro-usuario.jsp";
 		
@@ -30,7 +30,7 @@ public class CadastraUsuarioServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pagina, confirmaSenha, SQL;
+		String pagina="/erro.jsp", confirmaSenha, SQL;
 		DataSource datasource;
 		datasource 				= new DataSource();
 		UsuarioDAO  userDAO     = new UsuarioDAO(datasource);
@@ -48,10 +48,6 @@ public class CadastraUsuarioServlet extends HttpServlet {
 		SQL = enderecoDAO.buscaEndereco();
 		List <Object> enderecos = enderecoDAO.read(endereco, SQL);
 		Endereco ultimoEnderecoCadastrado = (Endereco) enderecos.get(0);
-		
-		if(enderecos.equals(null) || enderecos.isEmpty()) {
-			pagina = "/erro.jsp"; 
-		}
 		
 		Usuario cadastroUsuario = new Usuario(ultimoEnderecoCadastrado);
 		cadastroUsuario.setNome(request.getParameter("txtNome"));
