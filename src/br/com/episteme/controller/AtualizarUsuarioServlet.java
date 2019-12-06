@@ -33,20 +33,19 @@ public class AtualizarUsuarioServlet extends HttpServlet {
 			if(funcionalidade == 1) {
 				usuarioDAO.delete(usuario);
 				pagina = "/login.jsp";
-				request.getSession().setAttribute("Usuario", null);
+				request.getSession().setAttribute("usuario", null);
 			} else if(funcionalidade == 2) { //atualiza nome
 				pagina = "/atualizar-campo.jsp";
 				request.getSession().setAttribute("campo", "nomeusuario");
-				request.getSession().setAttribute("Usuario", usuario);
+				request.getSession().setAttribute("usuario", usuario);
 			} else if(funcionalidade == 3) { //atualiza email
 				pagina = "/atualizar-campo.jsp";
 				request.getSession().setAttribute("campo", "email");
-				request.getSession().setAttribute("Usuario", usuario);
+				request.getSession().setAttribute("usuario", usuario);
 				
 			} else if(funcionalidade == 4) { //atualiza endereço
-				pagina = "/atualiza-endereco.jsp";
-				request.getSession().setAttribute("campo", "endereco");
-				request.getSession().setAttribute("Usuario", usuario);
+				pagina = "/atualizar-endereco.jsp";
+				request.getSession().setAttribute("usuario", usuario);
 			}
 			
 			

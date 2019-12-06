@@ -16,32 +16,24 @@ import br.com.episteme.dao.UsuarioDAO;
 import br.com.episteme.model.Endereco;
 import br.com.episteme.model.Usuario;
 
+@WebServlet("/atualizarendereco")
 
-@WebServlet("/cadastrarusuario")
-public class CadastraUsuarioServlet extends HttpServlet {
+public class AtualizarEnderecoServlet extends HttpServlet{
+	
 	private static final long serialVersionUID = 1L;
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pagina;
-		
-		// NÃO TEM MUITO MAIS SOBRE O QUE OBTER REFERENTE A SEÇÃO NESSE PONTO.
-		if(!request.getSession().equals(null)) {
-			pagina = "/cadastro-usuario.jsp";
-		} else {
-			pagina = "erro.jsp";
-		}
-		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
-		dispatcher.forward(request, response);
-	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String pagina, confirmaSenha, SQL;
+		Usuario atualizaUsuario;
+		String pagina, SQL;
 		DataSource datasource;
 		datasource 				= new DataSource();
 		UsuarioDAO  userDAO     = new UsuarioDAO(datasource);
 		EnderecoDAO enderecoDAO = new EnderecoDAO(datasource);
 		Endereco    endereco 	= new Endereco();
-
+		
+		atualizaUsuario = (Usuario) (request.getSession().getAttribute("usuario"));
+				
+		
 		endereco.setCep((request.getParameter("txtCep")));
 		endereco.setLogradouro((request.getParameter("txtLogradouro")));
 		endereco.setNumeroImovel((Integer.parseInt(request.getParameter("txtNumero"))));
@@ -55,25 +47,27 @@ public class CadastraUsuarioServlet extends HttpServlet {
 		Endereco ultimoEnderecoCadastrado = (Endereco) enderecos.get(0);
 		
 		if(enderecos.equals(null) || enderecos.isEmpty()) {
-			pagina = "/erro.jsp"; 
+			pagina = "erro.jsp"; 
 		}
 		
-		Usuario cadastroUsuario = new Usuario(ultimoEnderecoCadastrado);
-		cadastroUsuario.setNome(request.getParameter("txtNome"));
-		cadastroUsuario.setEmail(request.getParameter("txtEmail"));
-		cadastroUsuario.setSenha(request.getParameter("txtSenha"));
-		confirmaSenha = (request.getParameter("txtConfirmaSenha"));
 		
-		if(!cadastroUsuario.equals(null) && confirmaSenha.equals(cadastroUsuario.getSenha())) {
-			userDAO.create(cadastroUsuario);
-			pagina = "/index.jsp";
-			request.getSession().setAttribute("usuario", cadastroUsuario);
+		//cadastroUsuario.setNome(request.getParameter("txtNome"));
+		//cadastroUsuario.setEmail(request.getParameter("txtEmail"));
+		//cadastroUsuario.setSenha(request.getParameter("txtSenha"));
+		//confirmaSenha = (request.getParameter("txtConfirmaSenha"));
+		System.out.println("UsuarioSessao: " + atualizaUsuario.getNome() );
+		System.out.println("IDSessao: " + atualizaUsuario.getIdUsuario() );
+		
+		if(!atualizaUsuario.equals(null)) {
+			userDAO.update(atualizaUsuario, ultimoEnderecoCadastrado);
+			pagina = "/login.jsp";
 		}
 		else {
 			// enviar a informação mencionando qual foi o erro...
 			pagina = "/erro.jsp";
-		}	
+		}
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);
 	}
+
 }
