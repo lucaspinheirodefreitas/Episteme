@@ -21,8 +21,10 @@ public class UsuarioDAO implements GenericDAO {
 		try {
 			if(o instanceof Usuario) { 
 				Usuario cadastrarUsuario = (Usuario) o;
-				String SQL = "INSERT INTO TBUSUARIO(IdUsuario, NomeUsuario, Email, Senha, IdEndereco) "
-							+ "VALUES (DEFAULT, ?, ?, ?, ?);";
+
+				String SQL = "INSERT INTO TBUSUARIO(NomeUsuario, Email, Senha, IdEndereco) "
+							+ "VALUES (?, ?, ?, ?);";
+
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				stm.setString(1, cadastrarUsuario.getNome());
 				stm.setString(2, cadastrarUsuario.getEmail());
@@ -32,7 +34,7 @@ public class UsuarioDAO implements GenericDAO {
 				stm.executeUpdate();
 				stm.close();
 			} else {
-				throw new RuntimeException("Objeto invÃƒÂ¡lido");
+				throw new RuntimeException("Objeto invalido");
 			}
 		} catch (SQLException ex) {
 			if(ex.getErrorCode() == 0) {
@@ -81,7 +83,7 @@ public class UsuarioDAO implements GenericDAO {
 	
 	public void update(Object o, String campo, String valor) {
 		System.out.println("CAMPO PARA ATUALIZAR: " + campo );
-		System.out.println("valor DA ATUALIZAÇÃO: " + valor );
+		System.out.println("valor DA ATUALIZAï¿½ï¿½O: " + valor );
 		try {
 			if(o instanceof Usuario) {
 				String SQL = "";

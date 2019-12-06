@@ -23,12 +23,7 @@ public class CadastraUsuarioServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pagina;
 		
-		// NÃO TEM MUITO MAIS SOBRE O QUE OBTER REFERENTE A SEÇÃO NESSE PONTO.
-		if(!request.getSession().equals(null)) {
-			pagina = "/cadastro-usuario.jsp";
-		} else {
-			pagina = "erro.jsp";
-		}
+		pagina = "/cadastro-usuario.jsp";
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(request, response);
@@ -70,7 +65,6 @@ public class CadastraUsuarioServlet extends HttpServlet {
 			request.getSession().setAttribute("usuario", cadastroUsuario);
 		}
 		else {
-			// enviar a informação mencionando qual foi o erro...
 			pagina = "/erro.jsp";
 		}	
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);

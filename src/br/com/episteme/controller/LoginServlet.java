@@ -35,7 +35,9 @@ public class LoginServlet extends HttpServlet {
 			pagina = "/index.jsp";
 			usuario = (Usuario) usuarios.get(0);
 			request.getSession().setAttribute("usuario", usuario);
-			pagina = "/login.jsp";
+
+			pagina = "/index.jsp";
+
 		}
 		else {
 			pagina = "/erro.jsp";

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.episteme.dao.DataSource;
-import br.com.episteme.dao.EmprestimoDAO;
 import br.com.episteme.dao.LivroDAO;
 import br.com.episteme.model.Livro;
 import br.com.episteme.model.Usuario;
@@ -24,9 +23,6 @@ public class PesquisaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pagina;
 		Usuario usuario;
-		DataSource datasource = new DataSource();
-		EmprestimoDAO emprestimoDAO = new EmprestimoDAO(datasource);
-		//Emprestimo emprestimos = new Emprestimo();
 		usuario = (Usuario) request.getSession().getAttribute("usuario");
 		
 		if(!usuario.equals(null)) {

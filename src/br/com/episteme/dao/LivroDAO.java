@@ -21,8 +21,8 @@ public class LivroDAO implements GenericDAO{
 		try {
 			if(o instanceof Livro) { 
 				Livro cadastrarLivro = (Livro) o;
-				String SQL = "INSERT INTO TBLIVRO(idlivro, nomelivro, autor, versao, editora, linkpdf, datacadastro, sinopse, idioma) "
-						+ "VALUES ((select nextval('autoIncrementUsuario')), ?, ?, ?, ?, ?, ?, ?, ?);";
+				String SQL = "INSERT INTO TBLIVRO(nomelivro, autor, versao, editora, linkpdf, datacadastro, sinopse, idioma) "
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				stm.setString(1, cadastrarLivro.getNome());
 				stm.setString(2, cadastrarLivro.getAutor());
