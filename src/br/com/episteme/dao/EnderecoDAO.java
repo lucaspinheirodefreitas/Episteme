@@ -29,7 +29,7 @@ public class EnderecoDAO implements GenericDAO{
 				stm.setString(4, cadastrarEndereco.getBairro());
 				stm.setString(5, cadastrarEndereco.getCidade());
 				stm.setString(6, cadastrarEndereco.getEstado());
-				stm.executeQuery();
+				stm.executeUpdate();
 				stm.close();
 			} else {
 				throw new RuntimeException("Objeto inválido");

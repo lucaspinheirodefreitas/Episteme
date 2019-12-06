@@ -32,7 +32,7 @@ public class LivroDAO implements GenericDAO{
 				stm.setTimestamp(6, cadastrarLivro.getDataCadastro());
 				stm.setString(7, cadastrarLivro.getSinopse());
 				stm.setString(8, cadastrarLivro.getIdioma());
-				stm.executeQuery();
+				stm.executeUpdate();
 				stm.close();
 			} else {
 				throw new RuntimeException("Objeto inválido");
@@ -97,7 +97,7 @@ public class LivroDAO implements GenericDAO{
 	}
 	
 	public String buscaUltimaInsercao() {
-		String SQL = "SELECT * FROM TBLIVRO WHERE nomeLivro = ? ORDER BY DESC dataCadastro FETCH FIRST 1 ROWS ONLY;";
+		String SQL = "SELECT * FROM TBLIVRO WHERE nomeLivro = ? ORDER BY dataCadastro DESC FETCH FIRST 1 ROWS ONLY;";
 		return SQL;
 	}
 

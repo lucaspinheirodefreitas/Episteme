@@ -35,7 +35,7 @@
 		<div class="row">
 			<div class="col-md-2">&nbsp;</div>
 			<div class="col-md-8">
-				<form role="form" action="cadastralivro" method="post">
+				<form role="form" action="cadastrarlivro" method="post">
 					<div class="form-group">
 						<label for="inputNomeLivro"> Nome do livro </label> <input
 							class="form-control" id="inputNomeLivro" type="text"

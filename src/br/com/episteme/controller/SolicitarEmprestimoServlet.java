@@ -27,16 +27,18 @@ public class SolicitarEmprestimoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String pagina, SQL;
 		LocalDate localDate = LocalDate.now();
+		DataSource datasource = new DataSource();
 	    String dataAtual = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(localDate);
 		int posicaoLivro = Integer.parseInt(request.getParameter("pos"));
 		int tipoSolicitacao = Integer.parseInt(request.getParameter("tipo"));
 		Usuario usuario = (Usuario)request.getSession().getAttribute("usuario");
 		@SuppressWarnings("unchecked")
-		ArrayList<Emprestimo> emprestimos = (ArrayList<Emprestimo>) request.getSession().getAttribute("emprestimo");
+		ArrayList<Livro> livros = (ArrayList<Livro>) request.getSession().getAttribute("listaLivros");
 		
-		if(!emprestimos.equals(null) && !usuario.equals(null)) {
-			Emprestimo emprestimo = emprestimos.get(posicaoLivro);
-			DataSource datasource = new DataSource();
+		if(!livros.equals(null) && !usuario.equals(null)) {
+			Livro livro = livros.get(posicaoLivro);
+			Emprestimo emprestimo = new Emprestimo (usuario, livro);
+
 			EmprestimoDAO emprestimoDAO = new EmprestimoDAO(datasource);
 			ArrayList<Object> emp = new ArrayList<Object>();
 			
