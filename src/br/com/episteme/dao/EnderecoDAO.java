@@ -20,9 +20,8 @@ public class EnderecoDAO implements GenericDAO{
 		try {
 			if(o instanceof Endereco) { 
 				Endereco cadastrarEndereco = (Endereco) o;
-				
-				String SQL =  "INSERT INTO TBENDERECO(IdEndereco, CEP, Logradouro, Numero, Bairro, Cidade, Estado) "
-							+ "VALUES((select nextval('autoIncrementEndereco')), ?, ?, ?, ?, ?, ?)";
+				String SQL =  "INSERT INTO TBENDERECO(CEP, Logradouro, Numero, Bairro, Cidade, Estado) "
+							+ "VALUES(?, ?, ?, ?, ?, ?)";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				stm.setString(1, cadastrarEndereco.getCep());
 				stm.setString(2, cadastrarEndereco.getLogradouro());
@@ -30,25 +29,14 @@ public class EnderecoDAO implements GenericDAO{
 				stm.setString(4, cadastrarEndereco.getBairro());
 				stm.setString(5, cadastrarEndereco.getCidade());
 				stm.setString(6, cadastrarEndereco.getEstado());
-				int qtdRegistrosInseridos = stm.executeUpdate();
-				if (qtdRegistrosInseridos == 0) {
-					System.out.println("Endereço já cadastrado na base.");
-				}
-				else {
-					System.out.println("Endereço cadastrado com sucesso.");
-				}
+				stm.executeQuery();
 				stm.close();
 			} else {
 				throw new RuntimeException("Objeto inválido");
 			}
 		} catch (SQLException ex) {
-			if(ex.getErrorCode() == 0) {
-				System.out.println("Endereço já cadastrado na base de clientes.");
-			}
-			else {
-				System.out.println("Falha ao efetuar inserção!\n" + "Codigo de erro: " + ex.getErrorCode() 
-				+ "\n" + "Mensagem de erro: " + ex.getMessage());
-			}
+			System.out.println("Falha ao efetuar inserção!\n" + "Codigo de erro: " + ex.getErrorCode() 
+			+ "\n" + "Mensagem de erro: " + ex.getMessage());
 		}
 		
 	}

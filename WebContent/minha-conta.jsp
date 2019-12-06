@@ -79,11 +79,12 @@
 							<th>Livro:</th>
 							<th>Data inicio:</th>
 							<th>Data fim</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<c:forEach var="item" items="${emprestimo}">
+							<c:forEach var="item" items="${emprestimo}" varStatus="loop">
 								<tr class="table-active">
 									<td></td>
 									<td></td>
@@ -92,6 +93,10 @@
 									<td>${item.livro.nome}</td>
 									<td>${item.retirada}</td>
 									<td>${item.devolucao}</td>
+									<td><a
+										href="./solicitaremprestimo?pos=${loop.index}&tipo=2">{+}
+											Renovar</a>
+									</td>
 								</tr>
 							</c:forEach>
 						</tr>

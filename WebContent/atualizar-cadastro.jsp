@@ -12,7 +12,8 @@ pageEncoding="UTF-8"%>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
 
 </head>
 <body>
@@ -93,13 +94,13 @@ pageEncoding="UTF-8"%>
                             <label for="tipo">
                                 Tipo do Logradouro
                             </label>
-                            <input type="text" readonly="true" class="form-control" id="tipo" name="txtTipo" />
+                            <input type="text" class="form-control" id="tipo" name="txtTipo" />
                         </div>
                         <div class="form-group">
                             <label for="logradouro">
                                 Logradouro
                             </label>
-                            <input type="text" readonly="true" class="form-control" id="logradouro" name="txtLogradouro" />
+                            <input type="text" class="form-control" id="logradouro" name="txtLogradouro" />
                         </div>
                         <div class="form-group">
                             <label for="numero">
@@ -117,19 +118,19 @@ pageEncoding="UTF-8"%>
                             <label for="bairro">
                                 Bairro
                             </label>
-                            <input type="text" readonly="true" class="form-control" id="bairro" name="txtBairro" />
+                            <input type="text" class="form-control" id="bairro" name="txtBairro" />
                         </div>
                         <div class="form-group">
                             <label for="cidade">
                                 Cidade
                             </label>
-                            <input type="text" readonly="true"  class="form-control" id="cidade" name="txtCidade" />
+                            <input type="text"   class="form-control" id="cidade" name="txtCidade" />
                         </div>
                         <div class="form-group">
                             <label for="estado">
                                 Estado
                             </label>
-                            <input type="text" readonly="true" class="form-control" id="estado" name="txtEstado" />
+                            <input type="text" class="form-control" id="estado" name="txtEstado" />
                         </div>
 
           <button type="submit" class="btn btn-primary">
@@ -144,10 +145,5 @@ pageEncoding="UTF-8"%>
       </div>
      </div>
    </div>
-
-   <!--SCRIPTS BOOTSTRAP-->
-   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

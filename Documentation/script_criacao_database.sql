@@ -4,11 +4,11 @@
 
 CREATE TABLE TBENDERECO (
   	IdEndereco 		SERIAL  		NOT NULL,
-	CEP 			VARCHAR(15)		NOT NULL, -- motivos: usuário pode colocar ponto ou pode ser alguém de fora do Brasil.
+	CEP 			VARCHAR(15)		NOT NULL, 
   	Logradouro 		VARCHAR(100) 	NOT NULL,
 	Numero 			INTEGER   		NOT NULL,
-	Bairro	 		VARCHAR(30) 	NOT NULL,
-	Cidade	 		VARCHAR(30) 	NOT NULL,
+	Bairro	 		VARCHAR(50) 	NOT NULL,
+	Cidade	 		VARCHAR(50) 	NOT NULL,
 	Estado	 		VARCHAR(20) 	NOT NULL,
 	UNIQUE			(CEP, Numero),
   	CONSTRAINT PK_endereco PRIMARY KEY(IdEndereco)
@@ -28,7 +28,7 @@ CREATE TABLE TBUSUARIO (
 
 CREATE TABLE TBLIVRO (
   	IdLivro 		SERIAL		  	NOT NULL,
-	NomeLivro		VARCHAR(30)		NOT NULL, 
+	NomeLivro		VARCHAR(50)		NOT NULL, 
   	Autor	 		VARCHAR(100) 	NOT NULL,
 	Versao	 		REAL		 	NOT NULL,
 	Editora	 		VARCHAR(30) 	NOT NULL,

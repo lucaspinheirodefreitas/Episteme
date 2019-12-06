@@ -79,10 +79,6 @@
 										href="./solicitaremprestimo?pos=${loop.index}&tipo=1">{+}
 											Pegar</a>
 									</td>
-									<td><a
-										href="./solicitaremprestimo?pos=${loop.index}&tipo=2">{+}
-											Renovar</a>
-									</td>
 								</tr>
 							</c:forEach>
 						</tr>
