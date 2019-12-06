@@ -19,9 +19,11 @@ public class EnderecoDAO implements GenericDAO{
 	public void create(Object o) {
 		try {
 			if(o instanceof Endereco) { 
+
 				Endereco cadastrarEndereco = (Endereco) o;
 				String SQL =  "INSERT INTO TBENDERECO(CEP, Logradouro, Numero, Bairro, Cidade, Estado) "
 							+ "VALUES(?, ?, ?, ?, ?, ?)";
+
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				stm.setString(1, cadastrarEndereco.getCep());
 				stm.setString(2, cadastrarEndereco.getLogradouro());

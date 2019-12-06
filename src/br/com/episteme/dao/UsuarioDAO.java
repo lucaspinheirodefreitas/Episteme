@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.episteme.model.Endereco;
 import br.com.episteme.model.Usuario;
 
 public class UsuarioDAO implements GenericDAO {
@@ -20,8 +21,10 @@ public class UsuarioDAO implements GenericDAO {
 		try {
 			if(o instanceof Usuario) { 
 				Usuario cadastrarUsuario = (Usuario) o;
+
 				String SQL = "INSERT INTO TBUSUARIO(NomeUsuario, Email, Senha, IdEndereco) "
 							+ "VALUES (?, ?, ?, ?);";
+
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				stm.setString(1, cadastrarUsuario.getNome());
 				stm.setString(2, cadastrarUsuario.getEmail());
@@ -134,6 +137,24 @@ public class UsuarioDAO implements GenericDAO {
 	public void update(Object o) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void update(Usuario atualizaUsuario, Endereco ultimoEnderecoCadastrado) {
+		// TODO Auto-generated method stub
+		try {
+			
+			String SQL = "update tbusuario set idendereco = ?   WHERE idusuario = ?;";
+			PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
+			stm.setInt(2, atualizaUsuario.getIdUsuario());
+			stm.setInt(1, ultimoEnderecoCadastrado.getIdEndereco());
+			stm.executeUpdate();
+			//System.out.println("Usuario: " + deletarUsuario.getNome() + " removido!");
+			stm.close();
+			
+		} catch(SQLException ex) {
+			System.out.println("Falha ao efetuar consulta!\n" + "Codigo de erro: " + ex.getErrorCode() 
+			+ "\n" + "Mensagem de erro: " + ex.getMessage());
+		}
 	}
 	
 }
