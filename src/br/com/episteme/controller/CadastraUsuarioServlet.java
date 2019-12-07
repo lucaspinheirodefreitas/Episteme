@@ -57,7 +57,7 @@ public class CadastraUsuarioServlet extends HttpServlet {
 		
 		if(!cadastroUsuario.equals(null) && confirmaSenha.equals(cadastroUsuario.getSenha())) {
 			userDAO.create(cadastroUsuario);
-			pagina = "/index.jsp";
+			pagina = "/login.jsp";
 			request.getSession().setAttribute("usuario", cadastroUsuario);
 		}
 		else {

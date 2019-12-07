@@ -88,9 +88,9 @@
 							<dd></dd>
 							<dd></dd>
 							<dt></dt>
-							<dd>Visite-nos</dd>
+							<dd>The first library with digital links in the world</dd>
 							<dd>.</dd>
-							<dt>Escrever aqui</dt>
+							<dt>developed by UFABC students</dt>
 							<dd>.</dd>
 						</dl>
 					</div>

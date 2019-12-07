@@ -29,7 +29,7 @@ scope="session" />
 					<li class="nav-item"><a class="nav-link" href="./pesquisar">Página
 							inicial</a></li>
 					<li class="nav-item"><a class="nav-link actived"
-						href="./minhaconta">Minha conta</a></li>
+						href="./minhaconta?tipo=1">Minha conta</a></li>
 					<li class="nav-item dropdown ml-md-auto"><a
 						class="nav-link dropdown-toggle" href="http://example.com"
 						id="navbarDropdownMenuLink" data-toggle="dropdown">Relatórios</a>
@@ -57,7 +57,7 @@ scope="session" />
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<h3>Bem vindo, "${usuario.nome}"</h3>
+				<h3>Olá, ${usuario.nome}.</h3>
 			</div>
 		</div>
 		<div class="row">

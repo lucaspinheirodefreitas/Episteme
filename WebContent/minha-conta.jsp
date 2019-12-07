@@ -29,20 +29,21 @@
 							inicial</a></li>
 					<li class="nav-item"><a class="nav-link disabled" href="#">Minha
 							conta</a></li>
-					<li class="nav-item"><a class="nav-link " href="./minhaconta?tipo=x">sair</a></li>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdownMenuLink" data-toggle="dropdown">Alterar
 							dados</a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="./atualizarusuario?tipo=2">Nome</a> <a
-								class="dropdown-item" href="./atualizarusuario?tipo=3">Email</a> <a
-								class="dropdown-item" href="./atualizarusuario?tipo=1">Deletar
+							<a class="dropdown-item" href="./atualizarusuario?tipo=2">Nome</a>
+							<a class="dropdown-item" href="./atualizarusuario?tipo=3">Email</a>
+							<a class="dropdown-item" href="./atualizarusuario?tipo=1">Deletar
 								conta</a>
 							<div class="dropdown-divider">Região</div>
 							<a class="dropdown-item" href="./atualizarusuario?tipo=4">Endereço</a>
 						</div></li>
+					<li class="nav-item"><a class="nav-link "
+						href="./minhaconta?tipo=x">sair</a></li>
 					<li class="nav-item dropdown ml-md-auto"><a
 						class="nav-link dropdown-toggle" href="http://example.com"
 						id="navbarDropdownMenuLink" data-toggle="dropdown">Relatórios</a>
@@ -96,8 +97,7 @@
 									<td>${item.devolucao}</td>
 									<td><a
 										href="./solicitaremprestimo?pos=${loop.index}&tipo=2">{+}
-											Renovar</a>
-									</td>
+											Renovar</a></td>
 								</tr>
 							</c:forEach>
 						</tr>

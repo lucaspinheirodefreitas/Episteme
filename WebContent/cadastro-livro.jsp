@@ -23,7 +23,7 @@
 					<li class="nav-item"><a class="nav-link active"
 						href="./minhaconta?tipo=1">Minha conta</a></li>
 					<li class="nav-item"><a class="nav-link disabled"
-						href="./cadastro-livro.html">Cadastrar livro</a></li>
+						href="./cadastro-livro.jsp">Cadastrar livro</a></li>
 				</ul>
 			</div>
 			<div class="col-md-12" align="center">
@@ -35,7 +35,7 @@
 		<div class="row">
 			<div class="col-md-2">&nbsp;</div>
 			<div class="col-md-8">
-				<form role="form" action="cadastrarltivro" method="post">
+				<form role="form" action="cadastrarlivro" method="post">
 					<div class="form-group">
 						<label for="inputNomeLivro"> Nome do livro </label> <input
 							class="form-control" id="inputNomeLivro" type="text"

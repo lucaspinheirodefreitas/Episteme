@@ -7,7 +7,7 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
-<title></title>
+<title>.: Atualizar endereço :.</title>
 
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -48,6 +48,20 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
+				<img alt="Logo biblioteca" src="imagens/episteme_1.jpg" width=120
+					height=120 align="right">
+
+				<ul class="nav">
+					<li class="nav-item"><a class="nav-link active" href="./index.jsp">Página
+							inicial</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="./minha-conta.jsp">Voltar</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">&nbsp;</div>
+			<div class="col-md-8">
 				<i class="material-icons"> account_box </i>
 				<form role="form" action="atualizarendereco" method="post">
 
@@ -94,8 +108,8 @@
 
 
 				</form>
-				<a href="./minha-conta.jsp"> Voltar </a>
 			</div>
+			<div class="col-md-2">&nbsp;</div>
 		</div>
 	</div>
 

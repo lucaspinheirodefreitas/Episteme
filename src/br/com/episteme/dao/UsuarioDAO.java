@@ -122,6 +122,7 @@ public class UsuarioDAO implements GenericDAO {
 				String SQL = "DELETE FROM tbusuario WHERE idusuario = ?;";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				stm.setInt(1, deletarUsuario.getIdUsuario());
+				System.out.println(deletarUsuario.getIdUsuario());
 				stm.executeUpdate();
 				System.out.println("Usuario: " + deletarUsuario.getNome() + " removido!");
 				stm.close();
