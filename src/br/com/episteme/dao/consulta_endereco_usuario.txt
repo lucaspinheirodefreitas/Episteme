@@ -1,0 +1,6 @@
+
+--tbusuario.idendereco será uma variável, onde o tratamento será por backend
+
+SELECT cep,logradouro,numero,bairro,cidade,estado
+from tbendereco right join tbusuario on tbusuario.idendereco = tbendereco.idendereco
+

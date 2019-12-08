@@ -10,6 +10,7 @@ public class DataSource {
 	
 	public DataSource() {
 		try {
+			Class.forName("org.postgresql.Driver");
 			hostname   = "localhost";
 			database   = "episteme";
 			username   = "postgres";
@@ -18,11 +19,13 @@ public class DataSource {
 			url        = "jdbc:postgresql://" + hostname + ":" + port + "/" + database;
 			connection = DriverManager.getConnection(url, username, password);
 		} catch (SQLException ex) {
-			System.out.println("Erro ao conectar com o database: " + ex);
+			System.out.println("Erro ao conectar com o database: " + ex.getErrorCode() + " " + ex.getMessage());
+		} catch (ClassNotFoundException e) {
+			System.out.println("Erro ao localizar o driver: " + e.getMessage());
 		}
 	}
 	
 	public Connection getConnection() {
 		return this.connection;
-	} 
+	}
 }

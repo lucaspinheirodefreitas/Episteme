@@ -1,7 +1,5 @@
 package br.com.episteme.dao;
 
-/* Assisti até 1h05 min o video modelando e implementando o banco de dados. */
-
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.episteme.model.Endereco;
 import br.com.episteme.model.Usuario;
 
 public class UsuarioDAO implements GenericDAO {
@@ -22,44 +21,41 @@ public class UsuarioDAO implements GenericDAO {
 		try {
 			if(o instanceof Usuario) { 
 				Usuario cadastrarUsuario = (Usuario) o;
-				String SQL = "INSERT INTO TBUSUARIO(IdUsuario, NomeUsuario, Email, Senha, IdEndereco) "
-						+ "VALUES ((select nextval('autoIncrementUsuario'))," 
-						+ cadastrarUsuario.getNome()        + ',' 
-						+ cadastrarUsuario.getEmail()   	+ ',' 
-						+ cadastrarUsuario.getSenha() 		+ ',' 
-						+ "(SELECT MAX(IdEndereco) FROM TBENDERECO))";
+
+				String SQL = "INSERT INTO TBUSUARIO(NomeUsuario, Email, Senha, IdEndereco) "
+							+ "VALUES (?, ?, ?, ?);";
+
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
-				ResultSet rs = stm.executeQuery();
-				System.out.println(rs);
-				/*
-					Pra atualizar o ID vou precisar executar uma operação de select na base eu acho.
-				
-				if(rs.next()) {
-					cadastrarUsuario.setIdUsuario(rs.getInt("IdUsuario"));
-				}
-				
-				*/
+				stm.setString(1, cadastrarUsuario.getNome());
+				stm.setString(2, cadastrarUsuario.getEmail());
+				stm.setString(3, cadastrarUsuario.getSenha());
+				int idEndereco = cadastrarUsuario.getEndereco().getIdEndereco();
+				stm.setInt(4, idEndereco);
+				stm.executeUpdate();
 				stm.close();
-				rs.close();
+			} else {
+				throw new RuntimeException("Objeto invalido");
+			}
+		} catch (SQLException ex) {
+			if(ex.getErrorCode() == 0) {
+				System.out.println("E-mail jÃ¡ cadastrado.");
 				
 			} else {
-				throw new RuntimeException("Objeto inválido"); // entender como funciona o throw.
+				System.out.println("Falha ao efetuar inserÃ§Ã£o!\n" + "Codigo de erro: " + ex.getErrorCode() 
+				+ "\n" + "Mensagem de erro: " + ex.getMessage());
 			}
-			
-		} catch (SQLException ex) {
-			System.out.println("Falha ao efetuar inserção!\n" + "Codigo de erro: " + ex.getErrorCode() 
-			+ "\n" + "Mensagem de erro: " + ex.getMessage());
 		}
 	}
 	
-	public List<Object> read(Object o) {
+	public List<Object> read(Object o, String SQ) {
 		try {
-			if(o instanceof Usuario) { // entender como funciona o instanceof.
+			if(o instanceof Usuario) { 
 				Usuario parcial = (Usuario) o;
-				String SQL = "SELECT * FROM TBUSUARIO WHERE email = lucas@lucas.com.br";
+				String SQL = "SELECT * FROM TBUSUARIO WHERE email = ? AND senha = ?";
 				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
 				stm.setString(1, parcial.getEmail());
 				stm.setString(2, parcial.getSenha());
+				
 				ResultSet rs = stm.executeQuery();
 				ArrayList<Object> result = new ArrayList<Object>();
 				
@@ -75,7 +71,7 @@ public class UsuarioDAO implements GenericDAO {
 				return result;
 				
 			} else {
-				throw new RuntimeException("Objeto inválido"); // entender como funciona o throw.
+				throw new RuntimeException("Objeto invalido");
 			}
 			
 		} catch (SQLException ex) {
@@ -85,17 +81,89 @@ public class UsuarioDAO implements GenericDAO {
 		return null;
 	}
 	
-	public void update(Object o) {
+	public void update(Object o, String campo, String valor) {
+		System.out.println("CAMPO PARA ATUALIZAR: " + campo );
+		System.out.println("valor DA ATUALIZA��O: " + valor );
+		try {
+			if(o instanceof Usuario) {
+				String SQL = "";
+				Usuario attUsuario = (Usuario) o;
+				System.out.println("usuario atualizado: " + attUsuario.getIdUsuario() );
+				//boolean bool = campo == "nomeusuario";
+				//System.out.println("true?" + bool);
+				if(campo == "nomeusuario") {
+					SQL = "update tbusuario set nomeusuario =  ?  WHERE idusuario = ?;";
+				} else if(campo == "email") {
+					SQL = "update tbusuario set email =  ?  WHERE idusuario = ?;";
+				} else{
+					SQL = "update tbusuario set senha =  ?  WHERE idusuario = ?;";
+				}
+					
+				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
+				stm.setString(1, valor);				
+				stm.setInt(2, attUsuario.getIdUsuario());
+				System.out.println("stm: " + stm );
+				stm.executeUpdate();
+				System.out.println("Usuario: " + attUsuario.getNome() + " atualizado!");
+				stm.close();
+			}
+			
+		} catch(SQLException ex) {
+			System.out.println("Falha ao efetuar consulta!\n" + "Codigo de erro: " + ex.getErrorCode() 
+			+ "\n" + "Mensagem de erro: " + ex.getMessage());
+		}
 		
 	}
 	
 	public void delete(Object o) {
+		try {
+			if(o instanceof Usuario) {
+				Usuario deletarUsuario = (Usuario) o;
+				String SQL = "DELETE FROM tbusuario WHERE idusuario = ?;";
+				PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
+				stm.setInt(1, deletarUsuario.getIdUsuario());
+				System.out.println(deletarUsuario.getIdUsuario());
+				stm.executeUpdate();
+				System.out.println("Usuario: " + deletarUsuario.getNome() + " removido!");
+				stm.close();
+			}
+		} catch(SQLException ex) {
+			System.out.println("Falha ao efetuar consulta!\n" + "Codigo de erro: " + ex.getErrorCode() 
+			+ "\n" + "Mensagem de erro: " + ex.getMessage());
+		}
 		
 	}
+
+	@Override
+	public void update(Object o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void update(Usuario atualizaUsuario, Endereco ultimoEnderecoCadastrado) {
+		// TODO Auto-generated method stub
+		try {
+			
+			String SQL = "update tbusuario set idendereco = ?   WHERE idusuario = ?;";
+			PreparedStatement stm = dataSource.getConnection().prepareStatement(SQL);
+			stm.setInt(2, atualizaUsuario.getIdUsuario());
+			stm.setInt(1, ultimoEnderecoCadastrado.getIdEndereco());
+			stm.executeUpdate();
+			//System.out.println("Usuario: " + deletarUsuario.getNome() + " removido!");
+			stm.close();
+			
+		} catch(SQLException ex) {
+			System.out.println("Falha ao efetuar consulta!\n" + "Codigo de erro: " + ex.getErrorCode() 
+			+ "\n" + "Mensagem de erro: " + ex.getMessage());
+		}
+	}
+	
 }
 
 /*
-	Exemplo de operações para realizar insert de novo usuário na base.
+	Exemplo de operaÃ§Ãµes para realizar insert de novo usuÃ¡rio na base.
+	
+	//md5(senha) -- criptografar no insert do banco
 	
 	** Passo 1:
 	INSERT INTO TBENDERECO(IdEndereco, CEP, Logradouro, Numero, Bairro, Cidade, Estado)
@@ -105,7 +173,7 @@ public class UsuarioDAO implements GenericDAO {
 	** Passo 2:
 	
 	INSERT INTO TBUSUARIO(IdUsuario, NomeUsuario, Email, Senha, IdEndereco)
-		VALUES ((select nextval('autoIncrementUsuario')), 'LUCAS', 'LUCAS@LUCAS.COM.BR', '12345', (SELECT MAX(IdEndereco) FROM TBENDERECO));
+		VALUES ((select nextval('autoIncrementUsuario')), 'LUCAS', 'LUCAS@LUCAS.COM.BR', MD5('12345'), (SELECT MAX(IdEndereco) FROM TBENDERECO));
 	
 		
 	DELETE FROM TBENDERECO;
@@ -127,11 +195,11 @@ public class UsuarioDAO implements GenericDAO {
 	-- DELETAR SEQUENCIA:
 	DROP SEQUENCE IF EXISTS autoincrementEndereco;
 	
-	-- SEMPRE QUE DÁ ERRO NO TIPO DE DADO A SER INSERIDO (Ex: NULL em campo NOT NULL), A SEQUENCIA INCREMENTA INDEVIDAMENTE POIS A OPERAÇÃO NÃO É COMMITADA.
+	-- SEMPRE QUE DÃ� ERRO NO TIPO DE DADO A SER INSERIDO (Ex: NULL em campo NOT NULL), A SEQUENCIA INCREMENTA INDEVIDAMENTE POIS A OPERAÃ‡ÃƒO NÃƒO Ã‰ COMMITADA.
 	-- Pensar em uma forma de sempre que der erro nesse ponto, restartar a sequencia do valor anterior.
 	-- Exemplo: pegar o codigo de erro e executar o SQL abaixo.
 	ALTER SEQUENCE autoincrementUsuario START WITH (select nextval('autoIncrementUsuario')-1);
 	
-	-- É necessário manter a integridade:
-	-- Obs.: Sempre que deletar um usuário, deletar também os dados do mesmo para as demais tabelas.
+	-- Ã‰ necessÃ¡rio manter a integridade:
+	-- Obs.: Sempre que deletar um usuÃ¡rio, deletar tambÃ©m os dados do mesmo para as demais tabelas.
 */

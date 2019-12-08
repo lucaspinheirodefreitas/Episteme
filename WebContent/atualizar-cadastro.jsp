@@ -1,23 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<jsp:useBean id="atualizarUsuario"
+	class="br.com.episteme.controller.AtualizarUsuarioServlet"
+	scope="session"></jsp:useBean>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>.:Atualizar cadastro:.</title>
 
-<title>Cadastro de livro</title>
 
-<meta name="description"
-	content="Source code generated using layoutit.com">
-<meta name="author" content="LayoutIt!">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 
 </head>
 <body>
+
 	<script type="text/javascript">
 		function buscaEndereco() {
 			var cep = document.getElementById("cep").value;
@@ -48,47 +50,62 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
+				<img alt="Logo biblioteca" src="imagens/episteme_1.jpg" width=120
+					height=120 align="right">
+
+				<ul class="nav">
+					<li class="nav-item"><a class="nav-link active"
+						href="./index.jsp">Página inicial</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="./minhaconta.jsp">Voltar</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">&nbsp;</div>
+			<div class="col-md-18">
 				<i class="material-icons"> account_box </i>
-				<form role="form" action="cadastrausuarioservlet" method="post">
+				<form role="form">
 
 					<div class="form-group">
 
-						<label for="exampleInputName"> Nome </label> <input type="text"
-							class="form-control" id="exampleInputName" name="txtNome"/>
+						<label for="inputName"> Nome </label> <input type="text"
+							class="form-control" id="inputName"
+							placeholder="${atualizarUsuario.getNome()}" />
 					</div>
 
 					<div class="form-group">
 
-						<label for="exampleInputEmail1"> Email </label> <input
-							type="email" class="form-control" id="exampleInputEmail1" name="txtEmail"/>
+						<label for="inputEmail1"> Email </label> <input type="email"
+							class="form-control" id="inputEmail1"
+							placeholder="${atualizarUsuario.getEmail()}" />
 					</div>
 					<div class="form-group">
 
-						<label for="exampleInputPassword1"> Senha </label> <input
-							type="password" class="form-control" id="exampleInputPassword1" name="txtSenha"/>
+						<label for="inputPassword1"> Senha </label> <input type="password"
+							class="form-control" id="inputPassword1"
+							placeholder="${atualizarUsuario.getEmail()}" />
 					</div>
 
 					<div class="form-group">
 
-						<label for="exampleInputPassword1"> Confirme a Senha </label> <input
-							type="password" class="form-control"
-							id="exampleInputPasswordCheck" name="txtConfirmaSenha"/>
+						<label for="inputPassword1"> Confirme a nova Senha </label> <input
+							type="password" class="form-control" id="inputPasswordCheck" />
 					</div>
 
 					<div class="form-group">
-						<label for="cep"> Digite o CEP </label> <input type="text"
+						<label for="cep"> Digite o novo CEP </label> <input type="text"
 							class="form-control" id="cep" name="txtCep"
 							onblur="buscaEndereco();" />
 					</div>
 
 					<div class="form-group">
 						<label for="tipo"> Tipo do Logradouro </label> <input type="text"
-							readonly="true" class="form-control" id="tipo" name="txtTipo" />
+							class="form-control" id="tipo" name="txtTipo" />
 					</div>
 					<div class="form-group">
 						<label for="logradouro"> Logradouro </label> <input type="text"
-							readonly="true" class="form-control" id="logradouro"
-							name="txtLogradouro" />
+							class="form-control" id="logradouro" name="txtLogradouro" />
 					</div>
 					<div class="form-group">
 						<label for="numero"> Numero </label> <input type="text"
@@ -100,26 +117,24 @@
 					</div>
 					<div class="form-group">
 						<label for="bairro"> Bairro </label> <input type="text"
-							readonly="true" class="form-control" id="bairro" name="txtBairro" />
+							class="form-control" id="bairro" name="txtBairro" />
 					</div>
 					<div class="form-group">
 						<label for="cidade"> Cidade </label> <input type="text"
-							readonly="true" class="form-control" id="cidade" name="txtCidade" />
+							class="form-control" id="cidade" name="txtCidade" />
 					</div>
 					<div class="form-group">
 						<label for="estado"> Estado </label> <input type="text"
-							readonly="true" class="form-control" id="estado" name="txtEstado" />
+							class="form-control" id="estado" name="txtEstado" />
 					</div>
 
 					<button type="submit" class="btn btn-primary">Cadastrar</button>
+
 				</form>
 
 			</div>
+			<div class="col-md-2">&nbsp;</div>
 		</div>
 	</div>
-
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/scripts.js"></script>
 </body>
 </html>
